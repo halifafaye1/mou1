@@ -144,8 +144,20 @@ include('connection/connection.php');
                   
 				  <a class = "btn btn-success btn-print" href = "" onclick = "window.print()"><i class ="glyphicon glyphicon-print"></i> Print</a>
                             <a class = "btn btn-primary btn-print" href = "index.php"><i class ="glyphicon glyphicon-arrow-left"></i> Back to Homepage</a> 
-                            <form action=""></form>  
-						
+                            <br>
+                            <br>
+                            
+                            <form action=""  method='POST' name='form_filter' > 
+                                <select class="form-control" name="value"> 
+                                    <option value="All">All</option> 
+                                    <option value="Pending">Pending</option> 
+                                    <option value="Approved">Approved</option> 
+                                    <option value="Denied">Denied</option>
+                                </select> 
+                                <br /> 
+                                <input type='submit' value = 'Filter'> 
+                            </form>
+                           
                   <table class="table table-bordered table-striped">
                     <thead>
 					
@@ -159,24 +171,58 @@ include('connection/connection.php');
                         <th>Email</th>
                         <th>Reference #</th>
                         <th>Date/Time</th>
-                        <th>Approval</th>
+                        <th>Status</th>
                       </tr>
                        
                  
                     </thead>
                     <tbody>
-<?php
-        
-        $sql= " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-        request.id as id, organization.organization_name, organization.id as Oid
-        FROM request JOIN organization
-        ON request.organization_id = organization.id";
+                    <?php include ('connection/connection.php');
+                            //connect to database, checking, etc 
 
-                  $result = mysqli_query($conn, $sql);
+                            // process form when posted
+                            if(isset($_POST['value'])) {
+                                if($_POST['value'] == 'Pending') {
+                                     
+                                    //$query = "SELECT * FROM request WHERE approval='Pending'";  
+                                    
+                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+                                    request.id as id, organization.organization_name, organization.id as Oid
+                                    FROM request JOIN organization
+                                    ON request.organization_id = organization.id
+                                    where request.approval = 'Pending' " ; 
+                                }  
+                                elseif($_POST['value'] == 'Approved') {  
 
-               ?>
+                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+                                    request.id as id, organization.organization_name, organization.id as Oid
+                                    FROM request JOIN organization
+                                    ON request.organization_id = organization.id
+                                    where request.approval='Approved'";  
+                                } 
+                                elseif($_POST['value'] == 'Denied'){
+                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+                                    request.id as id, organization.organization_name, organization.id as Oid
+                                    FROM request JOIN organization
+                                    ON request.organization_id = organization.id
+                                    where request.approval = 'Denied' " ; 
+                                }
+                                else {  
+                                    // query to get all records  
+                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+                                    request.id as id, organization.organization_name, organization.id as Oid
+                                    FROM request JOIN organization
+                                    ON request.organization_id = organization.id
+                                    ";  
+                                }  
+                                $result = mysqli_query($conn,$query);  
+                                
+                                
+                            
+                                while ($row = mysqli_fetch_assoc($result)){
+                                ?>
               <tbody>
-                  <?php while($row=mysqli_fetch_assoc($result)){ ?>
+                  
               <tr>
 
                   <td><?php echo $row['organization_name']; ?></td>
@@ -191,7 +237,8 @@ include('connection/connection.php');
                        
                       </tr>
 
-<?php }?>					  
+<?php }?>		
+			  
                     </tbody>
                     <tfoot>
                      
@@ -225,7 +272,7 @@ include('connection/connection.php');
                         <th></th>
                         <th></th>
                       </tr> 
- 				  
+                      <?php }?>	  
                     </tfoot>
                   </table>
                 </div><!-- /.box-body -->
@@ -239,6 +286,6 @@ include('connection/connection.php');
       </div><!-- /.content-wrapper -->
       
     </div><!-- ./wrapper -->
-
+    
 
 <?php include 'footer.php'; ?>          
