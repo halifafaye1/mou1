@@ -62,17 +62,10 @@
               </a>
             </li>
 
-            <li class="treeview">
-              <a href="activity_report.php">
+                <li class="treeview">
+              <a href="report.php">
                 <i class="fa fa-files-o"></i>
-                <span>Activity Report</span>
-                <span class="label label-primary pull-right"></span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
-                <span>Request Report</span>
+                <span>Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -116,7 +109,7 @@
                         <th>ID</th>
                         <th>Organisation ID</th>
                         <th>School ID</th>
-                        <th>support Type</th>
+                        <th>Support Type</th>
                         <th>Quantity</th>
                         <th>Cost</th>
                         <th>Period</th>
@@ -128,7 +121,7 @@
 						require 'connection/connection.php';
 
 
-						$sql = "SELECT school_id, support_type, quantity, cost, period_date, activity.id as id, organization_id,
+						$sql = "SELECT school_id, support_type, number, cost, period_date, activity.id as id, organization_id,
             organization.organization_name, organization.id as Oid, school.name, school.id as Sid
             FROM activity
 
@@ -148,18 +141,16 @@
                         <td><?php echo $row['organization_name']; ?></td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
-                        <td><?php echo $row['quantity']; ?></td>
+                        <td><?php echo $row['number']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
                         <td><?php echo $row['period_date']; ?></td>
 
                        <td>
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" data-id="<?php echo $row['id']; ?>"
                           data-target="#edit" data-organization_id="<?php echo $row['organization_id']; ?>"
-                          data-school_id="<?php echo $row['school_id']; ?>"  
-                          data-support_type="<?php echo $row['support_type']; ?>"
-                          data-quantity ="<?php echo $row['quantity']; ?>"
-                          data-cost="<?php echo $row['cost']; ?>" 
-                           data-period_date="<?php echo $row['period_date']; ?>"
+                          data-school_id="<?php echo $row['school_id']; ?>"  data-support_type="<?php echo $row['support_type']; ?>"
+                          data-cost="<?php echo $row['cost']; ?>"  data-period_date="<?php echo $row['period_date']; ?>"
+                          data-number="<?php echo $row['number']; ?>"
                           class="btn btn-warning">
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
                          <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
@@ -185,7 +176,7 @@
                            $drow=mysqli_fetch_array($del);
                          ?>
                          <div class="container-fluid">
-                           <h5><center>Are you sure you want to <br>delete</br>  <strong><?php echo $drow['support_type']; ?> ? ?  </div>
+                           <h5><center>Are you sure you want to <br>Delete</br>  <strong><?php echo $drow['support_type']; ?> ? ?  </div>
                                  <div class="modal-footer">
                                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                                      <a href="deleteActivity.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
@@ -235,7 +226,8 @@
 
                         ?>
                          <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                           <select type="text" class="select-field" id="organization_id" name="organization_id"  >
+                           <select type="text" class="select-field" id="organization_id" name="organization_id" required >
+                             <option disabled selected value> -- select an organization  -- </option>
                              <?php  while ($row = mysqli_fetch_array($result1)) {
                                   echo "<option value='" . $row['id'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."---Donates----". $row['previous_activities']. "</option>";
                               }
@@ -256,7 +248,8 @@
 
                        ?>
                       <label for="field1"><span>School Name <span class="required">*</span></span>
-                        <select type="text" class="select-field" id="school_id" name="school_id"  >
+                        <select type="text" class="select-field" id="" name="school_id"  required>
+                           <option disabled selected value> -- select a school  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result2)) {
                                echo "<option value='" . $row['id'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
                            }
@@ -266,25 +259,25 @@
                     </td>
                     <td>
                       <label for="field1"><span>Support Type <span class="required">*</span></span>
-                        <input type="text" class="input-field" id="support_type" name="support_type" value="" />
+                        <input required type="text" class="input-field" id="support_type" name="support_type" value="" />
                       </label>
                     </td>
                    </tr>
                    <tr>
                      <td>
                       <label for="field1"><span>Quantity <span class="required">*</span></span>
-                       <input type="number" class="input-field" id="quantity" name="quantity" value="" />
+                       <input type="number" class="input-field" id="number" name="number" value="" required/>
                       </label>
                     </td>
 
                      <td>
                       <label for="field1"><span>Cost <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="cost" name="cost" value="" />
+                       <input type="text" class="input-field" id="cost" name="cost" value="" required/>
                       </label>
                     </td>
                     <td>
                      <label for="field1"><span>Date <span class="required">*</span></span>
-                      <input type="date" class="input-field" id="period_date" name="period_date" value="" />
+                      <input type="date" class="input-field" id="period_date" name="period_date" value="" required/>
                      </label>
                    </td>
                    <td>
@@ -331,7 +324,7 @@
 
                       ?>
                        <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                         <select type="text" class="select-field" id="organization_id" name="organization_id"  >
+                         <select type="text" class="select-field" id="organization_id" name="organization_id"  required>
                            <?php  while ($row = mysqli_fetch_array($result1)) {
                                 echo "<option value='" . $row['id'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."---Donates----". $row['previous_activities']. "</option>";
                             }
@@ -352,7 +345,7 @@
 
                      ?>
                     <label for="field1"><span>School Name <span class="required">*</span></span>
-                      <select type="text" class="select-field" id="school_id" name="school_id"  >
+                      <select type="text" class="select-field" id="school_id" name="school_id"  required>
                         <?php  while ($row = mysqli_fetch_array($result2)) {
                              echo "<option value='" . $row['id'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
                          }
@@ -362,25 +355,25 @@
                   </td>
                   <td  colspan="4">
                     <label for="field1"><span>Support Type <span class="required">*</span></span>
-                      <input type="text" class="input-field" id="support_type" name="support_type" value="" />
+                      <input type="text" class="input-field" id="support_type" name="support_type" value="" required/>
                     </label>
                   </td>
                  </tr>
                  <tr>
                    <td>
                     <label for="field1"><span>Quantity <span class="required">*</span></span>
-                     <input type="number" class="input-field" id="quantity" name="quantity" value="" />
+                     <input type="number" class="input-field" id="number" name="number" value="" required/>
                     </label>
                   </td>
 
                    <td>
                     <label for="field1"><span>Cost <span class="required">*</span></span>
-                     <input type="text" class="input-field" id="cost" name="cost" value="" />
+                     <input type="text" class="input-field" id="cost" name="cost" value="" required/>
                     </label>
                   </td>
                   <td>
                    <label for="field1"><span>Date <span class="required">*</span></span>
-                    <input type="date" class="input-field" id="period_date" name="period_date" value="" />
+                    <input type="date" class="input-field" id="period_date" name="period_date" value="" required/>
                    </label>
                  </td>
                  <td>
@@ -686,9 +679,9 @@
         var organization_id = button.data('organization_id')
         var school_id = button.data('school_id')
         var support_type = button.data('support_type')
-        var quantity = button.data('quantity')
         var cost = button.data('cost')
         var period_date = button.data('period_date')
+        var number = button.data('number')
 
         var id = button.data('id')
 
@@ -699,9 +692,9 @@
         modal.find('.modal-body #organization_id').val(organization_id)
         modal.find('.modal-body #school_id').val(school_id)
         modal.find('.modal-body #support_type').val(support_type)
-        modal.find('.modal-body #quantity').val(quantity)
         modal.find('.modal-body #cost').val(cost)
         modal.find('.modal-body #period_date').val(period_date)
+        modal.find('.modal-body #number').val(number)
 
         modal.find('.modal-body #id').val(id)
 

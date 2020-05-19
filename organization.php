@@ -62,17 +62,10 @@
               </a>
             </li>
 
-            <li class="treeview">
-              <a href="activity_report.php">
+                <li class="treeview">
+              <a href="report.php">
                 <i class="fa fa-files-o"></i>
-                <span>Activity Report</span>
-                <span class="label label-primary pull-right"></span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
-                <span>Request Report</span>
+                <span>Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -221,32 +214,32 @@
                       <td>
 
                          <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                             <input type="text" class="input-field" id="organization_name" name="organization_name" value="" />
+                             <input type="text" class="input-field" id="organization_name" name="organization_name" value="" required/>
                          </label>
                       </td>
                       <td>
                        <label for="field1"><span>Ag Registration <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="ag_registration_no" name="ag_registration_no" value="" />
+                         <input type="text" class="input-field" id="ag_registration_no" name="ag_registration_no" value="" required/>
                        </label>
                      </td>
                    </tr>
                    <tr>
                      <td>
                        <label for="field1"><span>Office Space Address <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="office" name="office_space_address" value="" />
+                         <input type="text" class="input-field" id="office" name="office_space_address" value="" required/>
                        </label>
                      </td>
                      <td>
                       <label for="field1"><span>Previous Activity <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="previous_activities" name="previous_activities" value="" />
+                       <input type="text" class="input-field" id="previous_activities" name="previous_activities" value="" required/>
                       </label>
                     </td>
                    </tr>
                    <tr>
                      <td>
                          <label for="field1"><span>Region <span class="required">*</span></span>
-                           <select type="text" class="select-field" id="organization_name" name="organization_name">
-
+                           <select type="text" class="select-field" id="organization_name" name="organization_name" required>
+                           <option disabled selected value> -- select a region  -- </option>
                            <option value="region 1">1</option>;
                            <option value="region 2">2</option>;
                            <option value="region 3">3</option>;
@@ -316,7 +309,7 @@
 
                         ?>
                       <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                      <select type="text" class="select-field" id="organization_name" name="organization_name">
+                      <select type="text" class="select-field" id="organization_name" name="organization_name" required>
                       <?php  while ($row = mysqli_fetch_array($result1)) {
                            echo "<option value='" . $row['organization_name'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."----Donates----". $row['previous_activities']. "</option>";
                        }
@@ -328,7 +321,7 @@
                     <td>
                       <div class="form-style-2">
                       <label for="last_name">Ag Registration</label>
-                      <input type="text" id="ag_registration_no" name="ag_registration_no" placeholder="Registration" class="input-field" value=""/>
+                      <input type="text" id="ag_registration_no" name="ag_registration_no" placeholder="Registration" class="input-field" value="" required/>
                       </div>
                     </td>
 
@@ -339,7 +332,7 @@
                     <td>
                       <div class="form-style-2">
                       <label for="dob">Office Address </label>
-                      <input type="text" id="office" name="office_space_address" placeholder="Address" class="input-field" value=""/>
+                      <input type="text" id="office" name="office_space_address" placeholder="Address" class="input-field" value="" required/>
                       </div>
                     </td>
 
@@ -690,17 +683,17 @@
         html +=  '<tr id="inputFormRow">';
         html += ' <td>';
         html += ' <label for="field1"><span>Name <span class="required">*</span></span>';
-        html += '<input type="text" class="input-field" id="name" name="name'+$count+'" value="" />';
+        html += '<input type="text" class="input-field" id="name" name="name'+$count+'" value="" required/>';
         html += '</label>'  ;
         html += '</td>';
         html +=  ' <td>';
         html +=   ' <label for="field1"><span>Surname <span class="required">*</span></span>';
-        html +=    '<input type="text" class="input-field" id="surname" name="surname'+$count+'" value="" />' ;
+        html +=    '<input type="text" class="input-field" id="surname" name="surname'+$count+'" value="" required/>' ;
         html +=    '</label>';
         html +=  '</td>';
         html +=  ' <td>';
         html +=   '<label for="field1"><span>Designation <span class="required">*</span></span>';
-        html +=   '<input type="text" class="input-field" id="position" name="position'+$count+'" value="" />';
+        html +=   '<input type="text" class="input-field" id="position" name="position'+$count+'" value="" required/>';
         html +=   ' </label>';
         html +=  '</td>';
         html +=  ' <td>';
