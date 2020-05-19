@@ -128,7 +128,7 @@
 						require 'connection/connection.php';
 
 
-						$sql = "SELECT school_id, support_type, number, cost, period_date, activity.id as id, organization_id,
+						$sql = "SELECT school_id, support_type, quantity, cost, period_date, activity.id as id, organization_id,
             organization.organization_name, organization.id as Oid, school.name, school.id as Sid
             FROM activity
 
@@ -148,7 +148,7 @@
                         <td><?php echo $row['organization_name']; ?></td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
-                        <td><?php echo $row['number']; ?></td>
+                        <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
                         <td><?php echo $row['period_date']; ?></td>
 
@@ -157,7 +157,7 @@
                           data-target="#edit" data-organization_id="<?php echo $row['organization_id']; ?>"
                           data-school_id="<?php echo $row['school_id']; ?>"  data-support_type="<?php echo $row['support_type']; ?>"
                           data-cost="<?php echo $row['cost']; ?>"  data-period_date="<?php echo $row['period_date']; ?>"
-                          data-number="<?php echo $row['number']; ?>"
+                          data-quantity="<?php echo $row['quantity']; ?>"
                           class="btn btn-warning">
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
                          <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
@@ -273,7 +273,7 @@
                    <tr>
                      <td>
                       <label for="field1"><span>Quantity <span class="required">*</span></span>
-                       <input type="number" class="input-field" id="number" name="number" value="" required/>
+                       <input type="number" class="input-field" id="quantity" name="quantity" value="" required/>
                       </label>
                     </td>
 
@@ -369,7 +369,7 @@
                  <tr>
                    <td>
                     <label for="field1"><span>Quantity <span class="required">*</span></span>
-                     <input type="number" class="input-field" id="number" name="number" value="" required/>
+                     <input type="number" class="input-field" id="quantity" name="quantity" value="" required/>
                     </label>
                   </td>
 
@@ -688,7 +688,7 @@
         var support_type = button.data('support_type')
         var cost = button.data('cost')
         var period_date = button.data('period_date')
-        var number = button.data('number')
+        var quantity = button.data('quantity')
 
         var id = button.data('id')
 
@@ -701,7 +701,7 @@
         modal.find('.modal-body #support_type').val(support_type)
         modal.find('.modal-body #cost').val(cost)
         modal.find('.modal-body #period_date').val(period_date)
-        modal.find('.modal-body #number').val(number)
+        modal.find('.modal-body #quantity').val(quantity)
 
         modal.find('.modal-body #id').val(id)
 
