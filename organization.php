@@ -42,7 +42,7 @@
             </li>
             <li class="active treeview">
               <a href="organization.php">
-                <i class="fa fa-files-o"></i>
+                <i class="glyphicon glyphicon-home"></i>
                 <span>Organisation</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -56,7 +56,7 @@
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="fa fa-files-o"></i>
+                <i class="ion ion-stats-bars"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -153,7 +153,7 @@
                         <span class="glyphicon glyphicon-trash"></span> Delete</a>
                         <a href="organizationDetails.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
                           class="btn btn-primary">
-                       <span class="glyphicon glyphicon-trash"></span> Details</a>
+                       <span class="glyphicon glyphicon-eye-open"></span> Details</a>
                       </td>
 
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
