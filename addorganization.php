@@ -4,10 +4,11 @@
 
         $rowNo = $_POST['number'];
 
-        $organization_name = $_POST['organization_nane'];
+        $organization_name = $_POST['organization_name'];
         $ag_registration_no = $_POST['ag_registration_no'];
         $office_space_address = $_POST['office_space_address'];
         $previous_activities = $_POST['previous_activities'];
+        $region = $_POST['region'];
 
         for ($i=1; $i <= $rowNo; $i++) {
           // code...
@@ -23,8 +24,8 @@
         /*mysqli_query($conn,"insert into person (name, surname,dob, address) values ('$name', '$surname','$dob', '$address')");
          header('location:person.php');*/
 
-        $sql = "INSERT INTO organization ( organization_name, ag_registration_no, office_space_address, previous_activities)
-         VALUES ('$organization_name','$ag_registration_no','$office_space_address','$previous_activities')";
+        $sql = "INSERT INTO organization ( organization_name, ag_registration_no, office_space_address, previous_activities,region)
+         VALUES ('$organization_name','$ag_registration_no','$office_space_address','$previous_activities','$region')";
 
        $result = mysqli_query($conn, $sql);
 

@@ -153,7 +153,7 @@
                         <span class="glyphicon glyphicon-trash"></span> Delete</a>
                         <a href="organizationDetails.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
                           class="btn btn-primary">
-                       <span class="glyphicon glyphicon-eye-open"></span> Details</a>
+                       <span class="glyphicon glyphicon-trash"></span> Details</a>
                       </td>
 
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
@@ -245,7 +245,7 @@
                    <tr>
                      <td>
                          <label for="field1"><span>Region <span class="required">*</span></span>
-                           <select type="text" class="select-field" id="organization_name" name="organization_name" required>
+                           <select type="text" class="select-field" id="region" name="region" required>
                            <option disabled selected value> -- select a region  -- </option>
                            <option value="region 1">1</option>;
                            <option value="region 2">2</option>;
