@@ -4,7 +4,7 @@ session_start();
  <!--  Header (Page header) -->
  <?php include'header.php';?>
  <style type="text/css">
-      h5,h6{
+      h4,h5{
         text-align:center;
       }
 		
@@ -42,7 +42,7 @@ session_start();
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
@@ -84,10 +84,24 @@ session_start();
               </a>
             </li>
 
-                <li class="treeview">
+            <li class="active treeview">
               <a href="activity_report.php">
                 <i class="fa fa-files-o"></i>
                 <span>Activity Report</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="request_report.php">
+                <i class="fa fa-files-o"></i>
+                <span>Request Report</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="Verification.php">
+                <i class="fa fa-files-o"></i>
+                <span>Verification</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -124,10 +138,10 @@ include('connection/connection.php');
         $row=mysqli_fetch_array($query);
         
 ?>      
-                  <h5><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU ACTIVITY REPORT</b> </h5>  
-                  <h6>Address: WILLY THROPE PLACE BANJUL</h6>
-                  <h6>Contact #:</h6>
-				  <h5><b>ACTIVITY REPORT as of today, <?php echo date("M d, Y h:i a");?></b></h5>
+                  <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU ACTIVITY REPORT</b> </h4>  
+                  <h5><b>Address: WILLY THROPE PLACE BANJUL</b></h5>
+                  <h5><b>Contact #:</b></h5>
+				  <h4><b>ACTIVITY REPORT as of today, <?php echo date("M d, Y h:i a");?></b></h4>
                   
 				  <a class = "btn btn-success btn-print" href = "" onclick = "window.print()"><i class ="glyphicon glyphicon-print"></i> Print</a>
 							<a class = "btn btn-primary btn-print" href = "index.php"><i class ="glyphicon glyphicon-arrow-left"></i> Back to Homepage</a>   
@@ -137,7 +151,7 @@ include('connection/connection.php');
 					
                       
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Organisation Name</th>
                         <th>School Name</th>
                         <th>support Type</th>
@@ -166,7 +180,6 @@ include('connection/connection.php');
 			
 ?>
                       <tr>
-                        <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['organization_name']; ?></td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>

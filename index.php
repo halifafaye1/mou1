@@ -64,10 +64,24 @@ session_start();
               </a>
             </li>
 
-                <li class="treeview">
+            <li class="treeview">
               <a href="activity_report.php">
                 <i class="fa fa-files-o"></i>
                 <span>Activity Report</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="request_report.php">
+                <i class="fa fa-files-o"></i>
+                <span>Request Report</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="Verification.php">
+                <i class="fa fa-files-o"></i>
+                <span>Verification</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
