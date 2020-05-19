@@ -178,7 +178,7 @@ include('connection/connection.php');
                     </thead>
                     <tbody>
                     <?php include ('connection/connection.php');
-                            //connect to database, checking, etc 
+                            
 
                             // process form when posted
                             if(isset($_POST['value'])) {

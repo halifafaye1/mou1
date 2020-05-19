@@ -200,12 +200,6 @@ include('connection/connection.php');
                         <th></th>
                       </tr> 
                       <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                      </tr> 
-                      <tr>
                         <th>Prepared by:</th>
                         <th></th>
                         <th></th>
