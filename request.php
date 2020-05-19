@@ -62,18 +62,10 @@
               </a>
             </li>
 
-          
             <li class="treeview">
-              <a href="activity_report.php">
+              <a href="report.php">
                 <i class="fa fa-files-o"></i>
-                <span>Activity Report</span>
-                <span class="label label-primary pull-right"></span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
-                <span>Request Report</span>
+                <span>Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -159,12 +151,9 @@
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
                            data-target="#edit"  data-id="<?php echo $row['id']; ?>"
                            data-organization_id="<?php echo $row['organization_id']; ?>"
-                           data-name="<?php echo $row['name']; ?>" 
-                           data-address="<?php echo $row['address']; ?>"
-                           data-telephone="<?php echo $row['telephone']; ?>"
-                            data-email="<?php echo $row['email']; ?>"
-                           data-reference="<?php echo $row['file_ref_no']; ?>"
-                             data-date_time="<?php echo $row['date_time']; ?>"
+                           data-name="<?php echo $row['name']; ?>" data-address="<?php echo $row['address']; ?>"
+                           data-telephone="<?php echo $row['telephone']; ?>" data-email="<?php echo $row['email']; ?>"
+                           data-reference="<?php echo $row['file_ref_no']; ?>"  data-date_time="<?php echo $row['date_time']; ?>"
                              data-approval="<?php echo $row['approval']; ?>"
                             class="btn btn-warning">
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
@@ -233,7 +222,7 @@
                 <tbody>
                   <tr>
                     <td>
-                       <label for="field1"><span>Organization ID <span class="required">*</span></span>
+                       <label for="field1"><span>Organization Name <span class="required">*</span></span>
                          <?php
 
                            require 'connection/connection.php';
@@ -244,7 +233,8 @@
 
 
                          ?>
-                         <select type="text" class="select-field" id="organization_id" name="organization_id"  >
+                         <select type="text" class="select-field" id="organization_id" name="organization_id"  required>
+                            <option disabled selected value> -- select an organization  -- </option>
                            <?php  while ($row3 = mysqli_fetch_array($result1)) {
                                 echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
                                  $orgid = $_GET['organization_id'];
@@ -256,7 +246,7 @@
                     </td>
                     <td>
                        <label for="field1"><span>Request Name <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="name" name="name" value="" />
+                         <input type="text" class="input-field" id="name" name="name" value="" required/>
 
                        </label>
                     </td>
@@ -265,31 +255,31 @@
                  <tr>
                    <td>
                      <label for="field1"><span>Address <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="address" name="address" value="" />
+                       <input type="text" class="input-field" id="address" name="address" value="" required/>
                      </label>
                    </td>
                    <td>
                     <label for="field1"><span>Telephone <span class="required">*</span></span>
-                     <input type="text" class="input-field" id="telephone" name="telephone" value="" />
+                     <input type="tel" class="input-field" id="telephone" name="telephone" value="" required/>
                     </label>
                   </td>
                  </tr>
                  <tr>
                    <td>
                      <label for="field1"><span>Email <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="email" name="email" value="" />
+                       <input type="text" class="input-field" id="email" name="email" value="" required/>
                      </label>
                    </td>
                    <td>
                     <label for="field1"><span>Reference # <span class="required">*</span></span>
-                     <input type="text" class="input-field" id="file_ref_no" name="file_ref_no" value="" />
+                     <input type="text" class="input-field" id="file_ref_no" name="file_ref_no" value="" required/>
                     </label>
                   </td>
                  </tr>
                  <tr>
                    <td>
                      <label for="field1"><span>Date <span class="required">*</span></span>
-                       <input type="date" class="input-field" id="date_time" name="date_time" value="" />
+                       <input type="date" class="input-field" id="date_time" name="date_time" value=""required />
                      </label>
                    </td>
                    <!-- <td>
@@ -301,7 +291,7 @@
                    <td>
                     <label for="field1"><span>Approval <span class="required">*</span></span>
 
-                     <select class="select-field" id="approval" name="approval">
+                     <select class="select-field" id="approval" name="approval" required>
 
                         <option value="Pending">Pending </option>
                         <option value="Denied">Denied </option>
@@ -401,17 +391,16 @@
                    </label>
                  </td>
                  <td>
-                    <label for="field1"><span>Approval <span class="required">*</span></span>
+                  <label for="field1"><span>Approval <span class="required">*</span></span>
+                    <select class="select-field" id="approval" name="approval" required>
 
-                     <select class="select-field" id="approval" name="approval">
+                       <option value="Pending">Pending </option>
+                       <option value="Denied">Denied </option>
+                       <option value="Approved">Approved </option>
 
-                        <option value="Pending">Pending </option>
-                        <option value="Denied">Denied </option>
-                        <option value="Approved">Approved </option>
-
-                     </select>
-                    </label>
-                  </td>
+                    </select>
+                  </label>
+                </td>
                </tr>
             </tbody>
           </table>
