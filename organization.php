@@ -42,7 +42,7 @@
             </li>
             <li class="active treeview">
               <a href="organization.php">
-                <i class="glyphicon glyphicon-home"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Organisation</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -56,23 +56,16 @@
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
 
-            <li class="treeview">
-              <a href="activity_report.php">
+                <li class="treeview">
+              <a href="report.php">
                 <i class="fa fa-files-o"></i>
-                <span>Activity Report</span>
-                <span class="label label-primary pull-right"></span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
-                <span>Request Report</span>
+                <span>Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -153,7 +146,7 @@
                         <span class="glyphicon glyphicon-trash"></span> Delete</a>
                         <a href="organizationDetails.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
                           class="btn btn-primary">
-                       <span class="glyphicon glyphicon-eye-open"></span> Details</a>
+                       <span class="glyphicon glyphicon-trash"></span> Details</a>
                       </td>
 
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->

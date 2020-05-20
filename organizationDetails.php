@@ -197,6 +197,10 @@
 
           <div class="box-header">
               <h3 class="box-title">EXECUTIVE MEMBERS</h3>
+              <button class="btn btn-success" style="float:right"
+              data-toggle="modal"
+              data-target="#add_person"
+              type="button" name="button">Add Executive Member</button>
 
             </div><!-- /.box-header -->
           <div class="box">
@@ -284,7 +288,7 @@
               <h4 class="modal-title" id="myModalLabel">Update Person Details</h4>
               </div>
               <div class="modal-body">
-                echo <?php echo $row['id']; ?>;
+
               <?php
               $edit=mysqli_query($conn,"select * from person where id ='".$row['id']."'");
               $erow=mysqli_fetch_array($edit);
@@ -345,6 +349,15 @@
             </div><!-- /.box-header -->
           <div class="box">
             <div class="box-body">
+              <?php
+
+                require 'connection/connection.php';
+
+                $id = $_GET['id'];
+                $sql = "SELECT * FROM report where org_id = $id  ";
+                $result = mysqli_query($conn, $sql);
+
+              ?>
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -358,17 +371,15 @@
 
 
                 <tbody>
-
-                <tr>
-
-
-                    <td>1</td>
+                  <?php while($row=mysqli_fetch_assoc($result)){ ?>
+                  <tr>
+                    <td><?php echo $row['id']; ?></td>
                     <td>Submitted</td>
-                    <td>NA</td>
-                    <td>NA</td>
+                    <td ><button href="hello.gm"><strong>View: </strong><?php echo $row['report_1']; ?></button></td>
+                    <td><?php echo $row['report_2']; ?></td>
+                  </tr>
+                  <?php }   ?>
 
-
-                </tr>
               </tbody>
             </thead>
           </table>
@@ -389,43 +400,29 @@
         <div class="modal-body">
           <div class="form-style-2">
             <form action="addReport.php" method="post" enctype="multipart/form-data">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>
-                     <label for="field1"><span>Report 1 </span>
-                      <input type="file" class="input-field" id="report1" name="report_1" value="" required/>
-                     </label>
-                   </td>
-                 </tr>
-                 <tr>
 
-                  <td>
-                   <label for="field1"><span>Report 1 </span>
-                    <input type="radio" id="male" name="gender" value="male">
-                   </label>
-                 </td>
-                 <td>
-                  <label for="field1"><span>Report 2 </span>
-                   <input type="radio" id="male" name="gender" value="male">
-                  </label>
-                </td>
-                <td>
-                 <label for="field1"><span>Report 2 </span>
-                  <input type="radio" id="male" name="gender" value="male">
+
+               <input type="hidden" id="id" name="org_id" value="<?php echo $_GET['id'];?>">
+
+
+
+
+               <label ><span>Report 1 </span>
+                <input type="radio" id="report_1" name="report" value="report1">
+               </label>
+
+                <label ><span>Report 2 </span>
+                 <input type="radio" id="report_2" name="report" value="report2">
+                </label>
+
+                 <label ><span>Report 3 </span>
+                  <input type="radio" id="report_3" name="report" value="report3">
                  </label>
-               </td>
-                 </tr>
-                 <tr>
 
-                  <td>
-                   <label for="field1"><span>Report 3 </span>
-                    <input type="file" class="input-field" id="report3" name="report_3" value="" />
-                   </label>
-                 </td>
-                 </tr>
-              </tbody>
-            </table>
+                 <label for="field1"><span>Report 1 </span>
+                  <input type="file" class="input-field" id="report1" name="report_2" value="" required/>
+                 </label>
+
          </div>
          <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>
@@ -437,6 +434,52 @@
  </div>
 </div>
     <!--  End upload report  -->
+
+    <div class="modal fade" id="add_person" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h4 class="modal-title" id="myModalLabel">Add Executive Member</h4>
+    </div>
+    <div class="modal-body">
+      <form method="POST" action="addExecutive.php">
+      <input type="hidden" id="org_id" name="org_id" class="input-field" value="<?php echo $_GET['id']?>"/>
+
+
+      <div class="form-style-2">
+      <label for="first_name">Name </label>
+      <input type="text" id="name" name="name" placeholder="First Name" class="input-field" value=""/>
+      </div>
+
+      <div class="form-style-2">
+      <label for="last_name">Surname </label>
+      <input type="text" id="surname" name="surname" placeholder="Surname" class="input-field" value=""/>
+      </div>
+
+      <div class="form-style-2">
+      <label for="last_name">Designation </label>
+      <input type="text" id="position" name="position" placeholder="designation" class="input-field" value=""/>
+      </div>
+
+      <div class="form-style-2">
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" placeholder="DOB" class="input-field" value=""/>
+      </div>
+
+      <div class="form-style-2">
+      <label for="address">Identification Number (ID)</label>
+      <input type="text" id="id" name="id" placeholder="Identification Number" class="input-field" value="" />
+      </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>
+    <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
 
 
 

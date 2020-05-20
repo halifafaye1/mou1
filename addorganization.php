@@ -24,10 +24,25 @@
         /*mysqli_query($conn,"insert into person (name, surname,dob, address) values ('$name', '$surname','$dob', '$address')");
          header('location:person.php');*/
 
-        $sql = "INSERT INTO organization ( organization_name, ag_registration_no, office_space_address, previous_activities,region)
+         $sql = "INSERT INTO organization ( organization_name, ag_registration_no, office_space_address, previous_activities,region)
          VALUES ('$organization_name','$ag_registration_no','$office_space_address','$previous_activities','$region')";
 
-        $result = mysqli_query($conn, $sql);
+         $result = mysqli_query($conn, $sql);
+
+
+         // Create a new row of report in the report table for every added organization with the organization id set as the org_id
+         $sqlid = "SELECT id FROM organization ORDER BY id ASC";
+
+         $result3 = mysqli_query($conn, $sqlid);
+         while($row=mysqli_fetch_assoc($result3)){
+          $id = $row['id'];
+           }
+          $orgid = $id;
+
+         $sql = "INSERT INTO report ( org_id, report_1, report_2, report_3)
+          VALUES ('$orgid ','NA','NA','NA')";
+         $resultP = mysqli_query($conn, $sql);
+
 
 
 
