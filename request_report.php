@@ -64,7 +64,7 @@ session_start();
             </li>
             <li class="treeview">
               <a href="organization.php">
-                <i class="fa fa-files-o"></i>
+                <i class="glyphicon glyphicon-home"></i>
                 <span>Organisation</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -78,7 +78,7 @@ session_start();
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="fa fa-files-o"></i>
+                <i class="ion ion-stats-bars"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>

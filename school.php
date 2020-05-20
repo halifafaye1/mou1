@@ -42,14 +42,14 @@
             </li>
             <li class="treeview">
               <a href="organization.php">
-                <i class="fa fa-files-o"></i>
+                <i class="glyphicon glyphicon-home"></i>
                 <span>Organisation</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="active treeview">
               <a href="school.php">
-                <i class="fa fa-files-o"></i>
+                <i class="ion ion-stats-bars"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
