@@ -27,12 +27,12 @@
         $sql = "INSERT INTO organization ( organization_name, ag_registration_no, office_space_address, previous_activities,region)
          VALUES ('$organization_name','$ag_registration_no','$office_space_address','$previous_activities','$region')";
 
-       $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
 
 
 
 
-        if ($result )
+        if ($result && empty($_POST['name']))
         {
 
           $sqlid = "SELECT id FROM organization ORDER BY id ASC";
@@ -59,7 +59,7 @@
 
           //$result2 = mysqli_query($conn, $sql2);
 
-          if($result2){
+          if($result2 || empty($result2)){
 
             echo '<script>alert("Data Saved")</script>';
             header('Location:organization.php');
