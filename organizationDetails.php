@@ -62,17 +62,10 @@
               </a>
             </li>
 
-            <li class="treeview">
-              <a href="activity_report.php">
+                <li class="treeview">
+              <a href="report.php">
                 <i class="fa fa-files-o"></i>
-                <span>Activity Report</span>
-                <span class="label label-primary pull-right"></span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
-                <span>Request Report</span>
+                <span>Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -83,6 +76,7 @@
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
+
         </section>
         <!-- /.sidebar -->
       </aside>
@@ -157,6 +151,7 @@
 
 
 
+
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
 
 
@@ -175,7 +170,7 @@
       											$drow=mysqli_fetch_array($del);
       										?>
       										<div class="container-fluid">
-      											<h5><center>Ag. Registration: <strong><?php echo $drow['ag_registration_no']; ?></strong></center></h5>
+      											<h5><center>Ag. Registration: <strong><?php echo $drow['name']; ?></strong></center></h5>
       						                </div>
       										</div>
       						                <div class="modal-footer">
@@ -215,6 +210,7 @@
                     <th>Designation</th>
                     <th>DOB</th>
                     <th>ID #</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
       <?php
@@ -235,6 +231,10 @@
                     <td><?php echo $row['surname']; ?></td>
                     <td><?php echo $row['position']; ?></td>
                     <td><?php echo $row['dob']; ?></td>
+                    <td></td>
+                    <td><a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"  data-id="<?php echo $row['id']; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
+      							<a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a></td>
+
                     <!-- <td>Alhassan</td>
                     <td>Alhassan</td>
                     <td>Houmaini</td>
@@ -248,31 +248,82 @@
 
                 </tr>
                 <!-- Delete  Organisation-->
+                <!-- Delete -->
                   <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                           <div class="modal-content">
                               <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                  <center><h4 class="modal-title" id="myModalLabel">Delete Organization</h4></center>
+                                  <center><h4 class="modal-title" id="myModalLabel">Delete</h4></center>
                               </div>
                               <div class="modal-body">
                       <?php
-                        $del=mysqli_query($conn,"select * from organization where id='".$row['id']."'");
+                        $del=mysqli_query($conn,"select * from person where id='".$row['id']."'");
                         $drow=mysqli_fetch_array($del);
                       ?>
                       <div class="container-fluid">
-                        <h5><center>Ag. Registration: <strong><?php echo $drow['ag_registration_no']; ?></strong></center></h5>
+                        <h5><center>Firstname: <strong><?php echo $drow['name']; ?></strong></center></h5>
                               </div>
                       </div>
                               <div class="modal-footer">
                                   <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                                  <a href="deleteOrganization.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                  <a href="deleteperson.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                               </div>
 
                           </div>
                       </div>
                   </div>
                   <!-- END Delete Organisation-->
+
+                  <!--Edit  Modal -->
+              <div class="modal fade" id="edit<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+              <div class="modal-content">
+              <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title" id="myModalLabel">Update Person Details</h4>
+              </div>
+              <div class="modal-body">
+                echo <?php echo $row['id']; ?>;
+              <?php
+              $edit=mysqli_query($conn,"select * from person where id ='".$row['id']."'");
+              $erow=mysqli_fetch_array($edit);
+              ?>
+              <form method="POST" action="editperson.php?id=<?php echo $erow['id']; ?>">
+              <div class="form-style-2">
+              <label for="first_name">Name </label>
+              <input type="text" id="name" name="name" placeholder="First Name" class="input-field" value="<?php echo $erow['name']; ?>"/>
+              </div>
+
+              <div class="form-style-2">
+              <label for="last_name">Surname </label>
+              <input type="text" id="surname" name="surname" placeholder="Surname" class="input-field" value="<?php echo $erow['surname']; ?>"/>
+              </div>
+
+              <div class="form-style-2">
+              <label for="last_name">Designation </label>
+              <input type="text" id="designation" name="designation" placeholder="designation" class="input-field" value="<?php echo $erow['position']; ?>"/>
+              </div>
+
+              <div class="form-style-2">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" placeholder="DOB" class="input-field" value="<?php echo $erow['dob']; ?>"/>
+              </div>
+
+              <div class="form-style-2">
+              <label for="address">Identification Number (ID)</label>
+              <input type="text" id="id" name="id" placeholder="Identification Number" class="input-field" value="<?php echo $erow['address']; ?>" />
+              </div>
+              <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                        <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-check"></span> Save</button>
+                    </div>
+
+              </form>
+              </div>
+              </div>
+              </div>
+              <!-- /.modal -->
 
 
                 <?php }   ?>
@@ -337,23 +388,33 @@
           </div>
         <div class="modal-body">
           <div class="form-style-2">
-            <form action="upload.php" method="POST">
+            <form action="addReport.php" method="post" enctype="multipart/form-data">
               <table>
                 <tbody>
                   <tr>
                     <td>
                      <label for="field1"><span>Report 1 </span>
-                      <input type="file" class="input-field" id="report1" name="report" value="" />
+                      <input type="file" class="input-field" id="report1" name="report_1" value="" required/>
                      </label>
                    </td>
                  </tr>
                  <tr>
 
                   <td>
-                   <label for="field1"><span>Report 2 </span>
-                    <input type="file" class="input-field" id="report2" name="report_2" value="" />
+                   <label for="field1"><span>Report 1 </span>
+                    <input type="radio" id="male" name="gender" value="male">
                    </label>
                  </td>
+                 <td>
+                  <label for="field1"><span>Report 2 </span>
+                   <input type="radio" id="male" name="gender" value="male">
+                  </label>
+                </td>
+                <td>
+                 <label for="field1"><span>Report 2 </span>
+                  <input type="radio" id="male" name="gender" value="male">
+                 </label>
+               </td>
                  </tr>
                  <tr>
 
@@ -376,6 +437,8 @@
  </div>
 </div>
     <!--  End upload report  -->
+
+
 
 
 
