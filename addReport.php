@@ -44,7 +44,7 @@
 
                               echo "Your file was uploaded successfully.";
                               //header('Location: ' . $_SERVER['HTTP_REFERER']);
-                              $filename = $report_2;
+
 
                               header('Content-type: application/pdf');
                               readfile($report_2);
