@@ -30,7 +30,7 @@ session_start();
             </li>
             <li class="treeview">
               <a href="request.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-external-link"></i>
                 <span>Request</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -51,14 +51,14 @@ session_start();
             </li>
             <li class="treeview">
               <a href="school.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-institution"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-bar-chart"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -66,14 +66,14 @@ session_start();
 
             <li class="treeview">
               <a href="activity_report.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Activity Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Request Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>

@@ -156,7 +156,7 @@
 
                              echo "Your file was uploaded successfully.";
                              //header('Location: ' . $_SERVER['HTTP_REFERER']);
-                             $filename = "upload/Daily Attendance APRIL BILL.pdf";
+                             $filename =  $report_1 ;
 
                              header('Content-type: application/pdf');
                              readfile("upload/Daily Attendance APRIL BILL.pdf");

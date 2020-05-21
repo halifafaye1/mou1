@@ -23,8 +23,7 @@ include ('connection/connection.php');
                                     ON request.organization_id = organization.id";  
                                 }  
                                 $sql = mysqli_query($conn,$query);  
-                                
-                                
+                             
                                 while ($row = mysqli_fetch_assoc($sql)){ 
                                 
                                     
