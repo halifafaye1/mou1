@@ -21,7 +21,7 @@
                       if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
 
                       // Verify file size - 5MB maximum
-                      $maxsize = 5 * 1024 * 1024;
+                      $maxsize = 5 * 1024 * 10241;
                       if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
 
                       // Verify MYME type of the file
@@ -44,10 +44,10 @@
 
                               echo "Your file was uploaded successfully.";
                               //header('Location: ' . $_SERVER['HTTP_REFERER']);
-                              $filename = "upload/Daily Attendance APRIL BILL.pdf";
+                              $filename = $report_2;
 
                               header('Content-type: application/pdf');
-                              readfile("upload/Daily Attendance APRIL BILL.pdf");
+                              readfile($filename);
 
 
                           }
@@ -76,7 +76,7 @@
                     if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
 
                     // Verify file size - 5MB maximum
-                    $maxsize = 5 * 1024 * 1024;
+                    $maxsize = 5 * 1024 * 10241;
                     if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
 
                     // Verify MYME type of the file
@@ -103,7 +103,7 @@
                             $filename = "upload/Daily Attendance APRIL BILL.pdf";
 
                             header('Content-type: application/pdf');
-                            readfile("upload/Daily Attendance APRIL BILL.pdf");
+                            readfile($filename);
 
 
                         }
@@ -132,7 +132,7 @@
                      if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
 
                      // Verify file size - 5MB maximum
-                     $maxsize = 5 * 1024 * 1024;
+                     $maxsize = 5 * 1024 * 10241;
                      if($filesize > $maxsize) die("Error: File size is larger than the allowed limit.");
 
                      // Verify MYME type of the file
@@ -159,7 +159,7 @@
                              $filename =  $report_1 ;
 
                              header('Content-type: application/pdf');
-                             readfile("upload/Daily Attendance APRIL BILL.pdf");
+                             readfile($filename);
 
 
                          }
