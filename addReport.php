@@ -47,7 +47,7 @@
                               $filename = $report_2;
 
                               header('Content-type: application/pdf');
-                              readfile($filename);
+                              readfile($report_2);
 
 
                           }
@@ -100,10 +100,10 @@
 
                             echo "Your file was uploaded successfully.";
                             //header('Location: ' . $_SERVER['HTTP_REFERER']);
-                            $filename = "upload/Daily Attendance APRIL BILL.pdf";
+
 
                             header('Content-type: application/pdf');
-                            readfile($filename);
+                            readfile($report_3);
 
 
                         }
@@ -156,10 +156,10 @@
 
                              echo "Your file was uploaded successfully.";
                              //header('Location: ' . $_SERVER['HTTP_REFERER']);
-                             $filename =  $report_1 ;
+
 
                              header('Content-type: application/pdf');
-                             readfile($filename);
+                             readfile($report_1);
 
 
                          }
