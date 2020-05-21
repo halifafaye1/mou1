@@ -63,16 +63,9 @@
             </li>
 
             <li class="treeview">
-              <a href="activity_report.php">
+              <a href="report.php">
                 <i class="fa fa-files-o"></i>
-                <span>Activity Report</span>
-                <span class="label label-primary pull-right"></span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
-                <span>Request Report</span>
+                <span>Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -244,7 +237,7 @@
                             <option disabled selected value> -- select an organization  -- </option>
                            <?php  while ($row3 = mysqli_fetch_array($result1)) {
                                 echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
-                                // $orgid = $_GET['organization_id'];
+                                 $orgid = $_GET['organization_id'];
                             }
                             ?>
                          </select>
@@ -252,7 +245,7 @@
                        </label>
                     </td>
                     <td>
-                       <label for="field1"><span>Request Name <span class="required">*</span></span>
+                       <label for="field1"><span>Person Name <span class="required">*</span></span>
                          <input type="text" class="input-field" id="name" name="name" value="" required/>
 
                        </label>
@@ -362,7 +355,7 @@
                   </td>
 
                   <td>
-                   <label for="field1"><span>Name <span class="required">*</span></span>
+                   <label for="field1"><span>Person Name <span class="required">*</span></span>
                      <input type="text" class="input-field" id="name" name="name" value="" />
                    </label>
                  </td>
