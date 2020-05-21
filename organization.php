@@ -137,7 +137,7 @@
                        <td>
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
                             class="btn btn-warning"
-                            data-target=#edit data-id="<?php echo $row['id']; ?>"
+                            data-target=#edit data-id="<?php echo $row['id']; ?>"  data-region="<?php echo $row['region']; ?>"
                             data-organization_name="<?php echo $row['organization_name']; ?>"   data-ag_registration_no="<?php echo $row['ag_registration_no']; ?>"
                             data-office="<?php echo $row['office_space_address']; ?>"   data-previous_activities="<?php echo $row['previous_activities']; ?>">
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
@@ -238,7 +238,8 @@
                    <tr>
                      <td>
                          <label for="field1"><span>Region <span class="required">*</span></span>
-                           <select type="text" class="select-field" id="region" name="region" required>
+
+                          <select type="text" class="select-field" id="region" name="region" required>
                            <option disabled selected value> -- select a region  -- </option>
                            <option value="region 1">1</option>;
                            <option value="region 2">2</option>;
@@ -321,7 +322,7 @@
                     <td>
                       <div class="form-style-2">
                       <label for="last_name">Ag Registration</label>
-                      <input type="text" id="ag_registration_no" name="ag_registration_no" placeholder="Registration" class="input-field" value="" required/>
+                      <input type="text" id="ag_registration_no" name="ag_registration_no"  class="input-field" value="" required/>
                       </div>
                     </td>
 
@@ -332,17 +333,33 @@
                     <td>
                       <div class="form-style-2">
                       <label for="dob">Office Address </label>
-                      <input type="text" id="office" name="office_space_address" placeholder="Address" class="input-field" value="" required/>
+                      <input type="text" id="office" name="office_space_address"  class="input-field" value="" required/>
                       </div>
                     </td>
 
                     <td>
                       <div class="form-style-2">
                       <label for="address">Previous Activity </label>
-                      <input type="text" id="previous_activities" name="previous_activities" placeholder="Activity" class="input-field" value="" />
+                      <input type="text" id="previous_activities" name="previous_activities"  class="input-field" value="" />
                       </div>
                     </td>
 
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-style-2">
+                        <label for="field1"><span>Region <span class="required">*</span></span>
+                          <select type="text" class="select-field" id="region" name="region" required>
+                          <option disabled selected value> -- select a region  -- </option>
+                          <option value="region 1">1</option>;
+                          <option value="region 2">2</option>;
+                          <option value="region 3">3</option>;
+                          <option value="region 4">4</option>;
+                          <option value="region 5">5</option>;
+                          <option value="region 6">6</option>;
+                         </select>
+                      </div>
+                  </td>
                   </tr>
                 </tbody>
               </table>
@@ -652,6 +669,7 @@
         var ag_registration_no = button.data('ag_registration_no')
         var office = button.data('office')
         var previous_activities = button.data('previous_activities')
+        var region = button.data('region')
 
 
         var orgid = button.data('id')
@@ -665,6 +683,7 @@
         modal.find('.modal-body #ag_registration_no').val(ag_registration_no)
         modal.find('.modal-body #office').val(office)
         modal.find('.modal-body #previous_activities').val(previous_activities)
+        modal.find('.modal-body #region').val(region)
 
         modal.find('.modal-body #orgid').val(orgid)
 
@@ -700,6 +719,18 @@
         html +=  ' <button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
         html +=  ' </td>';
         html +=  '</tr>';
+        html +=  '<tr>';
+        html +=  '<td>';
+        html +=   '<label for="field1"><span>DOB <span class="required">*</span></span>';
+        html +=   '<input type="text" class="input-field" id="dob" name="dob'+$count+'" value="" required/>';
+        html +=   ' </label>';
+        html +=  '</td>';
+        html +=  '<td>';
+        html +=   '<label for="field1"><span>ID Number <span class="required">*</span></span>';
+        html +=   '<input type="text" class="input-field" id="id_number" name="id_number'+$count+'" value="" required/>';
+        html +=   ' </label>';
+        html +=  '</td>';
+        html +=  '<tr>';
         $count++;
         $rowCount++;
         $("#number").val($rowCount);
