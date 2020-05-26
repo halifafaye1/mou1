@@ -217,10 +217,11 @@ include('connection/connection.php');
                                 }
                                 else {
                                     // query to get all records
-                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-                                    request.id as id, organization.organization_name, organization.id as Oid
-                                    FROM request JOIN organization
-                                    ON request.organization_id = organization.id
+                                    $query = " SELECT *
+                                    FROM request JOIN person
+                                    join organization on
+                                    organization.id = person.org_id
+                                    where request.id_number = person.id_number
                                     ";
                                 }
                                 $result = mysqli_query($conn,$query);
