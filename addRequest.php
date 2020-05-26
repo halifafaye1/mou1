@@ -6,6 +6,7 @@
         //$organization_id = $_POST['organization_id'];
         $id_number = $_POST['id_number'];
         $name = $_POST['name'];
+        $person_name = $_POST['person_name'];
         $address = $_POST['address'];
         $telephone = $_POST['telephone'];
         $email = $_POST['email'];
@@ -18,8 +19,8 @@
         /*mysqli_query($conn,"insert into person (name, surname,dob, address) values ('$name', '$surname','$dob', '$address')");
          header('location:person.php');*/
 
-        $sql = "INSERT INTO request (name,id_number, address, telephone, email, file_ref_no, date_time, approval)
-         VALUES ('$name','$id_number','$address','$telephone','$email','$file_ref_no','$date_time','$approval')";
+        $sql = "INSERT INTO request (name,person_name,id_number, address, telephone, email, file_ref_no, date_time, approval)
+         VALUES ('$name','$person_name','$id_number','$address','$telephone','$email','$file_ref_no','$date_time','$approval')";
         $result = mysqli_query($conn, $sql);
 
 

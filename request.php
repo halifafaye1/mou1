@@ -6,7 +6,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,7 +24,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="active treeview">
               <a href="request.php">
@@ -120,11 +120,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>ID</th>
+
                         <th>Organisation ID</th>
+                        <th>Request Name</th>
                         <th>Person Name</th>
-                        <th>Address</th>
                         <th>ID #</th>
+                        <th>Address</th>
                         <th>Telephone</th>
                         <th>Email</th>
                         <th>Reference #</th>
@@ -140,10 +141,9 @@
 
 						//$sql = "SELECT * FROM request JOIN organization on request.organization_id = organization.id";
 
-            $sql= " SELECT name, id_number, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-              request.id as id, organization.organization_name, organization.id as Oid
-              FROM request JOIN organization
-              ON request.organization_id = organization.id";
+            $sql= " SELECT name, person_name,id_number, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+              request.id as id
+              FROM request ";
 
 						$result = mysqli_query($conn, $sql);
 
@@ -152,11 +152,12 @@
                     	<?php while($row=mysqli_fetch_assoc($result)){ ?>
                     <tr>
 
-                        <td><?php echo $row['id']; ?></td>
+
                         <td><?php echo $row['organization_name']; ?></td>
                         <td><?php echo $row['name']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
+                        <td><?php echo $row['person_name']; ?></td>
                         <td><?php echo $row['id_number']; ?></td>
+                        <td><?php echo $row['address']; ?></td>
                         <td><?php echo $row['telephone']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['file_ref_no']; ?></td>
@@ -166,7 +167,7 @@
                        <td>
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
                            data-target="#edit"  data-id="<?php echo $row['id']; ?>"
-                           data-organization_id="<?php echo $row['organization_id']; ?>"
+                           data-organization_id="<?php echo $row['organization_id']; ?>"data-person_name="<?php echo $row['person_name']; ?>"
                            data-name="<?php echo $row['name']; ?>" data-address="<?php echo $row['address']; ?>"
                            data-telephone="<?php echo $row['telephone']; ?>" data-email="<?php echo $row['email']; ?>"
                            data-reference="<?php echo $row['file_ref_no']; ?>"  data-date_time="<?php echo $row['date_time']; ?>"
@@ -238,12 +239,21 @@
                 <tbody>
                   <tr>
 
-                      <td>
-                         <label for="field1"><span>Person Name <span class="required">*</span></span>
-                           <input type="text" class="input-field" id="name" name="name" value="" required/>
+                    <td colspan="4">
+                       <label for="field1"><span>Request Name <span class="required">*</span></span>
+                         <input type="text" class="input-field" id="name" name="name" value="" required/>
 
-                         </label>
-                      </td>
+                       </label>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td >
+                       <label for="field1"><span>Person Name <span class="required">*</span></span>
+                         <input type="text" class="input-field" id="person_name" name="person_name" value="" required/>
+
+                       </label>
+                    </td>
 
                       <td>
                          <label for="field1"><span>ID Number <span class="required">*</span></span>
@@ -333,13 +343,23 @@
             <table>
               <tbody>
                 <tr>
+                  <td colspan="4">
+                     <label for="field1"><span>Request Name <span class="required">*</span></span>
+                       <input type="text" class="input-field" id="name" name="name" value="" required/>
+
+                     </label>
+                  </td>
+
+                </tr>
+                <tr>
                     <input type="hidden" id="id" name="id"  value=""/>
 
-                    <td>
-                     <label for="field1"><span>Person Name <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="name" name="name" value="" />
-                     </label>
-                   </td>
+                    <td >
+                       <label for="field1"><span>Person Name <span class="required">*</span></span>
+                         <input type="text" class="input-field" id="person_name" name="person_name" value="" required/>
+
+                       </label>
+                    </td>
 
                     <td>
                        <label for="field1"><span>ID Number <span class="required">*</span></span>
@@ -687,6 +707,7 @@
         var button = $(event.relatedTarget)
         var organization_id = button.data('organization_id')
         var name = button.data('name')
+        var person_name = button.data('person_name')
         var id_number = button.data('id_number')
         var address = button.data('address')
         var telephone = button.data('telephone')
@@ -705,6 +726,7 @@
 
         modal.find('.modal-body #organization_id').val(organization_id)
         modal.find('.modal-body #name').val(name)
+        modal.find('.modal-body #person_name').val(person_name)
         modal.find('.modal-body #id_number').val(id_number)
         modal.find('.modal-body #address').val(address)
         modal.find('.modal-body #telephone').val(telephone)
