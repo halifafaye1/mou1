@@ -46,6 +46,10 @@
           VALUES ('$orgid ','NA','NA','NA')";
          $resultP = mysqli_query($conn, $sql);
 
+         $sql = "INSERT INTO renewal ( org_id, count)
+          VALUES ('$orgid ','0')";
+         $resultq = mysqli_query($conn, $sql);
+
 
 
 

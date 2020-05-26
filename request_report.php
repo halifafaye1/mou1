@@ -246,10 +246,11 @@ include('connection/connection.php');
                   <td><?php echo $row['file_ref_no']; ?></td>
                   <td><?php echo $row['date_time']; ?></td>
                   <td><?php echo $row['approval']; ?></td>
-                  <td> 
-                  <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Renew</a>
-							<!-- Renewal -->
-						    <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <td>
+                  <a href="#renew<?php echo $row['org_id']; ?>" data-toggle="modal" data-org_id="<?php echo $row['organization_name']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Renew</a>
+</td>
+              <!-- Renewal -->
+						    <div class="modal fade" id="renew<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						        <div class="modal-dialog">
 						            <div class="modal-content">
 						                <div class="modal-header">
@@ -257,21 +258,26 @@ include('connection/connection.php');
 						                    <center><h4 class="modal-title" id="myModalLabel">Renew</h4></center>
 						                </div>
 						                <div class="modal-body">
-										<?php
-											$del=mysqli_query($conn,"select * from person where id='".$row['id']."'");
-											$drow=mysqli_fetch_array($del);
-										?>
-										<div class="container-fluid">
-											<h5><center>Firstname: <strong><?php echo $drow['name']; ?></strong></center></h5>
-						                </div>
-										</div>
+          										<?php
+          											$del=mysqli_query($conn,"select * from organization where id='".$row['id']."'");
+          											$drow=mysqli_fetch_array($del);
+          										?>
+          										<div class="container-fluid">
+          											<h5><center>Are you sure you want to renew the Agreement with : <strong><?php echo $drow['organization_name']; ?></strong></center></h5>
+          						                </div>
+          										</div>
+                              <form action="renewal.php" method="POST" enctype="multipart/form-data">
+                                 <input type="hidden" id="id" name="org_id" value="<?php echo $row['org_id']; ?>">
 						                <div class="modal-footer">
 						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-						                    <a href="deleteperson.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+						                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 						                </div>
+                          </form>
 
 						            </div>
+
 						        </div>
+
 						    </div>
                    </td>
 
