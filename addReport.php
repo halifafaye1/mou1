@@ -151,7 +151,8 @@
 
 
                              $sql = "UPDATE report SET
-                              report_1 = '$report_1'where org_id = '$id' ";
+                              report_1 = '$report_1' where org_id = '$id' ";
+                             
                              $result = mysqli_query($conn, $sql);
 
                              echo "Your file was uploaded successfully.";

@@ -1,12 +1,12 @@
-<?php require 'connection/connection.php'; ?>
+
  <!--  Header (Page header) -->
  <?php include'header.php';?>
  <!--  sidebar (Page sidebar) -->
    <!-- Left side column. contains the logo and sidebar -->
-   <aside class="main-sidebar">
+      <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,23 +24,23 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
-                <i class="fa fa-external-link"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Request</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="support_type.php">
                 <i class="fa fa-files-o"></i>
                 <span>Support Type</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="person.php">
                 <i class="fa fa-user"></i>
                 <span>Person</span>
@@ -56,14 +56,14 @@
             </li>
             <li class="treeview">
               <a href="school.php">
-                <i class="fa fa-institution"></i>
+                <i class="ion ion-stats-bars"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="fa fa-bar-chart"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -71,14 +71,14 @@
 
             <li class="treeview">
               <a href="activity_report.php">
-                <i class="fa fa-folder-open"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Activity Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="request_report.php">
-                <i class="fa fa-folder-open"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Request Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -99,7 +99,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Person
+            Support Type
             <small>Dashboard</small>
           </h1>
         </section>
@@ -110,22 +110,18 @@
             <div class="col-xs-12">
             	<div class="box-header">
                   <h3 class="box-title"></h3>
-
-                  	<div class="pull-right">
-                        <button class="btn btn-success" data-toggle="modal"
-                         data-target="#add_new_record_modal">Add New Person</button>
-                    </div>
-               </div><!-- /.box-header -->
+                  <div class="pull-right">
+                      <button class="btn btn-success" data-toggle="modal"
+                       data-target="#add_school">Add Support Type</button>
+                  </div>
+                </div><!-- /.box-header -->
               <div class="box">
                 <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>DOB</th>
-                        <th>Address</th>
+                        <th>Support Type</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -133,7 +129,8 @@
 
 						require 'connection/connection.php';
 
-						$sql = "SELECT * FROM person ORDER BY id";
+
+						$sql = "SELECT * FROM support_type ORDER BY id";
 						$result = mysqli_query($conn, $sql);
 
  					?>
@@ -142,94 +139,46 @@
                     <tr>
 
                         <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['name']; ?></td>
-                        <td><?php echo $row['surname']; ?></td>
-                        <td><?php echo $row['dob']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-
-                        <div class="btn-group" role="group">
-                        <td>
+                        <td><?php echo $row['support_type']; ?></td>
+                    
 
 
-							<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
-							<a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-							<!-- Delete -->
-						    <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						        <div class="modal-dialog">
-						            <div class="modal-content">
-						                <div class="modal-header">
-						                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						                    <center><h4 class="modal-title" id="myModalLabel">Delete</h4></center>
-						                </div>
-						                <div class="modal-body">
-										<?php
-											$del=mysqli_query($conn,"select * from person where id='".$row['id']."'");
-											$drow=mysqli_fetch_array($del);
-										?>
-										<div class="container-fluid">
-											<h5><center>Firstname: <strong><?php echo $drow['name']; ?></strong></center></h5>
-						                </div>
-										</div>
-						                <div class="modal-footer">
-						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-						                    <a href="deleteperson.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-						                </div>
+                       <td>
+                        
+         							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
+                           class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                       </td>
 
-						            </div>
-						        </div>
-						    </div>
+                                  <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
 
-
-
-							<!-- Modal -->
-		<div class="modal fade" id="edit<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-		<div class="modal-content">
-		<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-		<h4 class="modal-title" id="myModalLabel">Update Person Details</h4>
-		</div>
-		<div class="modal-body">
-			<?php
-					$edit=mysqli_query($conn,"select * from person where id='".$row['id']."'");
-					$erow=mysqli_fetch_array($edit);
-			?>
-		 <form method="POST" action="editperson.php?id=<?php echo $erow['id']; ?>">
-		<div class="form-style-2">
-		<label for="first_name">First Name</label>
-		<input type="text" id="name" name="name" placeholder="First Name" class="input-field" value="<?php echo $erow['name']; ?>"/>
-		</div>
-
-		<div class="form-style-2">
-		<label for="last_name">Last Name</label>
-		<input type="text" id="surname" name="surname" placeholder="Last Name" class="input-field" value="<?php echo $erow['surname']; ?>"/>
-		</div>
-
-		<div class="form-style-2">
-		<label for="dob">Date of Birth</label>
-		<input type="date" id="dob" name="dob" placeholder="DOB" class="input-field" value="<?php echo $erow['dob']; ?>"/>
-		</div>
-
-		 <div class="form-style-2">
-		<label for="address">Address</label>
-		<input type="text" id="address" name="address" placeholder="Address" class="input-field" value="<?php echo $erow['address']; ?>" />
-		</div>
-          <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-check"></span> Save</button>
-                </div>
-
-				</form>
-        </div>
-    </div>
-    </div>
-<!-- /.modal -->
-
-                        </td>
-                       </div>
 
                     </tr>
 
+                    <!-- Delete SCHOOL-->
+                     <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                     <center><h4 class="modal-title" id="myModalLabel">Delete Support Type</h4></center>
+                                 </div>
+                                 <div class="modal-body">
+                         <?php
+                           $del=mysqli_query($conn,"select * from support_type where id='".$row['id']."'");
+                           $drow=mysqli_fetch_array($del);
+                         ?>
+                         <div class="container-fluid">
+                           <h5><center>Are you sure you want to <br>delete</br>  <strong><?php echo $drow['support_type']; ?> ? ?  </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                     <a href="deleteSupport.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                 </div>
+
+                             </div>
+                         </div>
+                     </div>
+                     <!-- END Delete SCHOOL-->
 
                     <?php }   ?>
 
@@ -243,51 +192,44 @@
       </div><!-- /.content-wrapper -->
       </div>
 
+      <!-- Modals add/edit/delete school  -->
 
-      <!-- Modal -->
-      <!-- Bootstrap Modal - To Update Person -->
-<!-- Bootstrap Modal - To Add New Person -->
-<!-- Modal -->
-<div class="modal fade" id="add_new_record_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-<h4 class="modal-title" id="myModalLabel">Add New Person</h4>
-</div>
-<div class="modal-body">
-
- <form action="addperson.php" method="POST">
-<div class="form-style-2">
-<label for="first_name">First Name</label>
-<input type="text" id="name" name="name" placeholder="First Name" class="input-field" />
-</div>
-
-<div class="form-style-2">
-<label for="last_name">Last Name</label>
-<input type="text" id="surname" name="surname" placeholder="Last Name" class="input-field" />
-</div>
-
-<div class="form-style-2">
-<label for="dob">Date of Birth</label>
-<input type="date" id="dob" name="dob" placeholder="DOB" class="input-field" />
-</div>
-
- <div class="form-style-2">
-<label for="address">Address</label>
-<input type="text" id="address" name="address" placeholder="Address" class="input-field" />
-</div>
-
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>
-<button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
-</div>
-</div>
-</form>
-</div>
-</div>
-
+        <!--  add school  -->
+      <div class="modal fade" id="add_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add Support Type</h4>
+            </div>
+          <div class="modal-body">
+            <div class="form-style-2">
+              <form action="addSupport.php" method="POST">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                         
+                       <label for="field1"><span>Support Type </span><br><br>
+                         <input type="text" data-type="support_type"  class="input-field" id="support_type" name="support_type"/>
+                       </label>
+                     
+                     </td>
+                </tr>
+                </tbody>
+              </table>
+           </div>
+           <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>
+            <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+         </div>
+        </div>
+      </form>
+    </div>
+   </div>
+  </div>
+      <!--  End add organization  -->
+    
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -492,19 +434,12 @@
         });
       });
     </script>
+
     <style type="text/css">
         .form-style-2{
         	max-width: 500px;
         	padding: 20px 12px 10px 20px;
         	font: 13px Arial, Helvetica, sans-serif;
-        }
-        .form-style-2-heading{
-        	font-weight: bold;
-        	font-style: italic;
-        	border-bottom: 2px solid #ddd;
-        	margin-bottom: 20px;
-        	font-size: 15px;
-        	padding-bottom: 3px;
         }
         .form-style-2 label{
         	display: block;
@@ -573,5 +508,31 @@
         	color: #fff;
         }
     </style>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css" />
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script>
+    $('#edit').on('show.bs.modal',function(event){
+        var button = $(event.relatedTarget)
+        var support_type = button.data('support_type')
+
+
+
+        var schid = button.data('id')
+
+
+        console.log('modal open');
+
+        var modal = $(this)
+
+        modal.find('.modal-body #support_type').val(support_type)
+      
+
+        modal.find('.modal-body #schid').val(schid)
+
+        });
+</script>
+
+
    </body>
 </html>

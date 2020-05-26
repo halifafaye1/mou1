@@ -36,6 +36,13 @@ session_start();
               </a>
             </li>
             <li class="treeview">
+              <a href="support_type.php">
+                <i class="fa fa-files-o"></i>
+                <span>Support Type</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
+            <li class="treeview">
               <a href="person.php">
                 <i class="fa fa-user"></i>
                 <span>Person</span>
