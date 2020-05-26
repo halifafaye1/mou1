@@ -5,7 +5,7 @@
 
   if($radioVal == "report2")
           {
-              echo("You chose the first button. Good choice. :D");
+            
               if($_SERVER["REQUEST_METHOD"] == "POST"){
                   // Check if file was uploaded without errors
                   if(isset($_FILES["report_2"]) && $_FILES["report_2"]["error"] == 0){

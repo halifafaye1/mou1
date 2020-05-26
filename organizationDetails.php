@@ -235,9 +235,11 @@
                     <td><?php echo $row['surname']; ?></td>
                     <td><?php echo $row['position']; ?></td>
                     <td><?php echo $row['dob']; ?></td>
-                    <td></td>
+                    <td><?php echo $row['id_number']; ?></td>
                     <td><a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"  data-id="<?php echo $row['id']; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
-      							<a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a></td>
+                      <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
+                               class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span> Delete</a></td>
 
                     <!-- <td>Alhassan</td>
                     <td>Alhassan</td>
@@ -285,7 +287,7 @@
               <div class="modal-content">
               <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title" id="myModalLabel">Update Person Details</h4>
+              <h4 class="modal-title" id="myModalLabel">Update Executive Details</h4>
               </div>
               <div class="modal-body">
 
@@ -316,7 +318,7 @@
 
               <div class="form-style-2">
               <label for="address">Identification Number (ID)</label>
-              <input type="text" id="id" name="id" placeholder="Identification Number" class="input-field" value="<?php echo $erow['address']; ?>" />
+              <input type="text" id="id_number" name="id_number" class="input-field" value="<?php echo $erow['id_number']; ?>" />
               </div>
               <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -361,10 +363,12 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Report Year 1</th>
-                    <th>Report Year 2</th>
-                    <th>Report Year 3</th>
+
+                    <th>Status</th>
+                    <th>Report</th>
+                    <th>Title</th>
+                    <th>Actions</th>
+
 
                   </tr>
                 </thead>
@@ -373,11 +377,62 @@
                 <tbody>
                   <?php while($row=mysqli_fetch_assoc($result)){ ?>
                   <tr>
-                    <td><?php echo $row['id']; ?></td>
+
                     <td>Submitted</td>
-                    <td ><button href="hello.gm"><strong>View: </strong><?php echo $row['report_1']; ?></button></td>
-                    <td><?php echo $row['report_2']; ?></td>
+                    <td ><strong>Year 1: </strong></td>
+                    <td><?php echo $row['report_1']; ?></td>
+                    <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_1" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
+                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['id']; ?>&report=report_1"
+                     data-toggle="modal"><span class="glyphicon glyphicon-trash" ></span> Delete Report</a></td>
+
+
                   </tr>
+                  <tr>
+
+                    <td>Submitted</td>
+                    <td ><strong>Year 2: </strong></td>
+                    <td><?php echo $row['report_2']; ?></td>
+                    <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_2" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
+                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['id']; ?>&report=report_2"
+                     data-toggle="modal"><span class="glyphicon glyphicon-trash" ></span> Delete Report</a></td>
+
+
+                  </tr>
+                  <tr>
+
+                    <td>Submitted</td>
+                    <td ><strong>Year 3: </strong></td>
+                    <td><?php echo $row['report_3']; ?></td>
+                    <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_3" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
+                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['id']; ?>&report=report_3"
+                     data-toggle="modal"><span class="glyphicon glyphicon-trash" ></span> Delete Report</a></td>
+
+
+                  </tr>
+
+                  <!-- Delete  Organisation-->
+                    <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <center><h4 class="modal-title" id="myModalLabel">Delete Organization</h4></center>
+                                </div>
+                                <div class="modal-body">
+                          <form action="viewReport.php" method="POST">
+                            <input type="hidden" id="rid" name="rid"  value="<?php echo $row['id']; ?>"/>
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                </div>
+                                </form
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Delete Organisation-->
                   <?php }   ?>
 
               </tbody>
@@ -469,7 +524,7 @@
 
       <div class="form-style-2">
       <label for="address">Identification Number (ID)</label>
-      <input type="text" id="id" name="id" placeholder="Identification Number" class="input-field" value="" />
+      <input type="text" id="id_number" name="id_number" placeholder="Identification Number" class="input-field" value="" />
       </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>

@@ -108,8 +108,9 @@
                       <tr>
                         <th>ID</th>
                         <th>Organisation ID</th>
-                        <th>Name</th>
+                        <th>Person Name</th>
                         <th>Address</th>
+                        <th>ID #</th>
                         <th>Telephone</th>
                         <th>Email</th>
                         <th>Reference #</th>
@@ -125,7 +126,7 @@
 
 						//$sql = "SELECT * FROM request JOIN organization on request.organization_id = organization.id";
 
-            $sql= " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+            $sql= " SELECT name, id_number, address, telephone, email, file_ref_no, date_time, approval,organization_id,
               request.id as id, organization.organization_name, organization.id as Oid
               FROM request JOIN organization
               ON request.organization_id = organization.id";
@@ -141,6 +142,7 @@
                         <td><?php echo $row['organization_name']; ?></td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['address']; ?></td>
+                        <td><?php echo $row['id_number']; ?></td>
                         <td><?php echo $row['telephone']; ?></td>
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['file_ref_no']; ?></td>
@@ -154,7 +156,7 @@
                            data-name="<?php echo $row['name']; ?>" data-address="<?php echo $row['address']; ?>"
                            data-telephone="<?php echo $row['telephone']; ?>" data-email="<?php echo $row['email']; ?>"
                            data-reference="<?php echo $row['file_ref_no']; ?>"  data-date_time="<?php echo $row['date_time']; ?>"
-                             data-approval="<?php echo $row['approval']; ?>"
+                           data-approval="<?php echo $row['approval']; ?>" data-id_number="<?php echo $row['id_number']; ?>"
                             class="btn btn-warning">
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
@@ -221,35 +223,20 @@
               <table>
                 <tbody>
                   <tr>
-                    <td>
-                       <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                         <?php
 
-                           require 'connection/connection.php';
+                      <td>
+                         <label for="field1"><span>Person Name <span class="required">*</span></span>
+                           <input type="text" class="input-field" id="name" name="name" value="" required/>
 
-                           $sql1 = "SELECT * FROM organization ORDER BY id";
-                           $result1 = mysqli_query($conn, $sql1);
+                         </label>
+                      </td>
 
+                      <td>
+                         <label for="field1"><span>ID Number <span class="required">*</span></span>
+                           <input type="text" class="input-field" id="id_number" name="id_number" value="" required/>
 
-
-                         ?>
-                         <select type="text" class="select-field" id="organization_id" name="organization_id"  required>
-                            <option disabled selected value> -- select an organization  -- </option>
-                           <?php  while ($row3 = mysqli_fetch_array($result1)) {
-                                echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
-                                 //$orgid = $_GET['organization_id'];
-                            }
-                            ?>
-                         </select>
-
-                       </label>
-                    </td>
-                    <td>
-                       <label for="field1"><span>Person Name <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="name" name="name" value="" required/>
-
-                       </label>
-                    </td>
+                         </label>
+                      </td>
 
                  </tr>
                  <tr>
@@ -333,32 +320,21 @@
               <tbody>
                 <tr>
                     <input type="hidden" id="id" name="id"  value=""/>
-                  <td>
-                     <label for="field1"><span>Organization ID <span class="required">*</span></span>
-                       <?php
 
-                         require 'connection/connection.php';
-
-                         $sql1 = "SELECT * FROM organization ORDER BY id";
-                         $result1 = mysqli_query($conn, $sql1);
-
-                       ?>
-                       <select type="text" class="select-field" id="organization_id" name="organization_id"  >
-                         <?php  while ($row3 = mysqli_fetch_array($result1)) {
-                              echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
-
-                          }
-                          ?>
-                       </select>
-
+                    <td>
+                     <label for="field1"><span>Person Name <span class="required">*</span></span>
+                       <input type="text" class="input-field" id="name" name="name" value="" />
                      </label>
-                  </td>
+                   </td>
 
-                  <td>
-                   <label for="field1"><span>Person Name <span class="required">*</span></span>
-                     <input type="text" class="input-field" id="name" name="name" value="" />
-                   </label>
-                 </td>
+                    <td>
+                       <label for="field1"><span>ID Number <span class="required">*</span></span>
+                         <input type="text" class="input-field" id="id_number" name="id_number" value="" required/>
+
+                       </label>
+                    </td>
+
+
                </tr>
                <tr>
                  <td>
@@ -697,6 +673,7 @@
         var button = $(event.relatedTarget)
         var organization_id = button.data('organization_id')
         var name = button.data('name')
+        var id_number = button.data('id_number')
         var address = button.data('address')
         var telephone = button.data('telephone')
         var email = button.data('email')
@@ -714,6 +691,7 @@
 
         modal.find('.modal-body #organization_id').val(organization_id)
         modal.find('.modal-body #name').val(name)
+        modal.find('.modal-body #id_number').val(id_number)
         modal.find('.modal-body #address').val(address)
         modal.find('.modal-body #telephone').val(telephone)
         modal.find('.modal-body #email').val(email)

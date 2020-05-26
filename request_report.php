@@ -7,7 +7,7 @@ session_start();
       h4,h5{
         text-align:center;
       }
-		
+
 
       @media print {
           .btn-print {
@@ -19,8 +19,8 @@ session_start();
 		  .box.box-primary {
 			  border-top:none !important;
 		  }
-		  
-          
+
+
       }
     </style>
  <!--  sidebar (Page sidebar) -->
@@ -28,7 +28,7 @@ session_start();
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -46,7 +46,7 @@ session_start();
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -111,59 +111,59 @@ session_start();
       </body>
 </html>
 <div class="wrapper">
-      <?php 
+      <?php
       include('connection/connection.php');
       ?>
       <!-- Full Width Column -->
       <div class="content-wrapper">
         <div class="container">
           <!-- Content Header (Page header) -->
-         
+
 
           <!-- Main content -->
           <section class="content">
             <div class="row">
 	    <div class="col-xs-12">
               <div class="box box-primary">
-					
-              
+
+
                 <div class="box-body">
 				<?php
 include('connection/connection.php');
 
 
     $query=mysqli_query($conn,"SELECT * FROM request ");
-  
+
         $row=mysqli_fetch_array($query);
-        
-?>      
-                   <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU REQUEST REPORT</b> </h4>  
+
+?>
+                   <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU REQUEST REPORT</b> </h4>
                   <h5><b>Address: WILLY THROPE PLACE BANJUL</b></h5>
                   <h5><b>Contact #:</b></h5>
 				  <h4><b>REQUEST REPORT as of today, <?php echo date("M d, Y h:i a");?></b></h4>
-                  
+
 				  <a class = "btn btn-success btn-print" href = "" onclick = "window.print()"><i class ="glyphicon glyphicon-print"></i> Print</a>
-                            <a class = "btn btn-primary btn-print" href = "index.php"><i class ="glyphicon glyphicon-arrow-left"></i> Back to Homepage</a> 
+                            <a class = "btn btn-primary btn-print" href = "index.php"><i class ="glyphicon glyphicon-arrow-left"></i> Back to Homepage</a>
                             <br>
                             <br>
-                            
-                            <form action=""  method='POST' name='form_filter' > 
-                                <select class="form-control" name="value"> 
-                                    <option value="All">All</option> 
-                                    <option value="Pending">Pending</option> 
-                                    <option value="Approved">Approved</option> 
+
+                            <form action=""  method='POST' name='form_filter' >
+                                <select class="form-control" name="value">
+                                    <option value="All">All</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Approved">Approved</option>
                                     <option value="Denied">Denied</option>
-                                </select> 
-                                <br /> 
-                                <input type='submit' value = 'Filter'> 
+                                </select>
+                                <br />
+                                <input type='submit' value = 'Filter'>
                             </form>
-                           
+
                   <table class="table table-bordered table-striped">
                     <thead>
-					
-                      
+
+
                     <tr>
-                        
+
                         <th>Organisation Name</th>
                         <th>Request Name</th>
                         <th>Address</th>
@@ -173,56 +173,56 @@ include('connection/connection.php');
                         <th>Date/Time</th>
                         <th>Status</th>
                       </tr>
-                       
-                 
+
+
                     </thead>
                     <tbody>
                     <?php include ('connection/connection.php');
-                            
+
 
                             // process form when posted
                             if(isset($_POST['value'])) {
                                 if($_POST['value'] == 'Pending') {
-                                     
-                                    //$query = "SELECT * FROM request WHERE approval='Pending'";  
-                                    
-                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-                                    request.id as id, organization.organization_name, organization.id as Oid
-                                    FROM request JOIN organization
-                                    ON request.organization_id = organization.id
-                                    where request.approval = 'Pending' " ; 
-                                }  
-                                elseif($_POST['value'] == 'Approved') {  
+
+                                    //$query = "SELECT * FROM request WHERE approval='Pending'";
 
                                     $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
                                     request.id as id, organization.organization_name, organization.id as Oid
                                     FROM request JOIN organization
                                     ON request.organization_id = organization.id
-                                    where request.approval='Approved'";  
-                                } 
+                                    where request.approval = 'Pending' " ;
+                                }
+                                elseif($_POST['value'] == 'Approved') {
+
+                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
+                                    request.id as id, organization.organization_name, organization.id as Oid
+                                    FROM request JOIN organization
+                                    ON request.organization_id = organization.id
+                                    where request.approval='Approved'";
+                                }
                                 elseif($_POST['value'] == 'Denied'){
                                     $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
                                     request.id as id, organization.organization_name, organization.id as Oid
                                     FROM request JOIN organization
                                     ON request.organization_id = organization.id
-                                    where request.approval = 'Denied' " ; 
+                                    where request.approval = 'Denied' " ;
                                 }
-                                else {  
-                                    // query to get all records  
+                                else {
+                                    // query to get all records
                                     $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
                                     request.id as id, organization.organization_name, organization.id as Oid
                                     FROM request JOIN organization
                                     ON request.organization_id = organization.id
-                                    ";  
-                                }  
-                                $result = mysqli_query($conn,$query);  
-                                
-                                
-                            
+                                    ";
+                                }
+                                $result = mysqli_query($conn,$query);
+
+
+
                                 while ($row = mysqli_fetch_assoc($result)){
                                 ?>
               <tbody>
-                  
+
               <tr>
 
                   <td><?php echo $row['organization_name']; ?></td>
@@ -234,14 +234,13 @@ include('connection/connection.php');
                   <td><?php echo $row['date_time']; ?></td>
                   <td><?php echo $row['approval']; ?></td>
 
-                       
-                      </tr>
+              </tr>
 
-<?php }?>		
-			  
+<?php }?>
+
                     </tbody>
                     <tfoot>
-                     
+
                       <tr>
                         <th></th>
                         <th></th>
@@ -251,7 +250,7 @@ include('connection/connection.php');
                         <th></th>
                         <th></th>
                         <th></th>
-                      </tr> 
+                      </tr>
                       <tr>
                         <th></th>
                         <th></th>
@@ -261,7 +260,7 @@ include('connection/connection.php');
                         <th></th>
                         <th></th>
                         <th></th>
-                      </tr> 
+                      </tr>
                       <tr>
                         <th>Prepared by:</th>
                         <th></th>
@@ -271,8 +270,8 @@ include('connection/connection.php');
                         <th></th>
                         <th></th>
                         <th></th>
-                      </tr> 
-                      <?php }?>	  
+                      </tr>
+                      <?php }?>
                     </tfoot>
                   </table>
                 </div><!-- /.box-body -->
@@ -284,8 +283,8 @@ include('connection/connection.php');
           </section><!-- /.content -->
         </div><!-- /.container -->
       </div><!-- /.content-wrapper -->
-      
-    </div><!-- ./wrapper -->
-    
 
-<?php include 'footer.php'; ?>          
+    </div><!-- ./wrapper -->
+
+
+<?php include 'footer.php'; ?>

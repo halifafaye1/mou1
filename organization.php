@@ -230,8 +230,8 @@
                        </label>
                      </td>
                      <td>
-                      <label for="field1"><span>Previous Activity <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="previous_activities" name="previous_activities" value="" required/>
+                      <label for="field1"><span>Previous Activity </span>
+                       <input type="text" class="input-field" id="previous_activities" name="previous_activities" value="" />
                       </label>
                     </td>
                    </tr>
@@ -699,7 +699,7 @@
 
         var html = '';
 
-        html +=  '<tr id="inputFormRow">';
+        html +=  '<tr id="inputFormRowz">';
         html += ' <td>';
         html += ' <label for="field1"><span>Name <span class="required">*</span></span>';
         html += '<input type="text" class="input-field" id="name" name="name'+$count+'" value="" required/>';
@@ -715,14 +715,12 @@
         html +=   '<input type="text" class="input-field" id="position" name="position'+$count+'" value="" required/>';
         html +=   ' </label>';
         html +=  '</td>';
-        html +=  ' <td>';
-        html +=  ' <button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
-        html +=  ' </td>';
+
         html +=  '</tr>';
-        html +=  '<tr>';
+        html +=  '<tr id="inputFormRow">';
         html +=  '<td>';
         html +=   '<label for="field1"><span>DOB <span class="required">*</span></span>';
-        html +=   '<input type="text" class="input-field" id="dob" name="dob'+$count+'" value="" required/>';
+        html +=   '<input type="date" class="input-field" id="dob" name="dob'+$count+'" value="" required/>';
         html +=   ' </label>';
         html +=  '</td>';
         html +=  '<td>';
@@ -730,28 +728,30 @@
         html +=   '<input type="text" class="input-field" id="id_number" name="id_number'+$count+'" value="" required/>';
         html +=   ' </label>';
         html +=  '</td>';
+        html +=  '<td>';
+        html +=   '<label for="field1"><span>Address <span class="required">*</span></span>';
+        html +=   '<input type="text" class="input-field" id="address" name="address'+$count+'" value="" required/>';
+        html +=   ' </label>';
+        html +=  '</td>';
+        html +=  ' <td>';
+        html +=  ' <button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+        html +=  ' </td>';
         html +=  '<tr>';
+
         $count++;
         $rowCount++;
         $("#number").val($rowCount);
-
-
-
-
           $('#newRow').append(html);
-
 
       });
       console.log($rowCount);
       console.log($count);
 
-
-
-
-
       // remove row
       $(document).on('click', '#removeRow', function () {
-          $(this).closest('#inputFormRow').remove();
+          $('#inputFormRowz').remove() && $(this).closest('#inputFormRow').remove();
+          
+
             $rowCount--;
             $("#number").val($rowCount);
       });

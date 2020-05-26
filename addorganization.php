@@ -15,6 +15,9 @@
           $name[] = $_POST['name'.$i.''];
           $surname[] = $_POST['surname'.$i.''];
           $position[] = $_POST['position'.$i.''];
+          $dob[] = $_POST['dob'.$i.''];
+          $id_number[] = $_POST['id_number'.$i.''];
+          $address[] = $_POST['address'.$i.''];
 
         }
 
@@ -62,8 +65,8 @@
 
           for ($i=0; $i < count($name); $i++) {
             // code...
-            $sql2 = "INSERT INTO person (org_id, name, surname, position)
-             VALUES ('$orgid','$name[$i]','$surname[$i]','$position[$i]')";
+            $sql2 = "INSERT INTO person (org_id, name, surname, position,dob,id_number,address)
+             VALUES ('$orgid','$name[$i]','$surname[$i]','$position[$i]','$dob[$i]','$id_number[$i]','$address[$i]')";
 
             $result2 = mysqli_query($conn, $sql2);
             //   print_r($result2);
