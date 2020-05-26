@@ -25,7 +25,7 @@ session_start();
     </style>
  <!--  sidebar (Page sidebar) -->
   <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
+  <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
 
@@ -50,8 +50,15 @@ session_start();
             </li>
             <li class="treeview">
               <a href="request.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-external-link"></i>
                 <span>Request</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="support_type.php">
+                <i class="fa fa-files-o"></i>
+                <span>Support Type</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
@@ -71,14 +78,14 @@ session_start();
             </li>
             <li class="treeview">
               <a href="school.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-institution"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-bar-chart"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -86,14 +93,14 @@ session_start();
 
             <li class="treeview">
               <a href="activity_report.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Activity Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="active treeview">
               <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Request Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -105,6 +112,7 @@ session_start();
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
+
         </section>
         <!-- /.sidebar -->
       </aside>

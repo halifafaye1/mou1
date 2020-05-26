@@ -3,10 +3,10 @@
  <?php include'header.php';?>
  <!--  sidebar (Page sidebar) -->
    <!-- Left side column. contains the logo and sidebar -->
-   <aside class="main-sidebar">
+      <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,16 +24,16 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
-                <i class="fa fa-external-link"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Request</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="support_type.php">
                 <i class="fa fa-files-o"></i>
                 <span>Support Type</span>
@@ -47,7 +47,7 @@
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="organization.php">
                 <i class="glyphicon glyphicon-home"></i>
                 <span>Organisation</span>
@@ -56,14 +56,14 @@
             </li>
             <li class="treeview">
               <a href="school.php">
-                <i class="fa fa-institution"></i>
+                <i class="ion ion-stats-bars"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="activity.php">
-                <i class="fa fa-bar-chart"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -71,14 +71,14 @@
 
             <li class="treeview">
               <a href="activity_report.php">
-                <i class="fa fa-folder-open"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Activity Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="request_report.php">
-                <i class="fa fa-folder-open"></i>
+                <i class="fa fa-files-o"></i>
                 <span>Request Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -99,7 +99,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Organization
+            Support Type
             <small>Dashboard</small>
           </h1>
         </section>
@@ -112,7 +112,7 @@
                   <h3 class="box-title"></h3>
                   <div class="pull-right">
                       <button class="btn btn-success" data-toggle="modal"
-                       data-target="#add_organization">Add New Organization</button>
+                       data-target="#add_school">Add Support Type</button>
                   </div>
                 </div><!-- /.box-header -->
               <div class="box">
@@ -121,10 +121,7 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Organization Name</th>
-                        <th>AG Registration</th>
-                        <th>Office Space Address</th>
-                        <th>Previous Activity</th>
+                        <th>Support Type</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -133,7 +130,7 @@
 						require 'connection/connection.php';
 
 
-						$sql = "SELECT * FROM organization ORDER BY id";
+						$sql = "SELECT * FROM support_type ORDER BY id";
 						$result = mysqli_query($conn, $sql);
 
  					?>
@@ -142,58 +139,46 @@
                     <tr>
 
                         <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['organization_name']; ?></td>
-                        <td><?php echo $row['ag_registration_no']; ?></td>
-                        <td><?php echo $row['office_space_address']; ?></td>
-                        <td><?php echo $row['previous_activities']; ?></td>
+                        <td><?php echo $row['support_type']; ?></td>
+                    
 
 
                        <td>
-                         <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
-                            class="btn btn-warning"
-                            data-target=#edit data-id="<?php echo $row['id']; ?>"  data-region="<?php echo $row['region']; ?>"
-                            data-organization_name="<?php echo $row['organization_name']; ?>"   data-ag_registration_no="<?php echo $row['ag_registration_no']; ?>"
-                            data-office="<?php echo $row['office_space_address']; ?>"   data-previous_activities="<?php echo $row['previous_activities']; ?>">
-                         <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
+                        
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span> Delete</a>
-                        <a href="organizationDetails.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
-                          class="btn btn-primary">
-                       <span class="glyphicon glyphicon-trash"></span> Details</a>
-                      </td>
+                       </td>
 
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
 
 
                     </tr>
-                    <!-- Delete  Organisation-->
-      						    <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      						        <div class="modal-dialog">
-      						            <div class="modal-content">
-      						                <div class="modal-header">
-      						                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      						                    <center><h4 class="modal-title" id="myModalLabel">Delete Organization</h4></center>
-      						                </div>
-      						                <div class="modal-body">
-      										<?php
-      											$del=mysqli_query($conn,"select * from organization where id='".$row['id']."'");
-      											$drow=mysqli_fetch_array($del);
-      										?>
-      										<div class="container-fluid">
-      											<h5><center>Ag. Registration: <strong><?php echo $drow['ag_registration_no']; ?></strong></center></h5>
-      						                </div>
-      										</div>
-      						                <div class="modal-footer">
-      						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-      						                    <a href="deleteOrganization.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-      						                </div>
 
-      						            </div>
-      						        </div>
-      						    </div>
-                      <!-- END Delete Organisation-->
+                    <!-- Delete SCHOOL-->
+                     <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                     <center><h4 class="modal-title" id="myModalLabel">Delete Support Type</h4></center>
+                                 </div>
+                                 <div class="modal-body">
+                         <?php
+                           $del=mysqli_query($conn,"select * from support_type where id='".$row['id']."'");
+                           $drow=mysqli_fetch_array($del);
+                         ?>
+                         <div class="container-fluid">
+                           <h5><center>Are you sure you want to <br>delete</br>  <strong><?php echo $drow['support_type']; ?> ? ?  </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                     <a href="deleteSupport.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                 </div>
 
+                             </div>
+                         </div>
+                     </div>
+                     <!-- END Delete SCHOOL-->
 
                     <?php }   ?>
 
@@ -207,83 +192,30 @@
       </div><!-- /.content-wrapper -->
       </div>
 
+      <!-- Modals add/edit/delete school  -->
 
-      <!-- Modals add organization  -->
-
-        <!--  add organization  -->
-      <div class="modal fade" id="add_organization" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-dialog-scrollable " role="document">
+        <!--  add school  -->
+      <div class="modal fade" id="add_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title" id="myModalLabel">Add New Organization</h4>
+              <h4 class="modal-title" id="myModalLabel">Add Support Type</h4>
             </div>
           <div class="modal-body">
             <div class="form-style-2">
-              <form action="addOrganization.php" method="POST">
-                <table >
+              <form action="addSupport.php" method="POST">
+                <table>
                   <tbody>
-                    <input type="hidden" id="number" name="number"  value=""/>
                     <tr>
                       <td>
-
-                         <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                             <input type="text" class="input-field" id="organization_name" name="organization_name" value="" required/>
-                         </label>
-                      </td>
-                      <td>
-                       <label for="field1"><span>Ag Registration <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="ag_registration_no" name="ag_registration_no" value="" required/>
+                         
+                       <label for="field1"><span>Support Type </span><br><br>
+                         <input type="text" data-type="support_type"  class="input-field" id="support_type" name="support_type"/>
                        </label>
+                     
                      </td>
-                   </tr>
-                   <tr>
-                     <td>
-                       <label for="field1"><span>Office Space Address <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="office" name="office_space_address" value="" required/>
-                       </label>
-                     </td>
-                     <td>
-                      <label for="field1"><span>Previous Activity </span>
-                       <input type="text" class="input-field" id="previous_activities" name="previous_activities" value="" />
-                      </label>
-                    </td>
-                   </tr>
-                   <tr>
-                     <td>
-                         <label for="field1"><span>Region <span class="required">*</span></span>
-
-                          <select type="text" class="select-field" id="region" name="region" required>
-                           <option disabled selected value> -- select a region  -- </option>
-                           <option value="region 1">1</option>;
-                           <option value="region 2">2</option>;
-                           <option value="region 3">3</option>;
-                           <option value="region 4">4</option>;
-                           <option value="region 5">5</option>;
-                           <option value="region 6">6</option>;
-                          </select>
-                     </td>
-                   </tr>
-                    <tr>
-                      <td>
-                        <div class="form-style-2-heading">Executive Members</div>
-                      </td>
-                    </tr>
-
-
-                </tbody>
-              </table>
-              <table>
-                <tbody>
-
-                    <tr id="newRow">
-
-                    </tr>
-                    <td>
-                      <button id="addRow" type="button" class="btn btn-info">Add</buttom>
-                    </td>
-
-
+                </tr>
                 </tbody>
               </table>
            </div>
@@ -297,100 +229,7 @@
    </div>
   </div>
       <!--  End add organization  -->
-      <!-- Edit  organization Modal -->
-            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title" id="myModalLabel">Update Organization Details</h4>
-            </div>
-            <div class="modal-body">
-
-
-            <form method="POST" action="editOrganization.php">
-              <table>
-                <tbody>
-                  <tr>
-                    <input type="hidden" id="orgid" name="id"  value=""/>
-                    <td>
-                      <div class="form-style-2">
-                        <?php
-
-                          require 'connection/connection.php';
-
-                          $sql1 = "SELECT * FROM organization ORDER BY id";
-                          $result1 = mysqli_query($conn, $sql1);
-
-                        ?>
-                      <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                      <select type="text" class="select-field" id="organization_name" name="organization_name" required>
-                      <?php  while ($row = mysqli_fetch_array($result1)) {
-                           echo "<option value='" . $row['organization_name'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."----Donates----". $row['previous_activities']. "</option>";
-                       }
-                       ?>
-                     </select>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-style-2">
-                      <label for="last_name">Ag Registration</label>
-                      <input type="text" id="ag_registration_no" name="ag_registration_no"  class="input-field" value="" required/>
-                      </div>
-                    </td>
-
-                  </tr>
-
-                  <tr>
-
-                    <td>
-                      <div class="form-style-2">
-                      <label for="dob">Office Address </label>
-                      <input type="text" id="office" name="office_space_address"  class="input-field" value="" required/>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-style-2">
-                      <label for="address">Previous Activity </label>
-                      <input type="text" id="previous_activities" name="previous_activities"  class="input-field" value="" />
-                      </div>
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-style-2">
-                        <label for="field1"><span>Region <span class="required">*</span></span>
-                          <select type="text" class="select-field" id="region" name="region" required>
-                          <option disabled selected value> -- select a region  -- </option>
-                          <option value="region 1">1</option>;
-                          <option value="region 2">2</option>;
-                          <option value="region 3">3</option>;
-                          <option value="region 4">4</option>;
-                          <option value="region 5">5</option>;
-                          <option value="region 6">6</option>;
-                         </select>
-                      </div>
-                  </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                        <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-check"></span> Save</button>
-              </div>
-
-            </form>
-            </div>
-            </div>
-            </div>
-          </div>
-            <!-- /.END EDIT Organization -->
-
-
+    
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -595,19 +434,12 @@
         });
       });
     </script>
+
     <style type="text/css">
         .form-style-2{
         	max-width: 500px;
         	padding: 20px 12px 10px 20px;
         	font: 13px Arial, Helvetica, sans-serif;
-        }
-        .form-style-2-heading{
-        	font-weight: bold;
-        	font-style: italic;
-        	border-bottom: 2px solid #ddd;
-        	margin-bottom: 20px;
-        	font-size: 15px;
-        	padding-bottom: 3px;
         }
         .form-style-2 label{
         	display: block;
@@ -676,100 +508,31 @@
         	color: #fff;
         }
     </style>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css" />
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
     <script>
     $('#edit').on('show.bs.modal',function(event){
         var button = $(event.relatedTarget)
-        var organization_name = button.data('organization_name')
-        var ag_registration_no = button.data('ag_registration_no')
-        var office = button.data('office')
-        var previous_activities = button.data('previous_activities')
-        var region = button.data('region')
+        var support_type = button.data('support_type')
 
 
-        var orgid = button.data('id')
+
+        var schid = button.data('id')
 
 
         console.log('modal open');
 
         var modal = $(this)
 
-        modal.find('.modal-body #organization_name').val(organization_name)
-        modal.find('.modal-body #ag_registration_no').val(ag_registration_no)
-        modal.find('.modal-body #office').val(office)
-        modal.find('.modal-body #previous_activities').val(previous_activities)
-        modal.find('.modal-body #region').val(region)
+        modal.find('.modal-body #support_type').val(support_type)
+      
 
-        modal.find('.modal-body #orgid').val(orgid)
+        modal.find('.modal-body #schid').val(schid)
 
         });
+</script>
 
-    </script>
-    <script type="text/javascript">
 
-      var $count = 1;
-      var $rowCount = 0;
-    // add row
-      $("#addRow").click(function () {
-
-        var html = '';
-
-        html +=  '<tr id="inputFormRowz">';
-        html += ' <td>';
-        html += ' <label for="field1"><span>Name <span class="required">*</span></span>';
-        html += '<input type="text" class="input-field" id="name" name="name'+$count+'" value="" required/>';
-        html += '</label>'  ;
-        html += '</td>';
-        html +=  ' <td>';
-        html +=   ' <label for="field1"><span>Surname <span class="required">*</span></span>';
-        html +=    '<input type="text" class="input-field" id="surname" name="surname'+$count+'" value="" required/>' ;
-        html +=    '</label>';
-        html +=  '</td>';
-        html +=  ' <td>';
-        html +=   '<label for="field1"><span>Designation <span class="required">*</span></span>';
-        html +=   '<input type="text" class="input-field" id="position" name="position'+$count+'" value="" required/>';
-        html +=   ' </label>';
-        html +=  '</td>';
-
-        html +=  '</tr>';
-        html +=  '<tr id="inputFormRow">';
-        html +=  '<td>';
-        html +=   '<label for="field1"><span>DOB <span class="required">*</span></span>';
-        html +=   '<input type="date" class="input-field" id="dob" name="dob'+$count+'" value="" required/>';
-        html +=   ' </label>';
-        html +=  '</td>';
-        html +=  '<td>';
-        html +=   '<label for="field1"><span>ID Number <span class="required">*</span></span>';
-        html +=   '<input type="text" class="input-field" id="id_number" name="id_number'+$count+'" value="" required/>';
-        html +=   ' </label>';
-        html +=  '</td>';
-        html +=  '<td>';
-        html +=   '<label for="field1"><span>Address <span class="required">*</span></span>';
-        html +=   '<input type="text" class="input-field" id="address" name="address'+$count+'" value="" required/>';
-        html +=   ' </label>';
-        html +=  '</td>';
-        html +=  ' <td>';
-        html +=  ' <button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
-        html +=  ' </td>';
-        html +=  '<tr>';
-
-        $count++;
-        $rowCount++;
-        $("#number").val($rowCount);
-          $('#newRow').append(html);
-
-      });
-      console.log($rowCount);
-      console.log($count);
-
-      // remove row
-      $(document).on('click', '#removeRow', function () {
-          $('#inputFormRowz').remove() && $(this).closest('#inputFormRow').remove();
-          
-
-            $rowCount--;
-            $("#number").val($rowCount);
-      });
-
-    </script>
    </body>
 </html>
