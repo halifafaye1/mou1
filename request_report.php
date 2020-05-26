@@ -195,26 +195,29 @@ include('connection/connection.php');
 
                                     //$query = "SELECT * FROM request WHERE approval='Pending'";
 
-                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-                                    request.id as id, organization.organization_name, organization.id as Oid
-                                    FROM request JOIN organization
-                                    ON request.organization_id = organization.id
-                                    where request.approval = 'Pending' " ;
+                                    $query = " SELECT *
+                                    FROM request JOIN person
+                                    join organization on
+                                    organization.id = person.org_id
+                                    where (request.id_number = person.id_number AND
+                                     request.approval = 'Pending') " ;
                                 }
                                 elseif($_POST['value'] == 'Approved') {
 
-                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-                                    request.id as id, organization.organization_name, organization.id as Oid
-                                    FROM request JOIN organization
-                                    ON request.organization_id = organization.id
-                                    where request.approval='Approved'";
+                                    $query = " SELECT *
+                                    FROM request JOIN person
+                                    join organization on
+                                    organization.id = person.org_id
+                                    where (request.id_number = person.id_number AND
+                                     request.approval = 'Approved') " ;
                                 }
                                 elseif($_POST['value'] == 'Denied'){
-                                    $query = " SELECT name, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-                                    request.id as id, organization.organization_name, organization.id as Oid
-                                    FROM request JOIN organization
-                                    ON request.organization_id = organization.id
-                                    where request.approval = 'Denied' " ;
+                                    $query = " SELECT *
+                                    FROM request JOIN person
+                                    join organization on
+                                    organization.id = person.org_id
+                                    where (request.id_number = person.id_number AND
+                                     request.approval = 'Denied') " ;
                                 }
                                 else {
                                     // query to get all records
