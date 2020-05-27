@@ -117,6 +117,17 @@
                 </div><!-- /.box-header -->
               <div class="box">
                 <div class="box-body">
+                <form action=""  method='POST' name='form_filter' >
+                                <select class="form-control" name="value">
+                                    <option value="All">All</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Denied">Denied</option>
+                                </select>
+                                <br />
+                                <button class="btn btn-success" type="submit">Filter</button>
+                            </form>
+                            <br>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
@@ -139,32 +150,55 @@
 						require 'connection/connection.php';
 
 
-						//$sql = "SELECT * FROM request JOIN organization on request.organization_id = organization.id";
+						 // query to get all records
+             $query = " SELECT  * FROM request;
+             ";
 
-            $sql= " SELECT name, person_name,id_number, address, telephone, email, file_ref_no, date_time, approval,organization_id,
-              request.id as id
-              FROM request ";
+						$result = mysqli_query($conn, $query);
 
-						$result = mysqli_query($conn, $sql);
+            // process form when posted
+if(isset($_POST['value'])) {
+  if($_POST['value'] == 'Pending') {
 
- 					?>
-                    <tbody>
-                    	<?php while($row=mysqli_fetch_assoc($result)){ ?>
-                    <tr>
+      //$query = "SELECT * FROM request WHERE approval='Pending'";
+
+      $query = " SELECT *
+      FROM request 
+      where approval = 'Pending' " ;
+  }
+  elseif($_POST['value'] == 'Approved') {
+
+      $query = " SELECT *
+      FROM request 
+      where approval = 'Approved' " ;
+  }
+  elseif($_POST['value'] == 'Denied'){
+      $query = " SELECT *
+      FROM request
+      where approval = 'Denied' " ;
+  }            
+                 
+    $result = mysqli_query($conn,$query);
 
 
-                        <!-- <td><?php echo $row['organization_name']; ?></td> -->
-                        <td><?php echo $row['name']; ?></td>
-                        <td><?php echo $row['person_name']; ?></td>
-                        <td><?php echo $row['id_number']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-                        <td><?php echo $row['telephone']; ?></td>
-                        <td><?php echo $row['email']; ?></td>
-                        <td><?php echo $row['file_ref_no']; ?></td>
-                        <td><?php echo $row['date_time']; ?></td>
-                        <td><?php echo $row['approval']; ?></td>
+?>
+<tbody>
 
-                       <td>
+<?php while ($row = mysqli_fetch_assoc($result)){
+  ?>
+
+<tr>
+
+<td><?php echo $row['name']; ?></td>
+<td><?php echo $row['person_name']?></td>
+<td><?php echo $row['id_number']?></td>
+<td><?php echo $row['address']; ?></td>
+<td><?php echo $row['telephone']; ?></td>
+<td><?php echo $row['email']; ?></td>
+<td><?php echo $row['file_ref_no']; ?></td>
+<td><?php echo $row['date_time']; ?></td>
+<td><?php echo $row['approval']; ?></td>
+<td>
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
                            data-target="#edit"  data-id="<?php echo $row['id']; ?>"
                            data-organization_id="<?php echo $row['organization_id']; ?>"data-person_name="<?php echo $row['person_name']; ?>"
@@ -176,7 +210,10 @@
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                        <span class="glyphicon glyphicon-trash"></span> Delete</a> ||
+                        <a href="#renew<?php echo $row['id']; ?>" data-toggle="modal"
+                           class="btn btn-success">
+                        <span class="glyphicon glyphicon-ok"></span> Approve</a>
                        </td>
 
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
@@ -210,7 +247,8 @@
 
 
                     <?php }   ?>
-
+                   
+                    <?php }   ?>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

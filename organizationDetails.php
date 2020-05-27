@@ -122,7 +122,10 @@
             <div class="col-xs-12">
             	<div class="box-header">
                   <h3 class="box-title">ACTIVITY</h3>
-
+                  <button class="btn btn-success" style="float:right"
+              data-toggle="modal"
+              data-target="#add_activity"
+              type="button" name="button">Add Activity</button>
                 </div><!-- /.box-header -->
               <div class="box">
                 <div class="box-body">
@@ -207,7 +210,118 @@
               </div><!-- /.box -->
             </div><!-- /.col -->
 
+  <!--  add activity  -->
+  <div class="modal fade" id="add_activity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add New Activity</h4>
+            </div>
+          <div class="modal-body">
+            <div class="form-style-2">
+              <form action="addActivity.php" method="POST">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td colspan="4">
+                        <?php
 
+                          require 'connection/connection.php';
+
+                          $sql1 = "SELECT * FROM organization  ORDER BY id";
+                          $result1 = mysqli_query($conn, $sql1);
+
+                        ?>
+                         <label for="field1"><span>Organization Name <span class="required">*</span></span>
+                           <select type="text" class="select-field" id="organization_id" name="organization_id" required >
+                             <option disabled selected value> -- select an organization  -- </option>
+                             <?php  while ($row = mysqli_fetch_array($result1)) {
+                                  echo "<option value='" . $row['id'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."---Donates----". $row['previous_activities']. "</option>";
+                              }
+                              ?>
+                           </select>
+                         </label>
+                      </td>
+
+                   </tr>
+                   <tr>
+                     <td colspan="3">
+                       <?php
+
+                         require 'connection/connection.php';
+
+                         $sql2 = "SELECT * FROM school  ORDER BY id";
+                         $result2 = mysqli_query($conn, $sql2);
+
+                       ?>
+                      <label for="field1"><span>School Name <span class="required">*</span></span>
+                        <select type="text" class="select-field" id="" name="school_id"  required>
+                           <option disabled selected value> -- select a school  -- </option>
+                          <?php  while ($row = mysqli_fetch_array($result2)) {
+                               echo "<option value='" . $row['id'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
+                           }
+                           ?>
+                        </select>
+                      </label>
+                    </td>
+                   </tr>
+                   <tr>
+                     <td colspan="3">
+                       <?php
+
+                         require 'connection/connection.php';
+
+                         $sql3 = "SELECT * FROM support_type  ORDER BY id";
+                         $result3 = mysqli_query($conn, $sql3);
+
+                       ?>
+                      <label for="field1"><span>Support Type <span class="required">*</span></span>
+                        <select type="text" class="select-field" id="" name="id"  required>
+                           <option disabled selected value> -- select a support type  -- </option>
+                          <?php  while ($row = mysqli_fetch_array($result3)) {
+                               echo "<option value='" . $row['id'] . "'>" . $row['support_type']."</option>";
+                           }
+                           ?>
+                        </select>
+                      </label>
+                    </td>
+                   </tr>
+                   <tr>
+                     <td>
+                      <label for="field1"><span>Quantity <span class="required">*</span></span>
+                       <input type="number" class="input-field" id="quantity" name="quantity" value="" required/>
+                      </label>
+                    </td>
+
+                     <td>
+                      <label for="field1"><span>Cost <span class="required">*</span></span>
+                       <input type="text" class="input-field" id="cost" name="cost" value="" required/>
+                      </label>
+                    </td>
+                    <td>
+                     <label for="field1"><span>Date <span class="required">*</span></span>
+                      <input type="date" class="input-field" id="period_date" name="period_date" value="" required/>
+                     </label>
+                   </td>
+                   <td>
+                    <label for="field1"><span>End Date </span>
+                     <input type="date" class="input-field" id="edate" name="edate" value="" />
+                    </label>
+                  </td>
+                   </tr>
+                </tbody>
+              </table>
+           </div>
+           <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>
+            <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+         </div>
+        </div>
+      </form>
+    </div>
+   </div>
+  </div>
           </div><!-- /.row -->
 
           <div class="box-header">
