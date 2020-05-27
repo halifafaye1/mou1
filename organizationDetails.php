@@ -372,7 +372,7 @@
 
                 $id = $_GET['id'];
                 $sql = "SELECT * FROM report where org_id = $id
-                GROUP BY org_id DESC LIMIT 1";
+                ORDER BY id DESC LIMIT 1";
                 $result = mysqli_query($conn, $sql);
 
               ?>

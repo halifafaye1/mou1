@@ -143,7 +143,9 @@
                       join renewal ON
                       organization.id = renewal.org_id
                       where organization.id=report.org_id
-                     GROUP BY report.org_id DESC LIMIT 1";
+                    
+                     ORDER BY report.id
+                     DESC LIMIT 1";
 
           						$result = mysqli_query($conn, $sql);
 
