@@ -12,6 +12,10 @@
         $email = $_POST['email'];
         $file_ref_no = $_POST['file_ref_no'];
         $date_time = $_POST['date_time'];
+
+        $nxtDtate = strtotime($date_time);
+
+        $expire = date('Y-m-d', strtotime('+3 years',$nxtDtate));
         $approval = $_POST['approval'];
 
 
@@ -19,11 +23,9 @@
         /*mysqli_query($conn,"insert into person (name, surname,dob, address) values ('$name', '$surname','$dob', '$address')");
          header('location:person.php');*/
 
-        $sql = "INSERT INTO request (name,person_name,id_number, address, telephone, email, file_ref_no, date_time, approval)
-         VALUES ('$name','$person_name','$id_number','$address','$telephone','$email','$file_ref_no','$date_time','$approval')";
+        $sql = "INSERT INTO request (name,person_name,id_number, address, telephone, email, file_ref_no, date_time,expire, approval)
+         VALUES ('$name','$person_name','$id_number','$address','$telephone','$email','$file_ref_no','$date_time','$expire','$approval')";
         $result = mysqli_query($conn, $sql);
-
-
 
         if ($result)
         {
