@@ -6,7 +6,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,7 +24,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -140,7 +140,10 @@
 
 
           						$sql = "SELECT * FROM organization join report
-                       where organization.id=report.org_id ";
+                      join renewal ON
+                      organization.id = renewal.org_id
+                      where organization.id=report.org_id
+                     GROUP BY report.org_id DESC LIMIT 1";
 
           						$result = mysqli_query($conn, $sql);
 
@@ -161,7 +164,7 @@
                         <td><?php echo $row['report_1']; ?></td>
                         <td><?php echo $row['report_2']; ?></td>
                         <td><?php echo $row['report_3']; ?></td>
-                        <td>Not Due</td>
+                        <td>Renewed <?php echo $row['count']; ?> Times</td>
                         <!-- <td>Never Submitted</td> -->
 
 

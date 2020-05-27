@@ -268,9 +268,10 @@ include('connection/connection.php');
           										</div>
                               <form action="renewal.php" method="POST" enctype="multipart/form-data">
                                  <input type="hidden" id="id" name="org_id" value="<?php echo $row['org_id']; ?>">
+                                 <input type="hidden" id="id_number" name="id_number" value="<?php echo $row['id_number']; ?>">
 						                <div class="modal-footer">
 						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-						                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+						                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Renew</button>
 						                </div>
                           </form>
 

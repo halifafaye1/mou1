@@ -7,7 +7,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -25,7 +25,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -160,8 +160,8 @@
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
-                        <td>2017</td>
-                        <td>2021</td>
+                        <td><?php echo $row['period_date']; ?></td>
+                        <td><?php echo $row['end_date']; ?></td>
 
 
 
@@ -371,7 +371,8 @@
                 require 'connection/connection.php';
 
                 $id = $_GET['id'];
-                $sql = "SELECT * FROM report where org_id = $id  ";
+                $sql = "SELECT * FROM report where org_id = $id
+                GROUP BY org_id DESC LIMIT 1";
                 $result = mysqli_query($conn, $sql);
 
               ?>
