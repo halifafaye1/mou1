@@ -221,8 +221,8 @@ include('connection/connection.php');
                                 }
                                 else {
                                     // query to get all records
-                                    $query = " SELECT *
-                                    FROM request JOIN person
+                                    $query = " SELECT  request.*,organization.*,request.name AS rName
+                                    FROM request  JOIN person
                                     join organization on
                                     organization.id = person.org_id
                                     where request.id_number = person.id_number

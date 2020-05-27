@@ -6,7 +6,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,7 +24,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -311,7 +311,7 @@
                      </label>
                    </td>
                    <td>
-                    <label for="field1"><span>End Date <span class="required">*</span></span>
+                    <label for="field1"><span>End Date </span>
                      <input type="date" class="input-field" id="edate" name="edate" value="" />
                     </label>
                   </td>
@@ -407,7 +407,7 @@
                    </label>
                  </td>
                  <td>
-                  <label for="field1"><span>End Date <span class="required">*</span></span>
+                  <label for="field1"><span>End Date </span>
                    <input type="date" class="input-field" id="edate" name="edate" value="" />
                   </label>
                 </td>
