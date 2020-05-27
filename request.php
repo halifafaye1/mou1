@@ -121,7 +121,7 @@
                     <thead>
                       <tr>
 
-                        <th>Organisation ID</th>
+                        <!-- <th>Organisation ID</th> -->
                         <th>Request Name</th>
                         <th>Person Name</th>
                         <th>ID #</th>
@@ -153,7 +153,7 @@
                     <tr>
 
 
-                        <td><?php echo $row['organization_name']; ?></td>
+                        <!-- <td><?php echo $row['organization_name']; ?></td> -->
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['person_name']; ?></td>
                         <td><?php echo $row['id_number']; ?></td>
