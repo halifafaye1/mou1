@@ -455,9 +455,113 @@
             </thead>
           </table>
 
+        </div><!-- /.box-body -->
+
+      </div><!-- /.box -->
+      <div class="box-header">
+          <h3 class="box-title">Archives</h3>
+          <button class="btn btn-success" style="float:right"
+          data-toggle="modal"
+          data-target="#add_report"
+          type="button" name="button">Previous Report</button>
+
+        </div><!-- /.box-header -->
+      <div class="box">
+        <div class="box-body">
+          <?php
+
+            require 'connection/connection.php';
+
+            $id = $_GET['id'];
+            $sql = "SELECT * FROM report where org_id = $id
+            ORDER BY id DESC LIMIT 1,99999999";
+
+
+
+            $result = mysqli_query($conn, $sql);
+
+          ?>
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+
+                <th>Status</th>
+                <th>Report</th>
+                <th>Title</th>
+                <th>Actions</th>
+
+
+              </tr>
+            </thead>
+
+
+            <tbody>
+              <?php while($row=mysqli_fetch_assoc($result)){ ?>
+              <tr>
+
+                <td>Archive</td>
+                <td ><strong>Year 1: </strong></td>
+                <td><?php echo $row['report_1']; ?></td>
+                <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_1" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
+
+
+              </tr>
+              <tr>
+
+                <td>Archive</td>
+                <td ><strong>Year 2: </strong></td>
+                <td><?php echo $row['report_2']; ?></td>
+                <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_2" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
+
+
+              </tr>
+              <tr>
+
+                <td>Archive</td>
+                <td ><strong>Year 3: </strong></td>
+                <td><?php echo $row['report_3']; ?></td>
+                <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_3" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
+
+              </tr>
+              <tr>
+                <td colspan="4"><h1>End Of Year 1</h1></td>
+              </tr>
+
+              <!-- Delete  Organisation-->
+                <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <center><h4 class="modal-title" id="myModalLabel">Delete Organization</h4></center>
+                            </div>
+                            <div class="modal-body">
+                      <form action="viewReport.php" method="POST">
+                        <input type="hidden" id="rid" name="rid"  value="<?php echo $row['id']; ?>"/>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                                <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                            </div>
+                            </form
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END Delete Organisation-->
+              <?php }   ?>
+
+          </tbody>
+        </thead>
+      </table>
+
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       </div>
+    </div>
+
+
 
 
       <!--  upload report  -->

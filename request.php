@@ -241,7 +241,7 @@
 
                     <td colspan="4">
                        <label for="field1"><span>Request Name <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="name" name="name" value="" required/>
+                         <input type="text" class="input-field" id="name" name="name" value="" required />
 
                        </label>
                     </td>
@@ -282,7 +282,7 @@
                      </label>
                    </td>
                    <td>
-                    <label for="field1"><span>Reference # <span class="required">*</span></span>
+                    <label for="field1"><span>File Reference # <span class="required">*</span></span>
                      <input type="text" class="input-field" id="file_ref_no" name="file_ref_no" value="" required/>
                     </label>
                   </td>
@@ -345,7 +345,7 @@
                 <tr>
                   <td colspan="4">
                      <label for="field1"><span>Request Name <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="name" name="name" value="" required/>
+                       <input type="text" class="input-field" id="name" name="name" value="" required disabled/>
 
                      </label>
                   </td>
@@ -356,14 +356,14 @@
 
                     <td >
                        <label for="field1"><span>Person Name <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="person_name" name="person_name" value="" required/>
+                         <input type="text" class="input-field" id="person_name" name="person_name" value="" required disabled/>
 
                        </label>
                     </td>
 
                     <td>
                        <label for="field1"><span>ID Number <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="id_number" name="id_number" value="" required/>
+                         <input type="text" class="input-field" id="id_number" name="id_number" value="" required disabled/>
 
                        </label>
                     </td>
@@ -389,15 +389,15 @@
                    </label>
                  </td>
                  <td>
-                  <label for="field1"><span>Reference # <span class="required">*</span></span>
-                   <input type="text" class="input-field" id="reference" name="file_ref_no" value="" />
+                  <label for="field1"><span>File Reference # <span class="required">*</span></span>
+                   <input type="text" class="input-field" id="reference" name="file_ref_no" value="" disabled/>
                   </label>
                 </td>
                </tr>
                <tr>
                  <td>
                    <label for="field1"><span>Date <span class="required">*</span></span>
-                     <input type="date" class="input-field" id="date_time" name="date_time" value="" />
+                     <input type="date" class="input-field" id="date_time" name="date_time" value="" disabled/>
                    </label>
                  </td>
                  <td>
