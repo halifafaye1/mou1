@@ -6,7 +6,7 @@
 
   $organization_id=$_POST['organization_id'];
   $school_id=$_POST['school_id'];
-  $support_type= $_POST['support_type'];
+  //$support_type= $_POST['support_type'];
   $quantity = $_POST['quantity'];
   $cost=$_POST['cost'];
   $period_date=$_POST['period_date'];
@@ -14,7 +14,7 @@
  /* mysqli_query($conn,"update user set firstname='$firstname', lastname='$lastname', address='$address' where userid='$id'");
   header('location:index.php');*/
    $sql = "UPDATE activity SET organization_id = '$organization_id', school_id = '$school_id',
-   support_type = '$support_type',quantity = '$quantity', cost = '$cost', period_date='$period_date' WHERE id='$id'";
+   quantity = '$quantity', cost = '$cost', period_date='$period_date' WHERE id='$id'";
         $result = mysqli_query($conn, $sql);
 
         if ($result)

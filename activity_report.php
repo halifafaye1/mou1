@@ -180,7 +180,9 @@ include('connection/connection.php');
         JOIN organization ON
         activity.organization_id = organization.id
         JOIN School ON
-        activity.school_id = school.id ";
+        activity.school_id = school.id 
+        JOIN support_type ON support_type.id = activity.id"
+        ;
          $result = mysqli_query($conn, $sql);
 	
 		while($row=mysqli_fetch_array($result)){

@@ -211,7 +211,7 @@ if(isset($_POST['value'])) {
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span> Delete</a> ||
-                        <a href="#renew<?php echo $row['id']; ?>" data-toggle="modal"
+                        <a href="#approve<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-success">
                         <span class="glyphicon glyphicon-ok"></span> Approve</a>
                        </td>
@@ -220,6 +220,42 @@ if(isset($_POST['value'])) {
 
 
                     </tr>
+                    <!---APPROVAL MODAL---->
+                    <div class="modal fade" id="approve<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						        <div class="modal-dialog">
+						            <div class="modal-content">
+						                <div class="modal-header">
+						                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						                    <center><h4 class="modal-title" id="myModalLabel">Approval</h4></center>
+						                </div>
+						                <div class="modal-body">
+          										<?php
+          											$app=mysqli_query($conn,"select * from request where id='".$row['id']."'");
+          											$drow=mysqli_fetch_array($app);
+          										?>
+          										<div class="container-fluid">
+          											<h5><center>Are you sure you want to Approve this Request with : <strong><?php echo $drow['name']; ?></strong></center></h5>
+                                </div>
+                              <center> <div>
+                                  <label for="field1"><span>Date <span class="required">*</span></span>
+                                    <input type="date" class="input-field"  id="date_time" name="approved_date" value=""required />
+                                  </label>
+                                </div></center> 
+          										</div>
+                              <form action="renewal.php" method="POST" enctype="multipart/form-data">
+                                 <input type="hidden" id="id" name="id" value="<?php echo $row['id']; ?>">
+                                
+						                <div class="modal-footer">
+						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+						                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Approve</button>
+						                </div>
+                          </form>
+
+						            </div>
+
+						        </div>
+
+						    </div>
                     <!-- Delete SCHOOL-->
                      <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                          <div class="modal-dialog">

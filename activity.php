@@ -121,8 +121,8 @@
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Organisation ID</th>
-                        <th>School ID</th>
+                        <th>Organisation Name</th>
+                        <th>School Name</th>
                         <th>Support Type</th>
                         <th>Quantity</th>
                         <th>Cost</th>
@@ -142,7 +142,10 @@
             JOIN organization ON
             activity.organization_id = organization.id
             JOIN School ON
-            activity.school_id = school.id ";
+            activity.school_id = school.id 
+            JOIN support_type ON
+            activity.support_type1 = support_type.id 
+            ";
 						$result = mysqli_query($conn, $sql);
 
  					?>
@@ -190,7 +193,7 @@
                            $drow=mysqli_fetch_array($del);
                          ?>
                          <div class="container-fluid">
-                           <h5><center>Are you sure you want to <br>Delete</br>  <strong><?php echo $drow['support_type']; ?> ? ?  </div>
+                           <h5><center>Are you sure you want to <br>Delete</br>  <strong><?php echo $drow['id']; ?> ? ?  </div>
                                  <div class="modal-footer">
                                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                                      <a href="deleteActivity.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
@@ -383,11 +386,27 @@
                       </select>
                     </label>
                   </td>
-                  <td  colspan="4">
-                    <label for="field1"><span>Support Type <span class="required">*</span></span>
-                      <input type="text" class="input-field" id="support_type" name="support_type" value="" required/>
-                    </label>
-                  </td>
+                  <tr>
+                     <td colspan="3">
+                       <?php
+
+                         require 'connection/connection.php';
+
+                         $sql3 = "SELECT * FROM support_type  ORDER BY id";
+                         $result3 = mysqli_query($conn, $sql3);
+
+                       ?>
+                      <label for="field1"><span>Support Type <span class="required">*</span></span>
+                        <select type="text" class="select-field" id="" name="support_type"  required>
+      
+                          <?php  while ($row = mysqli_fetch_array($result3)) {
+                               echo "<option value='" . $row['id'] . "'>" . $row['support_type']."</option>";
+                           }
+                           ?>
+                        </select>
+                      </label>
+                    </td>
+                   </tr>
                  </tr>
                  <tr>
                    <td>

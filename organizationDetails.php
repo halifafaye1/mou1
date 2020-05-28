@@ -134,6 +134,7 @@
                       <tr>
                         <th>ID</th>
                         <th>SUPPORT TYPE</th>
+                        <th>QUANTITY</th>
                         <th>COST</th>
                         <th>FROM </th>
                         <th>TO</th>
@@ -145,7 +146,11 @@
           						require 'connection/connection.php';
 
                       $id = $_GET['id'];
-          						$sql = "SELECT * FROM activity where organization_id = $id  ";
+                      $sql = "SELECT * FROM activity 
+                      JOIN support_type ON 
+                      support_type.id = activity.support_type1 
+                      where organization_id = $id  ";
+
           						$result = mysqli_query($conn, $sql);
 
            					?>
@@ -162,6 +167,7 @@
 
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
+                        <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
                         <td><?php echo $row['period_date']; ?></td>
                         <td><?php echo $row['end_date']; ?></td>
@@ -188,7 +194,7 @@
       											$drow=mysqli_fetch_array($del);
       										?>
       										<div class="container-fluid">
-      											<h5><center>Ag. Registration: <strong><?php echo $drow['name']; ?></strong></center></h5>
+      											<h5><center>Ag. Registration: <strong><?php echo $drow['organization_name']; ?></strong></center></h5>
       						                </div>
       										</div>
       						                <div class="modal-footer">
@@ -223,30 +229,11 @@
               <form action="addActivity.php" method="POST">
                 <table>
                   <tbody>
-                    <tr>
-                      <td colspan="4">
-                        <?php
-
-                          require 'connection/connection.php';
-
-                          $sql1 = "SELECT * FROM organization  ORDER BY id";
-                          $result1 = mysqli_query($conn, $sql1);
-
-                        ?>
-                         <label for="field1"><span>Organization Name <span class="required">*</span></span>
-                           <select type="text" class="select-field" id="organization_id" name="organization_id" required >
-                             <option disabled selected value> -- select an organization  -- </option>
-                             <?php  while ($row = mysqli_fetch_array($result1)) {
-                                  echo "<option value='" . $row['id'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."---Donates----". $row['previous_activities']. "</option>";
-                              }
-                              ?>
-                           </select>
-                         </label>
-                      </td>
-
-                   </tr>
+                   
                    <tr>
+                   
                      <td colspan="3">
+                     <input type="hidden" class="input-field" id="organization_id" name="organization_id" value="<?php echo $_GET['id']?>" required/>
                        <?php
 
                          require 'connection/connection.php';
@@ -277,7 +264,7 @@
 
                        ?>
                       <label for="field1"><span>Support Type <span class="required">*</span></span>
-                        <select type="text" class="select-field" id="" name="id"  required>
+                        <select type="text" class="select-field" id="support_type" name="support_type"  required>
                            <option disabled selected value> -- select a support type  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result3)) {
                                echo "<option value='" . $row['id'] . "'>" . $row['support_type']."</option>";
