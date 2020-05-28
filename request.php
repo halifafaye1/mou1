@@ -163,21 +163,21 @@ if(isset($_POST['value'])) {
       //$query = "SELECT * FROM request WHERE approval='Pending'";
 
       $query = " SELECT *
-      FROM request 
+      FROM request
       where approval = 'Pending' " ;
   }
   elseif($_POST['value'] == 'Approved') {
 
       $query = " SELECT *
-      FROM request 
+      FROM request
       where approval = 'Approved' " ;
   }
   elseif($_POST['value'] == 'Denied'){
       $query = " SELECT *
       FROM request
       where approval = 'Denied' " ;
-  }            
-                 
+  }
+
     $result = mysqli_query($conn,$query);
 
 
@@ -247,7 +247,7 @@ if(isset($_POST['value'])) {
 
 
                     <?php }   ?>
-                   
+
                     <?php }   ?>
                     </tbody>
                   </table>
@@ -383,7 +383,7 @@ if(isset($_POST['value'])) {
                 <tr>
                   <td colspan="4">
                      <label for="field1"><span>Request Name <span class="required">*</span></span>
-                       <input type="text" class="input-field" id="name" name="name" value="" required disabled/>
+                       <input type="text" class="input-field" id="name" name="name" value="" required readonly/>
 
                      </label>
                   </td>
@@ -394,14 +394,14 @@ if(isset($_POST['value'])) {
 
                     <td >
                        <label for="field1"><span>Person Name <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="person_name" name="person_name" value="" required disabled/>
+                         <input type="text" class="input-field" id="person_name" name="person_name" value="" required readonly/>
 
                        </label>
                     </td>
 
                     <td>
                        <label for="field1"><span>ID Number <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="id_number" name="id_number" value="" required disabled/>
+                         <input type="text" class="input-field" id="id_number" name="id_number" value="" required readonly/>
 
                        </label>
                     </td>
@@ -428,14 +428,14 @@ if(isset($_POST['value'])) {
                  </td>
                  <td>
                   <label for="field1"><span>File Reference # <span class="required">*</span></span>
-                   <input type="text" class="input-field" id="reference" name="file_ref_no" value="" disabled/>
+                   <input type="text" class="input-field" id="reference" name="file_ref_no" value="" readonly/>
                   </label>
                 </td>
                </tr>
                <tr>
                  <td>
                    <label for="field1"><span>Date <span class="required">*</span></span>
-                     <input type="date" class="input-field" id="date_time" name="date_time" value="" disabled/>
+                     <input type="date" class="input-field" id="date_time" name="date_time" value="" readonly/>
                    </label>
                  </td>
                  <td>
