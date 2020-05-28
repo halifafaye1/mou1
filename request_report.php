@@ -166,7 +166,7 @@ include('connection/connection.php');
                                 <input type='submit' value = 'Filter'>
                             </form>
 
-                  <table class="table table-bordered table-striped">
+                  <table id="table" class="table table-bordered table-striped">
                     <thead>
 
 
@@ -236,7 +236,7 @@ include('connection/connection.php');
                                 ?>
               <tbody>
 
-              <tr>
+              <tr class="item">
 
                   <td><?php echo $row['organization_name']; ?></td>
                   <td><?php echo $row['name']; ?></td>
@@ -245,10 +245,23 @@ include('connection/connection.php');
                   <td><?php echo $row['email']; ?></td>
                   <td><?php echo $row['file_ref_no']; ?></td>
                   <td><?php echo $row['date_time']; ?></td>
-                  <td><?php echo $row['approval']; ?></td>
+                  <td class="approve"><?php echo $row['approval']; ?></td>
                   <td>
-                  <a href="#renew<?php echo $row['org_id']; ?>" data-toggle="modal" data-org_id="<?php echo $row['organization_name']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Renew</a>
-</td>
+
+
+                     <?php if ( $row['approval']=="Approved" ){
+                       echo " <button  href='#renew".$row['org_id']."'
+                         data-toggle='modal' id='btn' class='btn btn-danger'><span class='glyphicon glyphicon-plus' >
+                          </span> Renew</buttom>" ;
+                     }
+                     else{
+                    
+                     }
+
+
+                     ?>
+
+                  </td>
               <!-- Renewal -->
 						    <div class="modal fade" id="renew<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						        <div class="modal-dialog">
