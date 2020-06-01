@@ -140,22 +140,12 @@
 
 
           						$sql = "SELECT * FROM organization join report
-
+                      join renewal ON
+                      organization.id = renewal.org_id
                       where organization.id=report.org_id
-                      GROUP BY report.request_id
-                      ORDER BY report.id
-                     ";
-                     // "SELECT * FROM report
-                     // where id
-                     // IN (
-                     //   SELECT MAX(id)
-                     //
-                     //   FROM report
-                     //
-                     //
-                     //   GROUP BY request_id
-                     //
-                     // ) ";
+                    
+                     ORDER BY report.id
+                     DESC LIMIT 1";
 
           						$result = mysqli_query($conn, $sql);
 

@@ -15,10 +15,6 @@
      VALUES ('$id ','NA','NA','NA')";
     $resultP = mysqli_query($conn, $sql);
 
-     //add new renewal row with org_id and request_id (get renewal date form modal date)
-    //add new report row with org_id and request_id
-
-
     $sql = "UPDATE request SET expire = DATE_ADD(expire, INTERVAL 3 YEAR)  WHERE id_number='$id_number'";
     $result = mysqli_query($conn, $sql);
 
