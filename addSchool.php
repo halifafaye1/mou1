@@ -5,6 +5,7 @@
 
         $name = $_POST['name'];
         $sch_code = $_POST['sch_code'];
+        
         $district = $_POST['district'];
         $cluster = $_POST['cluster'];
         $region = $_POST['region'];

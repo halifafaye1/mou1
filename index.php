@@ -238,10 +238,18 @@ session_start();
                 </div>
                 <a href="school.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
+              
             </div><!-- ./col -->
           </div><!-- /.row -->
+          </div><!-- ./col -->
+            <!--TABLE-->
+           
           <!-- Main row -->
-
+                      
         </section><!-- /.content -->
+
+                      
+							
+						    </div>
       </div><!-- /.content-wrapper -->
 <?php include 'footer.php'; ?>          

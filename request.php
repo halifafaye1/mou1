@@ -128,7 +128,7 @@
                                 <button class="btn btn-success" type="submit">Filter</button>
                             </form>
                             <br>
-                <table id="example1" class="table table-bordered table-striped">
+                <table style="overflow-x:auto;" id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
 

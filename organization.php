@@ -721,6 +721,7 @@
         modal.find('.modal-body #ag_registration_no').val(ag_registration_no)
         modal.find('.modal-body #office').val(office)
         modal.find('.modal-body #previous_activities').val(previous_activities)
+        modal.find('.modal-body #previous_activities').val(previous_activities)
         modal.find('.modal-body #region').val(region)
 
         modal.find('.modal-body #orgid').val(orgid)

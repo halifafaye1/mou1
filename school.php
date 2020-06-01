@@ -122,10 +122,13 @@
                       <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>School Type</th>
                         <th>School Code</th>
-                        <th>District</th>
-                        <th>Cluster</th>
                         <th>Region</th>
+                        <th>Cluster</th>
+                        <th>District</th>
+                        <th>Ward</th>
+                        <th>Settlement</th>          
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -144,10 +147,13 @@
 
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['sch_type']; ?></td>
                         <td><?php echo $row['sch_code']; ?></td>
-                        <td><?php echo $row['district']; ?></td>
-                        <td><?php echo $row['cluster']; ?></td>
                         <td><?php echo $row['region']; ?></td>
+                        <td><?php echo $row['cluster']; ?></td>
+                        <td><?php echo $row['district']; ?></td>
+                        <td><?php echo $row['ward']; ?></td>
+                        <td><?php echo $row['settlement']; ?></td>
 
 
                        <td>
@@ -232,7 +238,7 @@
               						require 'connection/connection.php';
 
 
-              						$sql = "SELECT * FROM school ORDER BY id";
+              						$sql = "SELECT * FROM sch_list ORDER BY sid";
               						$result = mysqli_query($conn, $sql);
 
                					?>
@@ -240,7 +246,7 @@
                            <!-- <input class="input-field" id="name" name="name" list="schoolid" > -->
                                <select class="select-field" id="schoolid">
                                  <?php  while ($row = mysqli_fetch_array($result)) {
-                                      echo "<option value='" . $row['id'] . "'>" . $row['name'].  $row['region']."</option>";
+                                      echo "<option value='" . $row['sid'] . "'>" . $row['sch_name']."  " .$row['sch_type']."</option>";
                                   }
                                   ?>
 
@@ -248,7 +254,7 @@
 
                          </label>
                       </td>
-                      <td style="width:20%">
+                      <td style="width:25%">
                        <label for="field1"><span>School Type <span class="required">*</span></span>
                          <input type="text" data-type="sch_type"  class="input-field" id="sch_type" name="sch_type" value="" readonly/>
                        </label>
@@ -277,9 +283,9 @@
                     </td>
 
 
-                      <td colspan="4">
+                      <td colspan="5">
                        <label for="field1"><span>Settlement <span class="required">*</span></span>
-                        <input type="text" data-type="Settlement"  class="input-field" id="Settlement" name="Settlement" value="" readonly/>
+                        <input type="text" data-type="settlement"  class="input-field" id="settlement" name="settlement" value="" readonly/>
                        </label>
                      </td>
 
@@ -695,10 +701,13 @@ $.ajax({
    url:'Ajax.php',
    success:function(data){
        var inputs = data.split('|');
-       $('#sch_code').val(inputs[0]);
-       $('#district').val(inputs[1]);
-       $('#cluster').val(inputs[2]);
-       $('#region').val(inputs[3]);
+       $('#sch_type').val(inputs[1]);
+       $('#sch_code').val(inputs[2]);
+       $('#district').val(inputs[3]);
+       $('#cluster').val(inputs[4]);
+       $('#region').val(inputs[5]);
+       $('#ward').val(inputs[6]);
+       $('#settlement').val(inputs[7]);
    }
 })
 });
