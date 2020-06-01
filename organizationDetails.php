@@ -470,15 +470,15 @@
 
                 $id = $_GET['id'];
                 $sql ="SELECT *
-FROM report
-JOIN request ON request.id = report.request_id
-JOIN organization ON organization.id = report.org_id
-WHERE report.id IN (
-    SELECT MAX(id)
-    FROM report
-    where org_id = '$id'
-    GROUP BY request_id
-) ";
+                FROM report
+                JOIN request ON request.id = report.request_id
+                JOIN organization ON organization.id = report.org_id
+                WHERE report.id IN (
+                    SELECT MAX(id)
+                    FROM report
+                    where org_id = '$id'
+                    GROUP BY request_id
+                ) ";
 
                 $result = mysqli_query($conn, $sql);
 

@@ -146,7 +146,6 @@
                       WHERE report.id IN (
                           SELECT MAX(id)
                           FROM report
-                          
                           GROUP BY request_id
                       ) ";
 
