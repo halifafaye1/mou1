@@ -195,37 +195,34 @@ include('connection/connection.php');
 
                                     //$query = "SELECT * FROM request WHERE approval='Pending'";
 
-                                    $query = " SELECT *
-                                    FROM request JOIN person
+                                    $query =  " SELECT request.*,organization.*,organization.id AS org_id,request.name AS rName
+                                    FROM request
                                     join organization on
-                                    organization.id = person.org_id
-                                    where (request.id_number = person.id_number AND
-                                     request.approval = 'Pending') " ;
+                                    request.ag_registration_no = organization.ag_registration_no
+                                    where request.approval = 'Pending' " ;
                                 }
                                 elseif($_POST['value'] == 'Approved') {
 
-                                    $query = " SELECT *
-                                    FROM request JOIN person
+                                    $query =  " SELECT  request.*,organization.*,organization.id AS org_id,request.name AS rName
+                                    FROM request
                                     join organization on
-                                    organization.id = person.org_id
-                                    where (request.id_number = person.id_number AND
-                                     request.approval = 'Approved') " ;
+                                    request.ag_registration_no = organization.ag_registration_no
+                                    where request.approval = 'Approved' " ;
                                 }
                                 elseif($_POST['value'] == 'Denied'){
-                                    $query = " SELECT *
-                                    FROM request JOIN person
+                                    $query = " SELECT  request.*,organization.*,organization.id AS org_id,request.name AS rName
+                                    FROM request
                                     join organization on
-                                    organization.id = person.org_id
-                                    where (request.id_number = person.id_number AND
-                                     request.approval = 'Denied') " ;
+                                    request.ag_registration_no = organization.ag_registration_no
+                                    where request.approval = 'Denied' " ;
                                 }
                                 else {
                                     // query to get all records
-                                    $query = " SELECT  request.*,organization.*,person.org_id,request.name AS rName
-                                    FROM request  JOIN person
+                                    $query = " SELECT  request.*,organization.*,organization.id AS org_id,request.name AS rName
+                                    FROM request
                                     join organization on
-                                    organization.id = person.org_id
-                                    where request.id_number = person.id_number
+                                    request.ag_registration_no = organization.ag_registration_no
+
                                     ";
                                 }
                                 $result = mysqli_query($conn,$query);
@@ -249,13 +246,15 @@ include('connection/connection.php');
                   <td>
 
 
-                     <?php if ( $row['approval']=="Approved" ){
+                     <?php if ( $row['approval']!="Approved" && $row['approval'] !="Not Due"){
                        echo " <button  href='#renew".$row['org_id']."'
-                         data-toggle='modal' id='btn' class='btn btn-danger'><span class='glyphicon glyphicon-plus' >
-                          </span> Renew</buttom>" ;
+                         data-toggle='modal' id='btn' class='btn btn-danger' disabled><span class='glyphicon glyphicon-plus' >
+                          </span> Renew</buttom> " ;
                      }
                      else{
-                    
+                       echo " <button  href='#renew".$row['org_id']."'
+                         data-toggle='modal' id='btn' class='btn btn-danger' ><span class='glyphicon glyphicon-plus' >
+                          </span> Renew</buttom> " ;
                      }
 
 
