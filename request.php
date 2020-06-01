@@ -240,11 +240,11 @@ if(isset($_POST['value'])) {
                                   <label for="field1"><span>Date <span class="required">*</span></span>
                                     <input type="date" class="input-field"  id="date_time" name="approved_date" value=""required />
                                   </label>
-                                </div></center> 
+                                </div></center>
           										</div>
                               <form action="renewal.php" method="POST" enctype="multipart/form-data">
                                  <input type="hidden" id="id" name="id" value="<?php echo $row['id']; ?>">
-                                
+
 						                <div class="modal-footer">
 						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
 						                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Approve</button>
