@@ -122,7 +122,10 @@
             <div class="col-xs-12">
             	<div class="box-header">
                   <h3 class="box-title">ACTIVITY</h3>
-
+                  <button class="btn btn-success" style="float:right"
+              data-toggle="modal"
+              data-target="#add_activity"
+              type="button" name="button">Add Activity</button>
                 </div><!-- /.box-header -->
               <div class="box">
                 <div class="box-body">
@@ -143,9 +146,9 @@
           						require 'connection/connection.php';
 
                       $id = $_GET['id'];
-                      $sql = "SELECT * FROM activity 
-                      JOIN support_type ON 
-                      support_type.id = activity.support_type1 
+                      $sql = "SELECT * FROM activity
+                      JOIN support_type ON
+                      support_type.id = activity.support_type1
                       where organization_id = $id  ";
 
           						$result = mysqli_query($conn, $sql);
@@ -213,7 +216,6 @@
               </div><!-- /.box -->
             </div><!-- /.col -->
 
-<<<<<<< HEAD
   <!--  add activity  -->
   <div class="modal fade" id="add_activity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -227,9 +229,9 @@
               <form action="addActivity.php" method="POST">
                 <table>
                   <tbody>
-                   
+
                    <tr>
-                   
+
                      <td colspan="3">
                      <input type="hidden" class="input-field" id="organization_id" name="organization_id" value="<?php echo $_GET['id']?>" required/>
                        <?php
@@ -307,9 +309,6 @@
     </div>
    </div>
   </div>
-=======
-
->>>>>>> 0eb0422b413fc7f141c364c763a033d035e9ae3b
           </div><!-- /.row -->
 
           <div class="box-header">
@@ -460,10 +459,7 @@
           </div><!-- /.box -->
           <div class="box-header">
               <h3 class="box-title">Reports</h3>
-              <button class="btn btn-success" style="float:right"
-              data-toggle="modal"
-              data-target="#add_report"
-              type="button" name="button">Upload Report</button>
+
 
             </div><!-- /.box-header -->
           <div class="box">
@@ -473,8 +469,17 @@
                 require 'connection/connection.php';
 
                 $id = $_GET['id'];
-                $sql = "SELECT * FROM report where org_id = $id
-                ORDER BY id DESC LIMIT 1";
+                $sql ="SELECT *
+FROM report
+JOIN request ON request.id = report.request_id
+JOIN organization ON organization.id = report.org_id
+WHERE report.id IN (
+    SELECT MAX(id)
+    FROM report
+    where org_id = '$id'
+    GROUP BY request_id
+) ";
+
                 $result = mysqli_query($conn, $sql);
 
               ?>
@@ -494,6 +499,15 @@
 
                 <tbody>
                   <?php while($row=mysqli_fetch_assoc($result)){ ?>
+                    <tr>
+                      <td colspan="4"><h1>Upload here Reports for <?php echo $row['name']; ?> Request</h1></td>
+                      <td>
+                      <button class="btn btn-success" style="float:right"
+                      data-toggle="modal"
+                      data-target="#add_report"
+                      type="button" name="button">Upload Report</button>
+                    </td>
+                    </tr>
                   <tr>
 
                     <td>Submitted</td>
@@ -527,6 +541,14 @@
 
 
                   </tr>
+                  <tr>
+                    <td colspan="4"><h1>End of Reports for  <?php echo $row['name']; ?>  Request</h1></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4">...</td>
+                  </tr>
+
+
 
                   <!-- Delete  Organisation-->
                     <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -575,8 +597,17 @@
             require 'connection/connection.php';
 
             $id = $_GET['id'];
-            $sql = "SELECT * FROM report where org_id = $id
-            ORDER BY id DESC LIMIT 1,99999999";
+            $sql = "SELECT * FROM report
+            where id NOT
+            IN (
+              SELECT MAX(id)
+              FROM report
+              where org_id = '$id'
+              GROUP BY request_id
+            )
+            AND org_id = '$id' ";
+
+
 
 
 
@@ -598,13 +629,7 @@
 
 
             <tbody>
-              <?php
-
-
-              while($row=mysqli_fetch_assoc($result)){
-
-
-                ?>
+              <?php while($row=mysqli_fetch_assoc($result)){ ?>
               <tr>
 
                 <td>Archive</td>
@@ -632,19 +657,7 @@
 
               </tr>
               <tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <td colspan="4"><h1 style="text-align: center">End Of <?php echo $row['start_year']; ?> To <?php echo $row['end_year']; ?> Contract </h1></td>
-=======
-                <td colspan="4"><h1>End Of Year 1</h1></td>
->>>>>>> parent of b4261c4... fixed
-=======
-                <td colspan="4"><h1>End Of Year 1</h1></td>
->>>>>>> parent of b4261c4... fixed
-=======
-                <td colspan="4"><h1>End Of Year 1</h1></td>
->>>>>>> parent of b4261c4... fixed
+                 <td colspan="4"><h1 style="text-align: center">End Of <?php echo $row['approval_date']; ?> To <?php echo $row['expiry_date']; ?> Contract </h1></td>
               </tr>
 
               <!-- Delete  Organisation-->
@@ -670,7 +683,7 @@
                     </div>
                 </div>
                 <!-- END Delete Organisation-->
-              <?php  }   ?>
+              <?php }   ?>
 
           </tbody>
         </thead>
@@ -702,6 +715,7 @@
 
 
 
+
                <label ><span>Report 1 </span>
                 <input type="radio" id="report_1" name="report" value="report1">
                </label>
@@ -714,7 +728,7 @@
                   <input type="radio" id="report_3" name="report" value="report3">
                  </label>
 
-                 <label for="field1"><span>Report 1 </span>
+                 <label for="field1"><span>Report</span>
                   <input type="file" class="input-field" id="report1" name="report_2" value="" required/>
                  </label>
 

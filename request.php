@@ -115,12 +115,7 @@
                        data-target="#add_request">Add New Request</button>
                   </div>
                 </div><!-- /.box-header -->
-<<<<<<< HEAD
-              <div style="overflow-x:auto;"  class="box">
-=======
-                
               <div class="box">
->>>>>>> parent of 84f2996... Revert "xx"
                 <div class="box-body">
                 <form action=""  method='POST' name='form_filter' >
                                 <select class="form-control" name="value">
@@ -140,7 +135,7 @@
                         <!-- <th>Organisation ID</th> -->
                         <th>Request Name</th>
                         <th>Person Name</th>
-                        <th>ID #</th>
+                        <th>AG Registration #</th>
                         <th>Address</th>
                         <th>Telephone</th>
                         <th>Email</th>
@@ -156,43 +151,41 @@
 
 
 						 // query to get all records
-             $query = " SELECT  * FROM request;
-             ";
+             $query = " SELECT  * FROM request";
 
 						$result = mysqli_query($conn, $query);
 
-<<<<<<< HEAD
             // process form when posted
-if(isset($_POST['value'])) {
-  if($_POST['value'] == 'Pending') {
+                if(isset($_POST['value'])) {
+                  if($_POST['value'] == 'Pending') {
 
-      //$query = "SELECT * FROM request WHERE approval='Pending'";
+                      //$query = "SELECT * FROM request WHERE approval='Pending'";
 
-      $query = " SELECT *
-      FROM request
-      where approval = 'Pending' " ;
-  }
-  elseif($_POST['value'] == 'Approved') {
+                      $query = " SELECT *
+                      FROM request
+                      where approval = 'Pending' " ;
+                  }
+                  elseif($_POST['value'] == 'Approved') {
 
-      $query = " SELECT *
-      FROM request
-      where approval = 'Approved' " ;
-  }
-  elseif($_POST['value'] == 'Denied'){
-      $query = " SELECT *
-      FROM request
-      where approval = 'Denied' " ;
-  }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    $result = mysqli_query($conn,$query);
+                      $query = " SELECT *
+                      FROM request
+                      where approval = 'Approved' " ;
+                  }
+                  elseif($_POST['value'] == 'Denied'){
+                      $query = " SELECT *
+                      FROM request
+                      where approval = 'Denied' " ;
+                  }
 
 
-?>
+                    $result = mysqli_query($conn,$query);
+              }
+
+
+
+                ?>
 <tbody>
 
-<<<<<<< HEAD
                 <?php while ($row = mysqli_fetch_assoc($result)){
                   ?>
 
@@ -208,96 +201,33 @@ if(isset($_POST['value'])) {
                 <td><?php echo $row['date_time']; ?></td>
                 <td><?php echo $row['approval']; ?></td>
                 <td>
-=======
-      ?>
-<tbody>
-  <?php
-            // process form when posted
-            if(isset($_POST['value'])) {
-              if($_POST['value'] == 'Pending') {
-            
-                  //$query = "SELECT * FROM request WHERE approval='Pending'";
-            
-                  $query = " SELECT *
-                  FROM request
-                  where approval = 'Pending' " ;
-              }
-              elseif($_POST['value'] == 'Approved') {
-            
-                  $query = " SELECT *
-                  FROM request
-                  where approval = 'Approved' " ;
-              }
-              elseif($_POST['value'] == 'Denied'){
-                  $query = " SELECT *
-                  FROM request
-                  where approval = 'Denied' " ;
-              }
-            
-                $result= mysqli_query($conn,$query);
-            
-            
-            ?>
-=======
->>>>>>> parent of b4261c4... fixed
-=======
-
-    $result = mysqli_query($conn,$query);
-
-
-?>
-<tbody>
-
->>>>>>> parent of b4261c4... fixed
-=======
-
-    $result = mysqli_query($conn,$query);
-
-
-?>
-<tbody>
-
->>>>>>> parent of b4261c4... fixed
-<?php while ($row = mysqli_fetch_assoc($result)){
-  ?>
-
-<tr>
-
-<td><?php echo $row['name']; ?></td>
-<td><?php echo $row['person_name']?></td>
-<td><?php echo $row['id_number']?></td>
-<td><?php echo $row['address']; ?></td>
-<td><?php echo $row['telephone']; ?></td>
-<td><?php echo $row['email']; ?></td>
-<td><?php echo $row['file_ref_no']; ?></td>
-<td><?php echo $row['date_time']; ?></td>
-<td><?php echo $row['approval']; ?></td>
-<td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 84f2996... Revert "xx"
-=======
->>>>>>> parent of b4261c4... fixed
-=======
->>>>>>> parent of b4261c4... fixed
-=======
->>>>>>> parent of b4261c4... fixed
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
                            data-target="#edit"  data-id="<?php echo $row['id']; ?>"
                            data-organization_id="<?php echo $row['organization_id']; ?>"data-person_name="<?php echo $row['person_name']; ?>"
                            data-name="<?php echo $row['name']; ?>" data-address="<?php echo $row['address']; ?>"
                            data-telephone="<?php echo $row['telephone']; ?>" data-email="<?php echo $row['email']; ?>"
                            data-reference="<?php echo $row['file_ref_no']; ?>"  data-date_time="<?php echo $row['date_time']; ?>"
-                           data-approval="<?php echo $row['approval']; ?>" data-id_number="<?php echo $row['id_number']; ?>"
+                           data-approval="<?php echo $row['approval']; ?>" data-ag_registration_no="<?php echo $row['ag_registration_no']; ?>"
                             class="btn btn-warning">
                          <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</a> ||
-                        <a href="#approve<?php echo $row['id']; ?>" data-toggle="modal"
-                           class="btn btn-success">
-                        <span class="glyphicon glyphicon-ok"></span> Approve</a>
+                        <span class="glyphicon glyphicon-trash"></span> Delete</a>
+
+                        <?php if ( $row['approval']!="Approved" ){
+                          // echo " || <a  data-toggle='modal'
+                          //    class='btn btn-success'disabled>
+                          // <span class='glyphicon glyphicon-ok'></span> Approve</a> ";
+                        }
+                        else{
+
+                          echo "<a href='#approve".$row['id']."' data-toggle='modal'
+                             class='btn btn-success'>
+                          <span class='glyphicon glyphicon-ok'></span> Approve</a> ";
+
+                        }
+                        ?>
+
                        </td>
 
                                   <!-- <td><a href="editperson.php<?php echo $row['id']?>" class="btn btn-warning"><i class="icon-pencil icon-large"></i>&nbsp;Edit</a></td>  -->
@@ -320,15 +250,20 @@ if(isset($_POST['value'])) {
           										<div class="container-fluid">
           											<h5><center>Are you sure you want to Approve this Request with : <strong><?php echo $drow['name']; ?></strong></center></h5>
                                 </div>
-                              <center> <div>
-                                  <label for="field1"><span>Date <span class="required">*</span></span>
-                                    <input type="date" class="input-field"  id="date_time" name="approved_date" value=""required />
-                                  </label>
-                                </div></center> 
-          										</div>
-                              <form action="renewal.php" method="POST" enctype="multipart/form-data">
+
+                              <form action="requestContract.php" method="POST" enctype="multipart/form-data">
                                  <input type="hidden" id="id" name="id" value="<?php echo $row['id']; ?>">
-                                
+                                 <input type="hidden" id="id" name="org_id" value="<?php echo $row['organization_id']; ?>">
+                                 <center> <div>
+                                     <div class="form-style-2">
+                                     <label style="width:200px;" for="field1"><span>Date <span class="required">*</span></span>
+                                       <input style="width:200px;" type="date" class="input-field"  id="approved_date" name="approved_date" value=""  required />
+
+                                     </label>
+
+                                   </div></center>
+             										</div>
+
 						                <div class="modal-footer">
 						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
 						                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Approve</button>
@@ -368,7 +303,7 @@ if(isset($_POST['value'])) {
 
                     <?php }   ?>
 
-                    <?php }   ?>
+
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
@@ -404,6 +339,31 @@ if(isset($_POST['value'])) {
                        </label>
                     </td>
                   </tr>
+                  <tr>
+                    <td colspan="4">
+                       <label for="field1"><span>Organization Name <span class="required">*</span></span>
+                         <?php
+
+                           require 'connection/connection.php';
+
+                           $sql1 = "SELECT * FROM organization ORDER BY id";
+                           $result1 = mysqli_query($conn, $sql1);
+
+
+
+                         ?>
+                         <select type="text" class="select-field" id="organization_id" name="organization_id"  required>
+                            <option disabled selected value> -- select an organization  -- </option>
+                           <?php  while ($row3 = mysqli_fetch_array($result1)) {
+                                echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
+                                 $orgid = $_GET['organization_id'];
+                            }
+                            ?>
+                         </select>
+
+                       </label>
+                    </td>
+                  </tr>
 
                   <tr>
                     <td >
@@ -414,7 +374,7 @@ if(isset($_POST['value'])) {
                     </td>
 
                       <td>
-                         <label for="field1"><span>ID Number <span class="required">*</span></span>
+                         <label for="field1"><span>Ag. Registration Number <span class="required">*</span></span>
                            <input type="text" class="input-field" id="id_number" name="id_number" value="" required/>
 
                          </label>
@@ -510,6 +470,30 @@ if(isset($_POST['value'])) {
 
                 </tr>
                 <tr>
+                  <td colspan="4">
+                     <label for="field1"><span>Organization Name <span class="required">*</span></span>
+                       <?php
+
+                         require 'connection/connection.php';
+
+                         $sql1 = "SELECT * FROM organization ORDER BY id";
+                         $result1 = mysqli_query($conn, $sql1);
+
+
+
+                       ?>
+                       <select type="text" class="select-field" id="organization_id" name="organization_id"  required>
+                          <option disabled selected value> -- select an organization  -- </option>
+                         <?php  while ($row3 = mysqli_fetch_array($result1)) {
+                              echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
+                               $orgid = $_GET['organization_id'];
+                          }
+                          ?>
+                       </select>
+                     </label>
+                  </td>
+                </tr>
+                <tr>
                     <input type="hidden" id="id" name="id"  value=""/>
 
                     <td >
@@ -520,8 +504,8 @@ if(isset($_POST['value'])) {
                     </td>
 
                     <td>
-                       <label for="field1"><span>ID Number <span class="required">*</span></span>
-                         <input type="text" class="input-field" id="id_number" name="id_number" value="" required readonly/>
+                       <label for="field1"><span>Ag. Registration Number <span class="required">*</span></span>
+                         <input type="text" class="input-field" id="ag_registration_no" name="ag_registration_no" value="" required readonly/>
 
                        </label>
                     </td>
@@ -866,7 +850,7 @@ if(isset($_POST['value'])) {
         var organization_id = button.data('organization_id')
         var name = button.data('name')
         var person_name = button.data('person_name')
-        var id_number = button.data('id_number')
+        var id_number = button.data('ag_registration_no')
         var address = button.data('address')
         var telephone = button.data('telephone')
         var email = button.data('email')
@@ -885,7 +869,7 @@ if(isset($_POST['value'])) {
         modal.find('.modal-body #organization_id').val(organization_id)
         modal.find('.modal-body #name').val(name)
         modal.find('.modal-body #person_name').val(person_name)
-        modal.find('.modal-body #id_number').val(id_number)
+        modal.find('.modal-body #ag_registration_no').val(id_number)
         modal.find('.modal-body #address').val(address)
         modal.find('.modal-body #telephone').val(telephone)
         modal.find('.modal-body #email').val(email)

@@ -139,13 +139,16 @@
           						require 'connection/connection.php';
 
 
-          						$sql = "SELECT * FROM organization join report
-                      join renewal ON
-                      organization.id = renewal.org_id
-                      where organization.id=report.org_id
-                    
-                     ORDER BY report.id
-                     DESC LIMIT 1";
+          						$sql ="SELECT *
+                      FROM report
+                      JOIN request ON request.id = report.request_id
+                      JOIN organization ON organization.id = report.org_id
+                      WHERE report.id IN (
+                          SELECT MAX(id)
+                          FROM report
+                          
+                          GROUP BY request_id
+                      ) ";
 
           						$result = mysqli_query($conn, $sql);
 
