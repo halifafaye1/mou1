@@ -6,7 +6,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
+         
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,7 +24,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-
+              
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -264,30 +264,6 @@
                           </select>
                      </td>
                    </tr>
-                   <tr>
-                     <td>
-                       <div class="form-style-2-heading">Sponsors </div>
-                     </td>
-                   </tr>
-                   <tr>
-                     <td>
-
-                        <label for="field1"><span>Sponsoring Organization Name <span class="required">*</span></span>
-                            <input type="text" class="input-field" id="Sponsor_name" name="Sponsor_name" value="" required/>
-                        </label>
-                     </td>
-                     <td>
-                      <label for="field1"><span>Country <span class="required">*</span></span>
-                        <input type="text" class="input-field" id="country" name="country" value="" required/>
-                      </label>
-                    </td>
-                   </tr>
-
-                     <td>
-                       <button id="adds" type="button" class="btn btn-info">Add Sponsor</buttom>
-                     </td>
-
-
                     <tr>
                       <td>
                         <div class="form-style-2-heading">Executive Members</div>
@@ -789,32 +765,7 @@
       // remove row
       $(document).on('click', '#removeRow', function () {
           $('#inputFormRowz').remove() && $(this).closest('#inputFormRow').remove();
-
-
-            $rowCount--;
-            $("#number").val($rowCount);
-      });
-      /// add Sponsors
-      $("#addSponsor").click(function () {
-
-        var html = '';
-
-        html +=  '<tr id="inputFormRowz">';
-        html += ' <td>';
-
-        html +=  ' </td>';
-        html +=  '<tr>';
-
-
-
-      });
-      console.log($rowCount);
-      console.log($count);
-
-      // remove row
-      $(document).on('click', '#removeSponsor', function () {
-
-
+          
 
             $rowCount--;
             $("#number").val($rowCount);

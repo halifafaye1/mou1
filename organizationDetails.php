@@ -122,10 +122,7 @@
             <div class="col-xs-12">
             	<div class="box-header">
                   <h3 class="box-title">ACTIVITY</h3>
-                  <button class="btn btn-success" style="float:right"
-              data-toggle="modal"
-              data-target="#add_activity"
-              type="button" name="button">Add Activity</button>
+
                 </div><!-- /.box-header -->
               <div class="box">
                 <div class="box-body">
@@ -216,6 +213,7 @@
               </div><!-- /.box -->
             </div><!-- /.col -->
 
+<<<<<<< HEAD
   <!--  add activity  -->
   <div class="modal fade" id="add_activity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -309,6 +307,9 @@
     </div>
    </div>
   </div>
+=======
+
+>>>>>>> 0eb0422b413fc7f141c364c763a033d035e9ae3b
           </div><!-- /.row -->
 
           <div class="box-header">
@@ -597,7 +598,13 @@
 
 
             <tbody>
-              <?php while($row=mysqli_fetch_assoc($result)){ ?>
+              <?php
+
+
+              while($row=mysqli_fetch_assoc($result)){
+
+
+                ?>
               <tr>
 
                 <td>Archive</td>
@@ -625,7 +632,19 @@
 
               </tr>
               <tr>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                <td colspan="4"><h1 style="text-align: center">End Of <?php echo $row['start_year']; ?> To <?php echo $row['end_year']; ?> Contract </h1></td>
+=======
                 <td colspan="4"><h1>End Of Year 1</h1></td>
+>>>>>>> parent of b4261c4... fixed
+=======
+                <td colspan="4"><h1>End Of Year 1</h1></td>
+>>>>>>> parent of b4261c4... fixed
+=======
+                <td colspan="4"><h1>End Of Year 1</h1></td>
+>>>>>>> parent of b4261c4... fixed
               </tr>
 
               <!-- Delete  Organisation-->
@@ -651,7 +670,7 @@
                     </div>
                 </div>
                 <!-- END Delete Organisation-->
-              <?php }   ?>
+              <?php  }   ?>
 
           </tbody>
         </thead>

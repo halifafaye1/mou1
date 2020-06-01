@@ -251,7 +251,19 @@ include('connection/connection.php');
 
                      <?php if ( $row['approval']=="Approved" ){
                        echo " <button  href='#renew".$row['org_id']."'
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                         data-toggle='modal' id='btn' class='btn btn-success'><span class='glyphicon glyphicon-plus' >
+=======
                          data-toggle='modal' id='btn' class='btn btn-danger'><span class='glyphicon glyphicon-plus' >
+>>>>>>> parent of b4261c4... fixed
+=======
+                         data-toggle='modal' id='btn' class='btn btn-danger'><span class='glyphicon glyphicon-plus' >
+>>>>>>> parent of b4261c4... fixed
+=======
+                         data-toggle='modal' id='btn' class='btn btn-danger'><span class='glyphicon glyphicon-plus' >
+>>>>>>> parent of b4261c4... fixed
                           </span> Renew</buttom>" ;
                      }
                      else{
