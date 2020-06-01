@@ -632,7 +632,11 @@
 
               </tr>
               <tr>
+<<<<<<< HEAD
                 <td colspan="4"><h1 style="text-align: center">End Of <?php echo $row['start_year']; ?> To <?php echo $row['end_year']; ?> Contract </h1></td>
+=======
+                <td colspan="4"><h1>End Of Year 1</h1></td>
+>>>>>>> parent of b4261c4... fixed
               </tr>
 
               <!-- Delete  Organisation-->
