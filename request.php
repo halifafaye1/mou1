@@ -115,7 +115,12 @@
                        data-target="#add_request">Add New Request</button>
                   </div>
                 </div><!-- /.box-header -->
+<<<<<<< HEAD
               <div style="overflow-x:auto;"  class="box">
+=======
+                
+              <div class="box">
+>>>>>>> parent of 84f2996... Revert "xx"
                 <div class="box-body">
                 <form action=""  method='POST' name='form_filter' >
                                 <select class="form-control" name="value">
@@ -155,6 +160,7 @@
 
 						$result = mysqli_query($conn, $query);
 
+<<<<<<< HEAD
             // process form when posted
                 if(isset($_POST['value'])) {
                   if($_POST['value'] == 'Pending') {
@@ -201,6 +207,52 @@
                 <td><?php echo $row['date_time']; ?></td>
                 <td><?php echo $row['approval']; ?></td>
                 <td>
+=======
+      ?>
+<tbody>
+  <?php
+            // process form when posted
+            if(isset($_POST['value'])) {
+              if($_POST['value'] == 'Pending') {
+            
+                  //$query = "SELECT * FROM request WHERE approval='Pending'";
+            
+                  $query = " SELECT *
+                  FROM request
+                  where approval = 'Pending' " ;
+              }
+              elseif($_POST['value'] == 'Approved') {
+            
+                  $query = " SELECT *
+                  FROM request
+                  where approval = 'Approved' " ;
+              }
+              elseif($_POST['value'] == 'Denied'){
+                  $query = " SELECT *
+                  FROM request
+                  where approval = 'Denied' " ;
+              }
+            
+                $result= mysqli_query($conn,$query);
+            
+            
+            ?>
+<?php while ($row = mysqli_fetch_assoc($result)){
+  ?>
+
+<tr>
+
+<td><?php echo $row['name']; ?></td>
+<td><?php echo $row['person_name']?></td>
+<td><?php echo $row['id_number']?></td>
+<td><?php echo $row['address']; ?></td>
+<td><?php echo $row['telephone']; ?></td>
+<td><?php echo $row['email']; ?></td>
+<td><?php echo $row['file_ref_no']; ?></td>
+<td><?php echo $row['date_time']; ?></td>
+<td><?php echo $row['approval']; ?></td>
+<td>
+>>>>>>> parent of 84f2996... Revert "xx"
                          <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
                            data-target="#edit"  data-id="<?php echo $row['id']; ?>"
                            data-organization_id="<?php echo $row['organization_id']; ?>"data-person_name="<?php echo $row['person_name']; ?>"
