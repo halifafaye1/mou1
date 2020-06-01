@@ -115,7 +115,7 @@
                        data-target="#add_request">Add New Request</button>
                   </div>
                 </div><!-- /.box-header -->
-              <div class="box">
+              <div style="overflow-x:auto;"  class="box">
                 <div class="box-body">
                 <form action=""  method='POST' name='form_filter' >
                                 <select class="form-control" name="value">
