@@ -115,6 +115,7 @@
                        data-target="#add_request">Add New Request</button>
                   </div>
                 </div><!-- /.box-header -->
+                
               <div class="box">
                 <div class="box-body">
                 <form action=""  method='POST' name='form_filter' >
@@ -156,34 +157,35 @@
 
 						$result = mysqli_query($conn, $query);
 
-            // process form when posted
-if(isset($_POST['value'])) {
-  if($_POST['value'] == 'Pending') {
-
-      //$query = "SELECT * FROM request WHERE approval='Pending'";
-
-      $query = " SELECT *
-      FROM request
-      where approval = 'Pending' " ;
-  }
-  elseif($_POST['value'] == 'Approved') {
-
-      $query = " SELECT *
-      FROM request
-      where approval = 'Approved' " ;
-  }
-  elseif($_POST['value'] == 'Denied'){
-      $query = " SELECT *
-      FROM request
-      where approval = 'Denied' " ;
-  }
-
-    $result = mysqli_query($conn,$query);
-
-
-?>
+      ?>
 <tbody>
-
+  <?php
+            // process form when posted
+            if(isset($_POST['value'])) {
+              if($_POST['value'] == 'Pending') {
+            
+                  //$query = "SELECT * FROM request WHERE approval='Pending'";
+            
+                  $query = " SELECT *
+                  FROM request
+                  where approval = 'Pending' " ;
+              }
+              elseif($_POST['value'] == 'Approved') {
+            
+                  $query = " SELECT *
+                  FROM request
+                  where approval = 'Approved' " ;
+              }
+              elseif($_POST['value'] == 'Denied'){
+                  $query = " SELECT *
+                  FROM request
+                  where approval = 'Denied' " ;
+              }
+            
+                $result= mysqli_query($conn,$query);
+            
+            
+            ?>
 <?php while ($row = mysqli_fetch_assoc($result)){
   ?>
 

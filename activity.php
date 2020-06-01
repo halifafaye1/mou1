@@ -265,6 +265,7 @@
 
                        ?>
                       <label for="field1"><span>School Name <span class="required">*</span></span>
+                   
                         <select type="text" class="select-field" id="" name="school_id"  required>
                            <option disabled selected value> -- select a school  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result2)) {
@@ -272,6 +273,8 @@
                            }
                            ?>
                         </select>
+                        <input type="hidden" name="hidden_school" id="hidden_school" />
+                         
                       </label>
                     </td>
                    </tr>
@@ -648,6 +651,7 @@
         });
       });
     </script>
+    </script>
 
     <style type="text/css">
         .form-style-2{
@@ -752,5 +756,6 @@
 
 
     </script>
+
    </body>
 </html>
