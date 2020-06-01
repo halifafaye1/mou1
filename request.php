@@ -184,6 +184,7 @@ if(isset($_POST['value'])) {
       where approval = 'Denied' " ;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     $result = mysqli_query($conn,$query);
 
@@ -248,6 +249,15 @@ if(isset($_POST['value'])) {
 <tbody>
 
 >>>>>>> parent of b4261c4... fixed
+=======
+
+    $result = mysqli_query($conn,$query);
+
+
+?>
+<tbody>
+
+>>>>>>> parent of b4261c4... fixed
 <?php while ($row = mysqli_fetch_assoc($result)){
   ?>
 
@@ -265,7 +275,10 @@ if(isset($_POST['value'])) {
 <td>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 84f2996... Revert "xx"
+=======
+>>>>>>> parent of b4261c4... fixed
 =======
 >>>>>>> parent of b4261c4... fixed
 =======
