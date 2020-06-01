@@ -42,13 +42,13 @@
            }
           $orgid = $id;
 
-         $sql = "INSERT INTO report ( org_id, report_1, report_2, report_3)
-          VALUES ('$orgid ','NA','NA','NA')";
-         $resultP = mysqli_query($conn, $sql);
-
-         $sql = "INSERT INTO renewal ( org_id, count)
-          VALUES ('$orgid ','0')";
-         $resultq = mysqli_query($conn, $sql);
+         // $sql = "INSERT INTO report ( org_id, report_1, report_2, report_3)
+         //  VALUES ('$orgid ','NA','NA','NA')";
+         // $resultP = mysqli_query($conn, $sql);
+         //
+         // $sql = "INSERT INTO renewal ( org_id, count)
+         //  VALUES ('$orgid ','0')";
+         // $resultq = mysqli_query($conn, $sql);
 
 
 
