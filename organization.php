@@ -284,8 +284,11 @@
                    </tr>
 
                      <td>
-                       <button id="adds" type="button" class="btn btn-info">Add Sponsor</buttom>
+                       <button id="addSponsor" type="button" class="btn btn-info">Add Sponsor</buttom>
                      </td>
+                     <tr id="newSponsor">
+
+                     </tr>
 
 
                     <tr>
@@ -801,9 +804,18 @@
 
         html +=  '<tr id="inputFormRowz">';
         html += ' <td>';
+        html += '<label for="field1"><span> Organization Name <span class="required">*</span></span>';
+        html += ' <input type="text" class="input-field" id="Sponsor_name" name="Sponsor_name" value="" required/>';
+        html += ' </label>';
+        html += ' <td>';
+        html += '<label for="field1"><span>Country <span class="required">*</span></span>';
+        html += '<input type="text" class="input-field" id="country" name="country" value="" required/>'
+        html += ' </label>';
 
         html +=  ' </td>';
         html +=  '<tr>';
+
+        $('#newSponsor').append(html);
 
 
 
@@ -823,15 +835,3 @@
     </script>
    </body>
 </html>
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

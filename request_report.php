@@ -136,13 +136,22 @@ session_start();
 
 
                 <div class="box-body">
-				<?php
-include('connection/connection.php');
+	<?php
+         include('connection/connection.php');
+
+         $currentDate = date('Y-m-d');
+         $run = " UPDATE  request
+         join report on
+         request.id = report.request_id
+         where expiry_date > $currentDate
+         set request.approval = 'Expired'
 
 
-    $query=mysqli_query($conn,"SELECT * FROM request ");
+         ";
+       $updateStatus=mysqli_query($conn,$run);
 
-        $row=mysqli_fetch_array($query);
+       $query=mysqli_query($conn,"SELECT * FROM request ");
+       $row=mysqli_fetch_array($query);
 
 ?>
                    <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU REQUEST REPORT</b> </h4>
@@ -180,6 +189,8 @@ include('connection/connection.php');
                         <th>Reference #</th>
                         <th>Date/Time</th>
                         <th>Status</th>
+                        <th>Expiry Date</th>
+                        <th>Months Left</th>
                         <th>renewal</th>
                       </tr>
 
@@ -218,11 +229,18 @@ include('connection/connection.php');
                                 }
                                 else {
                                     // query to get all records
-                                    $query = " SELECT  request.*,organization.*,organization.id AS org_id,request.name AS rName
-                                    FROM request
-                                    join organization on
-                                    request.ag_registration_no = organization.ag_registration_no
-                                    ";
+                                    $query =
+                                    "SELECT *
+                                    FROM report
+                                    JOIN request ON request.id = report.request_id
+                                    JOIN organization ON organization.id = report.org_id
+                                    WHERE report.id IN (
+                                        SELECT MAX(id)
+                                        FROM report
+                                        GROUP BY request_id
+
+                                    )
+                                    ORDER BY report.expiry_date";
                                 }
                                 $result = mysqli_query($conn,$query);
 
@@ -242,10 +260,43 @@ include('connection/connection.php');
                   <td><?php echo $row['file_ref_no']; ?></td>
                   <td><?php echo $row['date_time']; ?></td>
                   <td class="approve"><?php echo $row['approval']; ?></td>
+                  <td><?php echo $row['expiry_date']; ?></td>
+                  <td>
+
+                     <?php
+
+
+                  $date2 = $row['expiry_date'];
+                  $date1 = date('Y-m-d');
+
+                  $ts1 = strtotime($date1);
+                  $ts2 = strtotime($date2);
+
+                  $year1 = date('Y', $ts1);
+                  $year2 = date('Y', $ts2);
+
+                  $month1 = date('m', $ts1);
+                  $month2 = date('m', $ts2);
+
+                  $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+
+                  if ($diff < 1){
+                    $diff = abs($diff);
+                  echo "Expired " .$diff." Months Ago ";
+                  }
+                  else
+                    echo $diff." Months ";
+
+
+
+
+                    ?>
+
+                  </td>
                   <td>
 
 
-                     <?php if ( $row['approval']!="Approved" && $row['approval'] !="Not Due"){
+                     <?php if ( $row['approval']!="Expired" ){
                        echo " <button  href='#renew".$row['org_id']."'
                          data-toggle='modal' id='btn' class='btn btn-danger' disabled><span class='glyphicon glyphicon-plus' >
                           </span> Renew</buttom> " ;
@@ -260,6 +311,7 @@ include('connection/connection.php');
                      ?>
 
                   </td>
+
               <!-- Renewal -->
 						    <div class="modal fade" id="renew<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						        <div class="modal-dialog">

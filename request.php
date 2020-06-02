@@ -102,6 +102,12 @@
             Request
             <small>Dashboard</small>
           </h1>
+
+        <div >
+            <?php $result = '<div class="alert alert-success">Record has been Successfully added.</div>';
+            echo $result; ?>
+        </div>
+
         </section>
 
         <!-- Main content -->
@@ -179,7 +185,7 @@
 
 
                     $result = mysqli_query($conn,$query);
-              }
+              } 
 
 
 
@@ -250,6 +256,8 @@
           										<div class="container-fluid">
           											<h5><center>Are you sure you want to Approve this Request with : <strong><?php echo $drow['name']; ?></strong></center></h5>
                                 </div>
+
+
 
                               <form action="requestContract.php" method="POST" enctype="multipart/form-data">
                                  <input type="hidden" id="id" name="id" value="<?php echo $row['id']; ?>">
