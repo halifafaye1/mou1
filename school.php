@@ -701,13 +701,13 @@ $.ajax({
    url:'Ajax.php',
    success:function(data){
        var inputs = data.split('|');
-       $('#sch_type').val(inputs[1]);
-       $('#sch_code').val(inputs[2]);
-       $('#district').val(inputs[3]);
-       $('#cluster').val(inputs[4]);
-       $('#region').val(inputs[5]);
-       $('#ward').val(inputs[6]);
-       $('#settlement').val(inputs[7]);
+       $('#sch_type').val(inputs[0]);
+       $('#sch_code').val(inputs[1]);
+       $('#district').val(inputs[2]);
+       $('#cluster').val(inputs[3]);
+       $('#region').val(inputs[4]);
+       $('#ward').val(inputs[5]);
+       $('#settlement').val(inputs[6]);
    }
 })
 });

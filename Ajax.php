@@ -6,7 +6,7 @@ if (isset($_POST['name'])) {
     $rec = mysqli_query($conn,$qry);
 
         while ($res = mysqli_fetch_array($rec)) {
-            echo $res['sch_type']."|". $res['sch_code']."|".$res['district']."|" .$res['cluster']."|".$res['region']."|".$res['ward'] .$res['settlement'];
+            echo $res['sch_type']."|". $res['sch_code']."|".$res['district']."|" .$res['cluster']."|".$res['region']."|".$res['ward']. "|" .$res['settlement'];
 
     }
 }
