@@ -127,6 +127,7 @@
                         <!-- <th>ID</th> -->
                         <th>Organization Region</th>
                         <th>Organization Name</th>
+                        <th>Request Name</th>
                         <th>Report 1</th>
                         <th>Report 2</th>
                         <th>Report 3</th>
@@ -165,6 +166,7 @@
 
                         <td><?php echo $row['region']; ?></td>
                         <td><?php echo $row['organization_name']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['report_1']; ?></td>
                         <td><?php echo $row['report_2']; ?></td>
                         <td><?php echo $row['report_3']; ?></td>
