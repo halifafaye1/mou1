@@ -5,7 +5,7 @@
 
   if($radioVal == "report2")
           {
-            
+
               if($_SERVER["REQUEST_METHOD"] == "POST"){
                   // Check if file was uploaded without errors
                   if(isset($_FILES["report_2"]) && $_FILES["report_2"]["error"] == 0){
@@ -34,12 +34,14 @@
 
 
                               require 'connection/connection.php';
-                              $id=$_POST['org_id'];
+                              // $id=$_POST['org_id'];
+                              // $request_id=$_POST['request_id'];
+                              $id=$_POST['rid'];
                               $report_2="upload/".$filename;
 
 
                               $sql = "UPDATE report SET
-                               report_2 = '$report_2' WHERE org_id = '$id' ";
+                               report_2 = '$report_2' WHERE id = '$id' ";
                               $result = mysqli_query($conn, $sql);
 
                               echo "Your file was uploaded successfully.";
@@ -90,12 +92,13 @@
 
 
                             require 'connection/connection.php';
-                            $id=$_POST['org_id'];
+                            // $id=$_POST['org_id'];
+                            $id=$_POST['rid'];
                             $report_3="upload/".$filename;
 
 
                             $sql = "UPDATE report SET
-                             report_3 = '$report_3' where org_id = '$id'";
+                             report_3 = '$report_3' where id = '$id'";
                             $result = mysqli_query($conn, $sql);
 
                             echo "Your file was uploaded successfully.";
@@ -144,15 +147,16 @@
                          } else{
                              move_uploaded_file($_FILES["report_2"]["tmp_name"], "upload/" . $filename);
 
-                             $id=$_POST['org_id'];
+                             // $id=$_POST['org_id'];
+                             $id=$_POST['rid'];
                              require 'connection/connection.php';
 
                              $report_1="upload/".$filename;
 
 
                              $sql = "UPDATE report SET
-                              report_1 = '$report_1' where org_id = '$id' ";
-                             
+                              report_1 = '$report_1' where id = '$id' ";
+
                              $result = mysqli_query($conn, $sql);
 
                              echo "Your file was uploaded successfully.";

@@ -146,7 +146,7 @@
                         <th>Telephone</th>
                         <th>Email</th>
                         <th>Reference #</th>
-                        <th>Date/Time</th>
+                        <th>MOU 1st Signed</th>
                         <th>Approval</th>
                         <th>Action</th>
                       </tr>
@@ -185,7 +185,7 @@
 
 
                     $result = mysqli_query($conn,$query);
-              } 
+              }
 
 
 
@@ -254,7 +254,7 @@
           											$drow=mysqli_fetch_array($app);
           										?>
           										<div class="container-fluid">
-          											<h5><center>Are you sure you want to Approve this Request with : <strong><?php echo $drow['name']; ?></strong></center></h5>
+          											<h5><center>Are you sure you want to Approve this Request for : <strong><?php echo $drow['name']; ?></strong></center></h5>
                                 </div>
 
 

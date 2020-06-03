@@ -469,7 +469,7 @@
                 require 'connection/connection.php';
 
                 $id = $_GET['id'];
-                $sql ="SELECT *
+                $sql ="SELECT report.*,organization.*,request.*, report.id AS rid
                 FROM report
                 JOIN request ON request.id = report.request_id
                 JOIN organization ON organization.id = report.org_id
@@ -500,11 +500,12 @@
                 <tbody>
                   <?php while($row=mysqli_fetch_assoc($result)){ ?>
                     <tr>
-                      <td colspan="4"><h1>Upload here Reports for <?php echo $row['name']; ?> Request</h1></td>
+                      <td colspan="4"><h1>Upload here Reports for:        <strong><?php echo $row['name']; ?></strong>  Request</h1></td>
                       <td>
                       <button class="btn btn-success" style="float:right"
                       data-toggle="modal"
                       data-target="#add_report"
+                      data-request="<?php echo $row['rid']; ?>"
                       type="button" name="button">Upload Report</button>
                     </td>
                     </tr>
@@ -513,8 +514,8 @@
                     <td>Submitted</td>
                     <td ><strong>Year 1: </strong></td>
                     <td><?php echo $row['report_1']; ?></td>
-                    <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_1" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
-                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['id']; ?>&report=report_1"
+                    <td><a  href="viewReport.php?id=<?php echo $row['rid']; ?>&report=report_1" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
+                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['rid']; ?>&report=report_1"
                      data-toggle="modal"><span class="glyphicon glyphicon-trash" ></span> Delete Report</a></td>
 
 
@@ -524,8 +525,8 @@
                     <td>Submitted</td>
                     <td ><strong>Year 2: </strong></td>
                     <td><?php echo $row['report_2']; ?></td>
-                    <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_2" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
-                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['id']; ?>&report=report_2"
+                    <td><a  href="viewReport.php?id=<?php echo $row['rid']; ?>&report=report_2" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
+                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['rid']; ?>&report=report_2"
                      data-toggle="modal"><span class="glyphicon glyphicon-trash" ></span> Delete Report</a></td>
 
 
@@ -535,15 +536,15 @@
                     <td>Submitted</td>
                     <td ><strong>Year 3: </strong></td>
                     <td><?php echo $row['report_3']; ?></td>
-                    <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_3" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
-                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['id']; ?>&report=report_3"
+                    <td><a  href="viewReport.php?id=<?php echo $row['rid']; ?>&report=report_3" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a> ||
+                    <a class="btn btn-danger" href="deleteReport.php?id=<?php echo $row['rid']; ?>&report=report_3"
                      data-toggle="modal"><span class="glyphicon glyphicon-trash" ></span> Delete Report</a></td>
 
 
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td colspan="4"><h1>End of Reports for  <?php echo $row['name']; ?>  Request</h1></td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td colspan="4">...</td>
                   </tr>
@@ -584,10 +585,10 @@
       </div><!-- /.box -->
       <div class="box-header">
           <h3 class="box-title">Archives</h3>
-          <button class="btn btn-success" style="float:right"
+          <!-- <button class="btn btn-success" style="float:right"
           data-toggle="modal"
           data-target="#add_report"
-          type="button" name="button">Previous Report</button>
+          type="button" name="button">Previous Report</button> -->
 
         </div><!-- /.box-header -->
       <div class="box">
@@ -597,10 +598,11 @@
             require 'connection/connection.php';
 
             $id = $_GET['id'];
-            $sql = "SELECT * FROM report
-            where id NOT
+            $sql = "SELECT report.*,request.* FROM report
+            JOIN request on request.id = report.request_id
+            where report.id NOT
             IN (
-              SELECT MAX(id)
+              SELECT MAX(report.id)
               FROM report
               where org_id = '$id'
               GROUP BY request_id
@@ -657,7 +659,8 @@
 
               </tr>
               <tr>
-                 <td colspan="4"><h1 style="text-align: center">End Of <?php echo $row['approval_date']; ?> To <?php echo $row['expiry_date']; ?> Contract </h1></td>
+                 <td colspan="4"><h1 style="text-align: center">End Of <?php echo $row['approval_date']; ?> To <?php echo $row['expiry_date']; ?><br>
+                   <?php echo $row['name']; ?>  Contract </h1></td>
               </tr>
 
               <!-- Delete  Organisation-->
@@ -711,6 +714,7 @@
 
 
                <input type="hidden" id="id" name="org_id" value="<?php echo $_GET['id'];?>">
+               <input type="hidden" id="rid" name="rid" value="">
 
 
 
@@ -1102,7 +1106,24 @@
 
         modal.find('.modal-body #orgid').val(orgid)
 
-        });
+        })
+        $('#add_report').on('show.bs.modal',function(event){
+            var button = $(event.relatedTarget)
+            var request_id = button.data('request')
+
+
+
+
+
+
+            console.log('modal open');
+
+            var modal = $(this)
+
+            modal.find('.modal-body #rid').val(request_id)
+
+
+            });
 
 
 

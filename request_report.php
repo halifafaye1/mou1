@@ -140,14 +140,31 @@ session_start();
          include('connection/connection.php');
 
          $currentDate = date('Y-m-d');
-         $run = " UPDATE  request
-         join report on
-         request.id = report.request_id
-         where expiry_date > $currentDate
-         set request.approval = 'Expired'
+         $run = " UPDATE request r
+         JOIN report ON r.id = report.request_id
+         set r.approval  = 'Expired'
+         where expiry_date < '$currentDate'
+         AND
+         report.id IN (
+             SELECT MAX(id)
+             FROM report
 
+             GROUP BY report.request_id
+         )
+          ";
+          // SELECT *
+          //             FROM report
+          //             JOIN request ON request.id = report.request_id
+          //             JOIN organization ON organization.id = report.org_id
+          //
+          //             WHERE report.id IN (
+          //                 SELECT MAX(id)
+          //                 FROM report
+          //                 GROUP BY request_id
+          //             )
+          //             and
+          //             expiry_date < '2020-06-02'
 
-         ";
        $updateStatus=mysqli_query($conn,$run);
 
        $query=mysqli_query($conn,"SELECT * FROM request ");
@@ -187,7 +204,7 @@ session_start();
                         <th>Telephone</th>
                         <th>Email</th>
                         <th>Reference #</th>
-                        <th>Date/Time</th>
+                        <th>Date MOU 1st Signed</th>
                         <th>Status</th>
                         <th>Expiry Date</th>
                         <th>Months Left</th>
@@ -241,6 +258,12 @@ session_start();
 
                                     )
                                     ORDER BY report.expiry_date";
+                                    // "SELECT *
+                                    // FROM report
+                                    // JOIN request ON request.id = report.request_id
+                                    // JOIN organization ON organization.id = report.org_id
+                                    //
+                                    // ORDER BY report.expiry_date";
                                 }
                                 $result = mysqli_query($conn,$query);
 
@@ -298,12 +321,12 @@ session_start();
 
                      <?php if ( $row['approval']!="Expired" ){
                        echo " <button  href='#renew".$row['org_id']."'
-                         data-toggle='modal' id='btn' class='btn btn-danger' disabled><span class='glyphicon glyphicon-plus' >
+                         data-toggle='modal'data-rid='".$row['request_id']."' id='btn' class='btn btn-danger' disabled><span class='glyphicon glyphicon-plus' >
                           </span> Renew</buttom> " ;
                      }
                      else{
-                       echo " <button  href='#renew".$row['org_id']."'
-                         data-toggle='modal' id='btn' class='btn btn-danger' ><span class='glyphicon glyphicon-plus' >
+                       echo " <button  data-target='#renew'
+                         data-toggle='modal' data-rid='".$row['request_id']."' id='btn' class='btn btn-danger' ><span class='glyphicon glyphicon-plus' >
                           </span> Renew</buttom> " ;
                      }
 
@@ -313,7 +336,7 @@ session_start();
                   </td>
 
               <!-- Renewal -->
-						    <div class="modal fade" id="renew<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						    <div class="modal fade" id="renew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						        <div class="modal-dialog">
 						            <div class="modal-content">
 						                <div class="modal-header">
@@ -326,13 +349,21 @@ session_start();
           											$drow=mysqli_fetch_array($del);
           										?>
           										<div class="container-fluid">
-          											<h5><center>Are you sure you want to renew the Agreement with : <strong><?php echo $drow['organization_name']; ?></strong></center></h5>
-          						                </div>
+
           										</div>
                               <form action="renewal.php" method="POST" enctype="multipart/form-data">
                                  <input type="hidden" id="id" name="org_id" value="<?php echo $row['org_id']; ?>">
-                                 <input type="hidden" id="id_number" name="id_number" value="<?php echo $row['id_number']; ?>">
-						                <div class="modal-footer">
+                                 <input type="hidden" id="request_id" name="request_id" value="">
+                                 <h5><center>Are you sure you want to renew the Agreement with : <strong><?php echo $drow['organization_name']; ?></strong></center></h5>
+                                 <center> <div>
+                                     <div class="form-style-2">
+                                     <label style="width:200px;" for="field1"><span>Pick Renewal Date <span class="required">*</span></span>
+                                       <input style="width:200px;" type="date" class="input-field"  id="approved_date" name="approved_date" value=""  required />
+
+                                     </label>
+
+                                   </div></center>
+                            <div class="modal-footer">
 						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
 						                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Renew</button>
 						                </div>
@@ -423,3 +454,98 @@ session_start();
 
 
 <?php include 'footer.php'; ?>
+<style type="text/css">
+    .form-style-2{
+      max-width: 500px;
+      padding: 20px 12px 10px 20px;
+      font: 13px Arial, Helvetica, sans-serif;
+    }
+    .form-style-2 label{
+      display: block;
+      margin: 0px 0px 15px 0px;
+    }
+    .form-style-2 label > span{
+      width: auto;
+      font-weight: bold;
+      float: left;
+      padding-top: 8px;
+      padding-right: 5px;
+    }
+    .form-style-2 span.required{
+      color:red;
+    }
+    .form-style-2 .tel-number-field{
+      width: 40px;
+      text-align: center;
+    }
+    .form-style-2 input.input-field, .form-style-2 .select-field{
+      width: 86%;
+    }
+    .form-style-2 input.input-field,
+    .form-style-2 .tel-number-field,
+    .form-style-2 .textarea-field,
+     .form-style-2 .select-field{
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      border: 1px solid #C2C2C2;
+      box-shadow: 1px 1px 4px #EBEBEB;
+      -moz-box-shadow: 1px 1px 4px #EBEBEB;
+      -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      padding: 7px;
+      outline: none;
+    }
+    .form-style-2 .input-field:focus,
+    .form-style-2 .tel-number-field:focus,
+    .form-style-2 .textarea-field:focus,
+    .form-style-2 .select-field:focus{
+      border: 1px solid #0C0;
+    }
+    .form-style-2 .textarea-field{
+      height:100px;
+      width: 55%;
+    }
+    .form-style-2 input[type=submit],
+    .form-style-2 input[type=button]{
+      border: none;
+      padding: 8px 15px 8px 15px;
+      background: #FF8500;
+      color: #fff;
+      box-shadow: 1px 1px 4px #DADADA;
+      -moz-box-shadow: 1px 1px 4px #DADADA;
+      -webkit-box-shadow: 1px 1px 4px #DADADA;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+    }
+    .form-style-2 input[type=submit]:hover,
+    .form-style-2 input[type=button]:hover{
+      background: #EA7B00;
+      color: #fff;
+    }
+</style>
+<script>
+$('#renew').on('show.bs.modal',function(event){
+    var button = $(event.relatedTarget)
+    var rid = button.data('rid')
+
+
+
+
+
+    console.log('modal open');
+
+    var modal = $(this)
+
+
+
+    modal.find('.modal-body #request_id').val(rid)
+
+    });
+
+
+
+</script>

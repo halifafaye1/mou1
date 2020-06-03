@@ -33,6 +33,7 @@
 
 
 header('Content-type: application/pdf');
+echo $report;
 readfile($report);
 
 ?>

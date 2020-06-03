@@ -168,7 +168,24 @@
                         <td><?php echo $row['report_1']; ?></td>
                         <td><?php echo $row['report_2']; ?></td>
                         <td><?php echo $row['report_3']; ?></td>
-                        <td>Renewed <?php echo $row['count']; ?> Times</td>
+                        <td>Renewed
+
+                          <?php
+                           $rid  =$row['request_id'];
+                           $sql1 = " SELECT COUNT(request_id) as count
+                           FROM report
+                           where request_id = '$rid'
+                           ";
+                           $results = mysqli_query($conn, $sql1);
+                           $rows=mysqli_fetch_assoc($results);
+
+                           echo $rows['count'];
+                           ?>
+
+
+
+
+                          Times</td>
                         <!-- <td>Never Submitted</td> -->
 
 
