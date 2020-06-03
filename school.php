@@ -6,7 +6,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,7 +24,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -120,7 +120,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                   
+
                         <th>Name</th>
                         <th>School Type</th>
                         <th>School Code</th>
@@ -128,7 +128,7 @@
                         <th>Cluster</th>
                         <th>District</th>
                         <th>Ward</th>
-                        <th>Settlement</th>          
+                        <th>Settlement</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -145,7 +145,7 @@
                     	<?php while($row=mysqli_fetch_assoc($result)){ ?>
                     <tr>
 
-                      
+
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['sch_type']; ?></td>
                         <td><?php echo $row['sch_code']; ?></td>
@@ -157,11 +157,11 @@
 
 
                        <td>
-                         
 
-                           
 
-                           
+
+
+
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span> Delete</a>
@@ -233,7 +233,7 @@
               						require 'connection/connection.php';
 
 
-              						$sql = "SELECT * FROM sch_list ORDER BY sid";
+              						$sql = "SELECT * FROM sch_list ORDER BY sch_name";
               						$result = mysqli_query($conn, $sql);
 
                					?>
@@ -254,7 +254,7 @@
                          <input type="text"   class="input-field" id="sch_type" name="sch_type" value="" readonly/>
                        </label>
                      </td>
-                     
+
                    </tr>
                    <tr>
                      <td style="width:20%">
