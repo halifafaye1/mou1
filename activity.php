@@ -318,7 +318,7 @@
                    </td>
                    <td>
                     <label for="field1"><span>End Date </span>
-                     <input type="date" class="input-field" id="edate" name="edate" value="" />
+                     <input type="date" class="input-field" id="end_date" name="end_date" value="" />
                     </label>
                   </td>
                    </tr>

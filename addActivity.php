@@ -8,18 +8,19 @@
             $quantity = $_POST['quantity'];
             $cost = $_POST['cost'];
             $period_date = $_POST['period_date'];
+            $end_date = $_POST['end_date'];
 
             /*mysqli_query($conn,"insert into person (name, surname,dob, address) values ('$name', '$surname','$dob', '$address')");
             header('location:person.php');*/
 
-            $sql = "INSERT INTO activity (organization_id, school_id,support_type1,quantity, cost, period_date)
-            VALUES ('$organization_id','$school_id',$support_type,'$quantity','$cost','$period_date')";
+            $sql = "INSERT INTO activity (organization_id, school_id,support_type1,quantity, cost, period_date, end_date)
+            VALUES ('$organization_id','$school_id',$support_type,'$quantity','$cost','$period_date', '$end_date')";
             $result = mysqli_query($conn, $sql);
 
             if ($result)
             {
               echo '<script>alert("Data Saved")</script>';
-              header('Location:activity.php');
+              header('Location: '.$_SERVER['HTTP_REFERER']);
             }
             else
             {

@@ -133,6 +133,7 @@
                     <thead>
                       <tr>
                         <th>ID</th>
+                        <th>SCHOOL NAME</th>
                         <th>SUPPORT TYPE</th>
                         <th>QUANTITY</th>
                         <th>COST</th>
@@ -149,6 +150,7 @@
                       $sql = "SELECT * FROM activity
                       JOIN support_type ON
                       support_type.id = activity.support_type1
+                      JOIN school on activity.school_id = school.sch_code
                       where organization_id = $id  ";
 
           						$result = mysqli_query($conn, $sql);
@@ -166,6 +168,7 @@
                         <td><?php echo $row['previous_activities']; ?></td> -->
 
                         <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
@@ -246,7 +249,7 @@
                         <select type="text" class="select-field" id="" name="school_id"  required>
                            <option disabled selected value> -- select a school  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result2)) {
-                               echo "<option value='" . $row['id'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
+                               echo "<option value='" . $row['sch_code'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
                            }
                            ?>
                         </select>
@@ -293,7 +296,7 @@
                    </td>
                    <td>
                     <label for="field1"><span>End Date </span>
-                     <input type="date" class="input-field" id="edate" name="edate" value="" />
+                     <input type="date" class="input-field" id="end_date" name="end_date" value="" />
                     </label>
                   </td>
                    </tr>
