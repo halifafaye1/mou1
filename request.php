@@ -521,7 +521,7 @@
 
 
                        ?>
-                       <select type="text" class="select-field" id="organization_id" name="organization_id"  required>
+                       <select  type="text" class="select-field" id="organization_id" name="organization_id"  required disabled>
                           <option disabled selected value> -- select an organization  -- </option>
                          <?php  while ($row3 = mysqli_fetch_array($result1)) {
                               echo "<option value='" . $row3['id'] . "'>" . $row3['organization_name'].  "--"  .$row3['ag_registration_no'] . "</option>";
