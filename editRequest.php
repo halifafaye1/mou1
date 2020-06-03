@@ -4,7 +4,7 @@
   $id=$_REQUEST['id'];
 
 
-  //$organization_id=$_POST['organization_id'];
+  $organization_id=$_POST['organization_id'];
   $id_number= $_POST['ag_registration_no'];
   $name=$_POST['name'];
   $person_name=$_POST['person_name'];

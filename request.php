@@ -140,6 +140,7 @@
 
                         <!-- <th>Organisation ID</th> -->
                         <th>Request Name</th>
+                        <th>Organization</th>
                         <th>Person Name</th>
                         <th>AG Registration #</th>
                         <th>Address</th>
@@ -157,7 +158,12 @@
 
 
 						 // query to get all records
-             $query = " SELECT  * FROM request";
+             $query = "SELECT request.*,organization.*,organization.id AS Oid,
+             request.id AS id
+             FROM request
+             join organization On
+             organization.id = request.organization_id
+             ";
 
 						$result = mysqli_query($conn, $query);
 
@@ -167,19 +173,28 @@
 
                       //$query = "SELECT * FROM request WHERE approval='Pending'";
 
-                      $query = " SELECT *
+                      $query = " SELECT request.*,organization.*,organization.id AS Oid,
+                      request.id AS id
                       FROM request
+                      join organization On
+                      organization.id = request.organization_id
                       where approval = 'Pending' " ;
                   }
                   elseif($_POST['value'] == 'Approved') {
 
-                      $query = " SELECT *
+                      $query = " SELECT request.*,organization.*,organization.id AS Oid,
+                      request.id AS id
                       FROM request
+                      join organization On
+                      organization.id = request.organization_id
                       where approval = 'Approved' " ;
                   }
                   elseif($_POST['value'] == 'Denied'){
-                      $query = " SELECT *
+                      $query = " SELECT request.*,organization.*,organization.id AS Oid,
+                      request.id AS id
                       FROM request
+                      join organization On
+                      organization.id = request.organization_id
                       where approval = 'Denied' " ;
                   }
 
@@ -198,6 +213,7 @@
                 <tr>
 
                 <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['organization_name']?></td>
                 <td><?php echo $row['person_name']?></td>
                 <td><?php echo $row['ag_registration_no']?></td>
                 <td><?php echo $row['address']; ?></td>
@@ -208,7 +224,7 @@
                 <td><?php echo $row['approval']; ?></td>
                 <td>
                   <?php
-                  if ( 'Not Due'== $row['approval']){
+                  if ( 'Not Due'== $row['approval'] || 'Expired'== $row['approval']){
                         echo "<a href='#delete".$row['id']."' data-toggle='modal'
                         class='btn btn-danger'>
                        <span class='glyphicon glyphicon-trash'></span> Delete</a>

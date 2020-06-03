@@ -168,7 +168,7 @@
                         <td><?php echo $row['report_1']; ?></td>
                         <td><?php echo $row['report_2']; ?></td>
                         <td><?php echo $row['report_3']; ?></td>
-                        <td>Renewed
+                        <td>
 
                           <?php
                            $rid  =$row['request_id'];
@@ -179,13 +179,20 @@
                            $results = mysqli_query($conn, $sql1);
                            $rows=mysqli_fetch_assoc($results);
 
-                           echo $rows['count'];
+                           if (0==$rows['count']-1){
+                              echo "Has never been renewed";
+                           }
+                           elseif (1 == $rows['count']-1) {
+                             echo "Renewed once";
+                           }
+                            else
+                            echo "Renewed ".($rows['count'] - 1)."Times";
                            ?>
 
 
 
 
-                          Times</td>
+                        </td>
                         <!-- <td>Never Submitted</td> -->
 
 

@@ -264,7 +264,7 @@
                           </select>
                      </td>
                    </tr>
-                   <tr>
+                   <!-- <tr>
                      <td>
                        <div class="form-style-2-heading">Sponsors </div>
                      </td>
@@ -281,14 +281,14 @@
                         <input type="text" class="input-field" id="country" name="country" value="" required/>
                       </label>
                     </td>
-                   </tr>
-
+                   </tr> -->
+<!-- 
                      <td>
                        <button id="addSponsor" type="button" class="btn btn-info">Add Sponsor</buttom>
                      </td>
                      <tr id="newSponsor">
 
-                     </tr>
+                     </tr> -->
 
 
                     <tr>
@@ -767,7 +767,7 @@
         html +=  '</td>';
         html +=  '<td>';
         html +=   '<label for="field1"><span>ID Number <span class="required">*</span></span>';
-        html +=   '<input type="text" class="input-field" id="id_number" name="id_number'+$count+'" value="" required/>';
+        html +=   '<input type="text" class="input-field" id="id_number" name="id_number'+$count+'" value="" />';
         html +=   ' </label>';
         html +=  '</td>';
         html +=  '<td>';
