@@ -103,10 +103,10 @@
             <small>Dashboard</small>
           </h1>
 
-        <div >
+        <!-- <div >
             <?php $result = '<div class="alert alert-success">Record has been Successfully added.</div>';
             echo $result; ?>
-        </div>
+        </div> -->
 
         </section>
 
@@ -207,18 +207,33 @@
                 <td><?php echo $row['date_time']; ?></td>
                 <td><?php echo $row['approval']; ?></td>
                 <td>
-                         <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
-                           data-target="#edit"  data-id="<?php echo $row['id']; ?>"
-                           data-organization_id="<?php echo $row['organization_id']; ?>"data-person_name="<?php echo $row['person_name']; ?>"
-                           data-name="<?php echo $row['name']; ?>" data-address="<?php echo $row['address']; ?>"
-                           data-telephone="<?php echo $row['telephone']; ?>" data-email="<?php echo $row['email']; ?>"
-                           data-reference="<?php echo $row['file_ref_no']; ?>"  data-date_time="<?php echo $row['date_time']; ?>"
-                           data-approval="<?php echo $row['approval']; ?>" data-ag_registration_no="<?php echo $row['ag_registration_no']; ?>"
-                            class="btn btn-warning">
-                         <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
-         							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
-                           class="btn btn-danger">
-                        <span class="glyphicon glyphicon-trash"></span> Delete</a>
+                  <?php
+                  if ( 'Not Due'== $row['approval']){
+                        echo "<a href='#delete".$row['id']."' data-toggle='modal'
+                        class='btn btn-danger'>
+                       <span class='glyphicon glyphicon-trash'></span> Delete</a>
+                   ";
+
+
+                  }
+                  else{
+
+                    echo "<a href='#edit".$row['id']."' data-toggle='modal'
+                      data-target='#edit'  data-id='".$row['id']."'
+                      data-organization_id='".$row['organization_id']."' data-person_name='".$row['person_name']."'
+                      data-name='".$row['name']."' data-address='".$row['address']."'
+                      data-telephone='".$row['telephone']."' data-email='".$row['email']."'
+                      data-reference='".$row['file_ref_no']."'  data-date_time='".$row['date_time']."'
+                      data-approval=''".$row['approval']."' data-ag_registration_no='".$row['ag_registration_no']."'
+                       class='btn btn-warning'>
+                    <span class='glyphicon glyphicon-edit'></span> Edit</a> ||
+                    <a href='#delete".$row['id']."' data-toggle='modal'
+                      class='btn btn-danger'>
+                    <span class='glyphicon glyphicon-trash'></span> Delete</a>";
+
+                  }
+                  ?>
+
 
                         <?php if ( $row['approval']!="Approved" ){
                           // echo " || <a  data-toggle='modal'

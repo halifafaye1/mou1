@@ -184,8 +184,8 @@ session_start();
                             <form action=""  method='POST' name='form_filter' >
                                 <select class="form-control" name="value">
                                     <option value="All">All</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Approved">Approved</option>
+                                    <option value="Expired">Expired</option>
+                                    <option value="Not Due">Not Due</option>
                                     <option value="Denied">Denied</option>
                                 </select>
                                 <br />
@@ -219,23 +219,38 @@ session_start();
 
                             // process form when posted
                             if(isset($_POST['value'])) {
-                                if($_POST['value'] == 'Pending') {
+                                if($_POST['value'] == 'Expired') {
 
                                     //$query = "SELECT * FROM request WHERE approval='Pending'";
 
-                                    $query =  " SELECT request.*,organization.*,organization.id AS org_id,request.name AS rName
-                                    FROM request
-                                    join organization on
-                                    request.ag_registration_no = organization.ag_registration_no
-                                    where request.approval = 'Pending' " ;
-                                }
-                                elseif($_POST['value'] == 'Approved') {
+                                    $query =
+                                    "SELECT *
+                                    FROM report
+                                    JOIN request ON request.id = report.request_id
+                                    JOIN organization ON organization.id = report.org_id
+                                    WHERE report.id IN (
+                                        SELECT MAX(id)
+                                        FROM report
+                                        GROUP BY request_id
 
-                                    $query =  " SELECT  request.*,organization.*,organization.id AS org_id,request.name AS rName
-                                    FROM request
-                                    join organization on
-                                    request.ag_registration_no = organization.ag_registration_no
-                                    where request.approval = 'Approved' " ;
+                                    )
+                                    AND request.approval = 'Expired'
+                                    ORDER BY report.expiry_date";
+                                }
+                                elseif($_POST['value'] == 'Not Due') {
+
+                                    $query =  "SELECT *
+                                    FROM report
+                                    JOIN request ON request.id = report.request_id
+                                    JOIN organization ON organization.id = report.org_id
+                                    WHERE report.id IN (
+                                        SELECT MAX(id)
+                                        FROM report
+                                        GROUP BY request_id
+
+                                    )
+                                    AND request.approval = 'Not Due'
+                                    ORDER BY report.expiry_date";
                                 }
                                 elseif($_POST['value'] == 'Denied'){
                                     $query = " SELECT  request.*,organization.*,organization.id AS org_id,request.name AS rName

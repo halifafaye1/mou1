@@ -14,7 +14,7 @@
                       $filetype = $_FILES["report_2"]["type"];
                       $filesize = $_FILES["report_2"]["size"];
 
-                      $filename = "Report 2 ".rand(10, 20).$filename;
+                      $filename = "Report 2 ".rand(10, 1000).$filename;
 
                       // Verify file extension
                       $ext = pathinfo($filename, PATHINFO_EXTENSION);
