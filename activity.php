@@ -142,7 +142,7 @@
             JOIN organization ON
             activity.organization_id = organization.id
             JOIN School ON
-            activity.school_id = school.id 
+            activity.school_id = school.sch_code 
             JOIN support_type ON
             activity.support_type1 = support_type.id 
             ";
@@ -269,7 +269,7 @@
                         <select type="text" class="select-field" id="" name="school_id"  required>
                            <option disabled selected value> -- select a school  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result2)) {
-                               echo "<option value='" . $row['id'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
+                               echo "<option value='" . $row['sch_code'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
                            }
                            ?>
                         </select>
@@ -289,7 +289,7 @@
 
                        ?>
                       <label for="field1"><span>Support Type <span class="required">*</span></span>
-                        <select type="text" class="select-field" id="" name="id"  required>
+                        <select type="text" class="select-field" id="" name="support_type"  required>
                            <option disabled selected value> -- select a support type  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result3)) {
                                echo "<option value='" . $row['id'] . "'>" . $row['support_type']."</option>";

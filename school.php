@@ -120,7 +120,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                   
                         <th>Name</th>
                         <th>School Type</th>
                         <th>School Code</th>
@@ -145,7 +145,7 @@
                     	<?php while($row=mysqli_fetch_assoc($result)){ ?>
                     <tr>
 
-                        <td><?php echo $row['id']; ?></td>
+                      
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['sch_type']; ?></td>
                         <td><?php echo $row['sch_code']; ?></td>
@@ -157,17 +157,11 @@
 
 
                        <td>
-                         <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"
-                           data-target="#edit" data-id=<?php echo $row['id']; ?>
+                         
 
-                           data-name="<?php echo $row['name'];  ?>"
-                           data-sch_code="<?php echo $row['sch_code'];  ?>"
-                           data-district="<?php echo $row['district'];  ?>"
-                           data-cluster="<?php echo $row['cluster'];  ?>"
-                           data-region="<?php echo $row['region'];  ?>"
+                           
 
-                            class="btn btn-warning">
-                         <span class="glyphicon glyphicon-edit"></span> Edit</a> ||
+                           
          							   <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                            class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span> Delete</a>
@@ -232,6 +226,7 @@
                   <tbody>
                     <tr>
                        <input type="hidden" id="schid" name="id"  value=""/>
+                       <input type="hidden" id="school_name" name="school_name"  value=""/>
                       <td colspan="5">
                         <?php
 
@@ -254,17 +249,17 @@
 
                          </label>
                       </td>
-                      <td style="width:25%">
+                      <td >
                        <label for="field1"><span>School Type <span class="required">*</span></span>
-                         <input type="text" data-type="sch_type"  class="input-field" id="sch_type" name="sch_type" value="" readonly/>
+                         <input type="text"   class="input-field" id="sch_type" name="sch_type" value="" readonly/>
                        </label>
                      </td>
-
+                     
                    </tr>
                    <tr>
                      <td style="width:20%">
                       <label for="field1"><span>School Code <span class="required">*</span></span>
-                        <input type="text" data-type="sch_code"  class="input-field" id="sch_code" name="sch_code" value="" readonly/>
+                        <input type="text" class="input-field" id="sch_code" name="sch_code" value="" readonly/>
                       </label>
                     </td>
 
@@ -708,6 +703,7 @@ $.ajax({
        $('#region').val(inputs[4]);
        $('#ward').val(inputs[5]);
        $('#settlement').val(inputs[6]);
+       $('#school_name').val(inputs[7]);
    }
 })
 });
