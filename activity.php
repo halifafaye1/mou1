@@ -383,7 +383,7 @@
                     <label for="field1"><span>School Name <span class="required">*</span></span>
                       <select type="text" class="select-field" id="school_id" name="school_id"  required>
                         <?php  while ($row = mysqli_fetch_array($result2)) {
-                             echo "<option value='" . $row['id'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
+                             echo "<option value='" . $row['sch_code'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
                          }
                          ?>
                       </select>
