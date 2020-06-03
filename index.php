@@ -187,7 +187,7 @@ session_start();
                   	include 'connection/connection.php'; 
 
 
-					$sql="SELECT * FROM person";
+					$sql="SELECT * FROM request";
 
 					if ($result=mysqli_query($conn,$sql))
 					  {
@@ -200,12 +200,12 @@ session_start();
                   	?>
                   		
                   	</h3>     
-                  <p>Person</p>
+                  <p>Request</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="fa fa-external-link"></i>
                 </div>
-                <a href="person.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="request.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">

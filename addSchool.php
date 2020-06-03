@@ -3,7 +3,7 @@
     require 'connection/connection.php';
 
 
-      //  $name = $_POST['name'];
+        $name = $_POST['name'];
         $sch_name = $_POST['school_name'];
         $sch_code = $_POST['sch_code'];
         $sch_type = $_POST['sch_type'];
