@@ -143,7 +143,7 @@ session_start();
                   <p>Organization</p>
                 </div>
                 <div class="icon">
-                  <i class="glyphicon glyphicon-home"></i>
+                  <i class="fa fa-home"></i>
                 </div>
                 <a href="organization.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -234,7 +234,7 @@ session_start();
                   <p>School</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="fa fa-institution"></i>
                 </div>
                 <a href="school.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
