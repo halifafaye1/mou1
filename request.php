@@ -224,7 +224,7 @@
                       data-name='".$row['name']."' data-address='".$row['address']."'
                       data-telephone='".$row['telephone']."' data-email='".$row['email']."'
                       data-reference='".$row['file_ref_no']."'  data-date_time='".$row['date_time']."'
-                      data-approval=''".$row['approval']."' data-ag_registration_no='".$row['ag_registration_no']."'
+                      data-approval='".$row['approval']."' data-ag_registration_no='".$row['ag_registration_no']."'
                        class='btn btn-warning'>
                     <span class='glyphicon glyphicon-edit'></span> Edit</a> ||
                     <a href='#delete".$row['id']."' data-toggle='modal'
