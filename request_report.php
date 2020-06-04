@@ -186,7 +186,7 @@ session_start();
                                     <option value="All">All</option>
                                     <option value="Expired">Expired</option>
                                     <option value="Not Due">Not Due</option>
-                                    <option value="Denied">Denied</option>
+                                    <option value="All">Suggest other possible options</option>
                                 </select>
                                 <br />
                                 <input type='submit' value = 'Filter'>
