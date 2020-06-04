@@ -161,6 +161,8 @@ include('connection/connection.php');
                         
                         <th>Organisation Name</th>
                         <th>School Name</th>
+                        <th>Region</th>
+                        <th>District</th>
                         <th>support Type</th>
                         <th>Quantity</th>
                         <th>Cost</th>
@@ -173,13 +175,13 @@ include('connection/connection.php');
                     <tbody>
 <?php
         
-        $sql = "SELECT school_id, support_type, quantity, cost, period_date, activity.id as id, organization_id,
-        organization.organization_name, organization.id as Oid, school.name, school.id as Sid
+        $sql = "SELECT school.*,organization.*,support_type.*, activity.*,
+        school.region AS reg, school.district AS dis, activity.id as id,  organization.id as Oid,  school.id as Sid
         FROM activity
 
         JOIN organization ON
         activity.organization_id = organization.id
-        JOIN School ON
+        JOIN school ON
         activity.school_id = school.sch_code 
         JOIN support_type ON
         activity.support_type1 = support_type.id 
@@ -192,6 +194,8 @@ include('connection/connection.php');
                       <tr>
                         <td><?php echo $row['organization_name']; ?></td>
                         <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['reg']; ?></td>
+                        <td><?php echo $row['dis']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['quantity'];?></td>
                         <td><?php echo $row['cost']; ?></td>
@@ -208,9 +212,13 @@ include('connection/connection.php');
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
+                        <th></th>
                       </tr> 
                       <tr>
                         <th>Prepared by:</th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
