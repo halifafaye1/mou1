@@ -241,7 +241,7 @@
                            <!-- <input class="input-field" id="name" name="name" list="schoolid" > -->
                                <select class="select-field" id="schoolid">
                                  <?php  while ($row = mysqli_fetch_array($result)) {
-                                      echo "<option value='" . $row['sid'] . "'>" . $row['sch_name']."  " .$row['sch_type']."</option>";
+                                      echo "<option value='" . $row['sid'] . "'>" . $row['sch_name']." - " .$row['sch_type']." - ".$row['sch_code']."</option>";
                                   }
                                   ?>
 
