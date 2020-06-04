@@ -6,7 +6,7 @@
    <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -24,7 +24,7 @@
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -111,10 +111,10 @@
             	<div class="box-header">
                   <h3 class="box-title"></h3>
 
-                  	<div class="pull-right">
+                  	<!-- <div class="pull-right">
                         <button class="btn btn-success" data-toggle="modal"
                          data-target="#add_new_record_modal">Add New Person</button>
-                    </div>
+                    </div> -->
                </div><!-- /.box-header -->
               <div class="box">
                 <div class="box-body">
@@ -151,9 +151,9 @@
                         <td>
 
 
-							<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
+							<!-- <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
 							<a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-							<!-- Delete -->
+							<!-- Delete --> -->
 						    <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						        <div class="modal-dialog">
 						            <div class="modal-content">
