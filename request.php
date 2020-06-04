@@ -122,7 +122,7 @@
                   </div>
                 </div><!-- /.box-header -->
               <div class="box">
-                <div class="box-body">
+                <div style="overflow-x:auto;" class="box-body">
                 <form action=""  method='POST' name='form_filter' >
                                 <select class="form-control" name="value">
                                     <option value="All">All</option>
@@ -134,7 +134,7 @@
                                 <button class="btn btn-success" type="submit">Filter</button>
                             </form>
                             <br>
-                <table style="overflow-x:auto;" id="example1" class="table table-bordered table-striped">
+                <table  id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
 
