@@ -8,13 +8,14 @@
           $position = $_POST['position'];
           $dob = $_POST['dob'];
           $id_number = $_POST['id_number'];
+          $address = $_POST['address'];
 
           $id = $_POST['org_id'];
 
           $orgid = $id;
 
-          $sql2 = "INSERT INTO person (org_id, name, surname, position, dob,id_number)
-           VALUES ('$orgid','$name','$surname','$position','$dob','$id_number')";
+          $sql2 = "INSERT INTO person (org_id, name, surname, position, dob,id_number,address)
+           VALUES ('$orgid','$name','$surname','$position','$dob','$id_number','$address')";
 
           $result2 = mysqli_query($conn, $sql2);
 

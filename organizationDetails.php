@@ -147,10 +147,15 @@
           						require 'connection/connection.php';
 
                       $id = $_GET['id'];
-                      $sql = "SELECT * FROM activity
+                      $sql = "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+                       activity.id as id,  organization.id as Oid
+                      FROM activity
+                      JOIN organization ON
+                      activity.organization_id = organization.id
+                      JOIN sch_list ON
+                      activity.school_id = sch_list.sch_code
                       JOIN support_type ON
-                      support_type.id = activity.support_type1
-                      JOIN school on activity.school_id = school.sch_code
+                      activity.support_type1 = support_type.id
                       where organization_id = $id  ";
 
           						$result = mysqli_query($conn, $sql);
@@ -168,7 +173,7 @@
                         <td><?php echo $row['previous_activities']; ?></td> -->
 
                         <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['sch_name']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
@@ -241,17 +246,17 @@
 
                          require 'connection/connection.php';
 
-                         $sql2 = "SELECT * FROM school  ORDER BY id";
+                         $sql2 = "SELECT * FROM sch_list  ORDER BY sch_name";
                          $result2 = mysqli_query($conn, $sql2);
 
                        ?>
                       <label for="field1"><span>School Name <span class="required">*</span></span>
                         <select type="text" class="select-field" id="" name="school_id"  required>
                            <option disabled selected value> -- select a school  -- </option>
-                          <?php  while ($row = mysqli_fetch_array($result2)) {
-                               echo "<option value='" . $row['sch_code'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
-                           }
-                           ?>
+                           <?php  while ($row = mysqli_fetch_array($result2)) {
+                                echo "<option value='" . $row['sch_code'] . "'>" . $row['sch_name'].  " --- ". $row['sch_type'].  " --- "  .$row['sch_code']. " --- ". $row['region'].  "</option>";
+                            }
+                            ?>
                         </select>
                       </label>
                     </td>
@@ -333,6 +338,7 @@
                     <th>Designation</th>
                     <th>DOB</th>
                     <th>ID #</th>
+                    <th>Address</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -355,6 +361,7 @@
                     <td><?php echo $row['position']; ?></td>
                     <td><?php echo $row['dob']; ?></td>
                     <td><?php echo $row['id_number']; ?></td>
+                    <td><?php echo $row['address']; ?></td>
                     <td><a href="#edit<?php echo $row['id']; ?>" data-toggle="modal"  data-id="<?php echo $row['id']; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
                       <a href="#delete<?php echo $row['id']; ?>" data-toggle="modal"
                                class="btn btn-danger">
@@ -438,6 +445,11 @@
               <div class="form-style-2">
               <label for="address">Identification Number (ID)</label>
               <input type="text" id="id_number" name="id_number" class="input-field" value="<?php echo $erow['id_number']; ?>" />
+              </div>
+
+              <div class="form-style-2">
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" class="input-field" value="<?php echo $erow['address']; ?>" />
               </div>
               <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -786,6 +798,11 @@
       <div class="form-style-2">
       <label for="address">Identification Number (ID)</label>
       <input type="text" id="id_number" name="id_number" placeholder="Identification Number" class="input-field" value="" />
+      </div>
+
+      <div class="form-style-2">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" placeholder="Addresss" class="input-field" value="" />
       </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove">Cancel</button>
