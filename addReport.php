@@ -13,8 +13,9 @@
                       $filename = $_FILES["report_2"]["name"];
                       $filetype = $_FILES["report_2"]["type"];
                       $filesize = $_FILES["report_2"]["size"];
+                      $orgid=$_POST['org_id'];
 
-                      $filename = "Report 2 ".rand(10, 1000).$filename;
+                      $filename = "Report 2_".$orgid."_".rand(10, 1000)."_".$filename;
 
                       // Verify file extension
                       $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -71,7 +72,9 @@
                     $filetype = $_FILES["report_2"]["type"];
                     $filesize = $_FILES["report_2"]["size"];
 
-                    $filename = "Report 3 ".rand(10, 20).$filename;
+                    $orgid=$_POST['org_id'];
+
+                    $filename = "Report 3_".$orgid."_".rand(10, 1000)."_".$filename;
 
                     // Verify file extension
                     $ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -128,7 +131,9 @@
                      $filetype = $_FILES["report_2"]["type"];
                      $filesize = $_FILES["report_2"]["size"];
 
-                     $filename = "Report 1 ".rand(10, 1000).$filename;
+                     $orgid=$_POST['org_id'];
+
+                     $filename = "Report 1_".$orgid."_".rand(10, 1000)."_".$filename;
 
                      // Verify file extension
                      $ext = pathinfo($filename, PATHINFO_EXTENSION);

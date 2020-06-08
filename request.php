@@ -220,7 +220,7 @@
                 <td><?php echo $row['telephone']; ?></td>
                 <td><?php echo $row['email']; ?></td>
                 <td><?php echo $row['file_ref_no']; ?></td>
-                <td><?php echo $row['date_time']; ?></td>
+                <td><?php echo $row['expire']; ?></td>
                 <td><?php echo $row['approval']; ?></td>
                 <td>
                   <?php

@@ -257,7 +257,7 @@
 
                    </tr>
                    <tr>
-                     <td style="width:20%">
+                     <td style="width:23%">
                       <label for="field1"><span>School Code <span class="required">*</span></span>
                         <input type="text" class="input-field" id="sch_code" name="sch_code" value="" readonly/>
                       </label>

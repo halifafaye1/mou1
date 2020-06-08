@@ -7,20 +7,23 @@ session_start();
       h4,h5{
         text-align:center;
       }
-		
+
 
       @media print {
           .btn-print {
             display:none !important;
 		  }
+      .hideForm{
+        display:none !important;
+      }
 		  .main-footer	{
 			display:none !important;
 		  }
 		  .box.box-primary {
 			  border-top:none !important;
 		  }
-		  
-          
+
+
       }
     </style>
  <!--  sidebar (Page sidebar) -->
@@ -28,7 +31,7 @@ session_start();
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -46,7 +49,7 @@ session_start();
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -119,46 +122,117 @@ session_start();
       </body>
 </html>
 <div class="wrapper">
-      <?php 
+
+      <?php
       include('connection/connection.php');
       ?>
       <!-- Full Width Column -->
       <div class="content-wrapper">
         <div class="container">
           <!-- Content Header (Page header) -->
-         
+
 
           <!-- Main content -->
           <section class="content">
             <div class="row">
 	    <div class="col-xs-12">
               <div class="box box-primary">
-					
-              
+
+
                 <div class="box-body">
 				<?php
 include('connection/connection.php');
 
 
     $query=mysqli_query($conn,"SELECT * FROM activity ");
-  
+
         $row=mysqli_fetch_array($query);
-        
-?>      
-                  <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU ACTIVITY REPORT</b> </h4>  
+
+?>
+                  <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU ACTIVITY REPORT</b> </h4>
                   <h5><b>Address: WILLY THROPE PLACE BANJUL</b></h5>
                   <h5><b>Contact #:</b></h5>
 				  <h4><b>ACTIVITY REPORT as of today, <?php echo date("M d, Y h:i a");?></b></h4>
-                  
+
 				  <a class = "btn btn-success btn-print" href = "" onclick = "window.print()"><i class ="glyphicon glyphicon-print"></i> Print</a>
-							<a class = "btn btn-primary btn-print" href = "index.php"><i class ="glyphicon glyphicon-arrow-left"></i> Back to Homepage</a>   
-						
+							<a class = "btn btn-primary btn-print" href = "index.php"><i class ="glyphicon glyphicon-arrow-left"></i> Back to Homepage</a>
+        <br>
+        <br>
+
+        <form  action=""  method='POST' name='form_filter' class="hideForm" >
+        <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                      <?php
+
+                        require 'connection/connection.php';
+
+                        $sql1 = "SELECT * FROM organization  ORDER BY id";
+                        $result1 = mysqli_query($conn, $sql1);
+
+                      ?>
+                        <select class="form-control" name="value">
+                          <option disabled selected value> -- select an organization  -- </option>
+                          <?php  while ($row = mysqli_fetch_array($result1)) {
+                               echo "<option value='" . $row['id'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."---Donates----". $row['previous_activities']. "</option>";
+                           }
+                           ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                      <?php
+
+                        require 'connection/connection.php';
+
+                        $sql2 = "SELECT * FROM sch_list  ORDER BY sch_name";
+                        $result2 = mysqli_query($conn, $sql2);
+
+                      ?>
+                        <select class="form-control" name="school">
+                          <option disabled selected value> -- select a school  -- </option>
+                          <?php  while ($row = mysqli_fetch_array($result2)) {
+                               echo "<option value='" . $row['sch_code'] . "'>" . $row['sch_name'].  " --- ". $row['sch_type'].  " --- "  .$row['sch_code'] ." --- region "  . $row['region'].  "</option>";
+                           }
+                           ?>
+                            </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control" name="region">
+                          <option disabled selected value> -- select a region  -- </option>
+                            <option value="All">All</option>
+                            <option value="1">Region 1</option>
+                            <option value="2">Region 2</option>
+                            <option value="3">Region 3</option>
+                            <option value="4">Region 4</option>
+                            <option value="5">Region 5</option>
+                            <option value="6">Region 6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                      <input  type="text" class="form-control" placeholder=" From Date" onfocus="(this.type='date')"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                      <input  type="text" class="form-control" placeholder=" To Date" onfocus="(this.type='date')"/>
+                    </div>
+                </div>
+            </div>
+            <input type='submit' value = 'Filter'>
+            </form>
+
                   <table class="table table-bordered table-striped">
                     <thead>
-					
-                      
+
+
                       <tr>
-                        
+
                         <th>Organisation Name</th>
                         <th>School Name</th>
                         <th>Region</th>
@@ -167,63 +241,161 @@ include('connection/connection.php');
                         <th>Quantity</th>
                         <th>Cost</th>
                         <th>Period</th>
-                        
+
                       </tr>
-                       
-                 
+
+
                     </thead>
                     <tbody>
-<?php
-        
-        $sql = "SELECT school.*,organization.*,support_type.*, activity.*,
-        school.region AS reg, school.district AS dis, activity.id as id,  organization.id as Oid,  school.id as Sid
-        FROM activity
 
-        JOIN organization ON
-        activity.organization_id = organization.id
-        JOIN school ON
-        activity.school_id = school.sch_code 
-        JOIN support_type ON
-        activity.support_type1 = support_type.id 
-        ";
+<?php
+
+    $sql =
+    "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+     activity.id as id,  organization.id as Oid
+    FROM activity
+    JOIN organization ON
+    activity.organization_id = organization.id
+    JOIN sch_list ON
+    activity.school_id = sch_list.sch_code
+    JOIN support_type ON
+    activity.support_type1 = support_type.id ";
+
+      if(isset($_POST['value'])&& !isset($_POST['school']) && !isset($_POST['region'])) {
+
+             $org = $_POST['value'];
+
+              //$query = "SELECT * FROM request WHERE approval='Pending'";
+
+              $sql =
+              "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+               activity.id as id,  organization.id as Oid
+              FROM activity
+              JOIN organization ON
+              activity.organization_id = organization.id
+              JOIN sch_list ON
+              activity.school_id = sch_list.sch_code
+              JOIN support_type ON
+              activity.support_type1 = support_type.id
+               where organization_id = '$org' ";
+
+               echo $sql;
+             }
+             elseif (isset($_POST['value'])&& isset($_POST['school']) && !isset($_POST['region'])) {
+
+
+               $org = $_POST['value'];
+               $sch = $_POST['school'];
+               $sql =
+               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+                activity.id as id,  organization.id as Oid
+               FROM activity
+               JOIN organization ON
+               activity.organization_id = organization.id
+               JOIN sch_list ON
+               activity.school_id = sch_list.sch_code
+               JOIN support_type ON
+               activity.support_type1 = support_type.id
+                where organization_id = '$org' AND
+                school_id ='$sch'
+                 ";
+                 echo $sql;
+             }
+             elseif (isset($_POST['value'])&& isset($_POST['school']) && isset($_POST['region'])) {
+
+
+               $org = $_POST['value'];
+               $sch = $_POST['school'];
+               $reg = $_POST['region'];
+               $sql =
+               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+                activity.id as id,  organization.id as Oid
+               FROM activity
+               JOIN organization ON
+               activity.organization_id = organization.id
+               JOIN sch_list ON
+               activity.school_id = sch_list.sch_code
+               JOIN support_type ON
+               activity.support_type1 = support_type.id
+                where organization_id = '$org' AND
+                school_id ='$sch' AND sch_list.region = '$reg'
+                 ";
+                 echo $sql;
+             }
+             elseif (!isset($_POST['value'])&& isset($_POST['school']) && !isset($_POST['region'])) {
+
+
+               $org = $_POST['value'];
+               $sch = $_POST['school'];
+               $reg = $_POST['region'];
+               $sql =
+               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+                activity.id as id,  organization.id as Oid
+               FROM activity
+               JOIN organization ON
+               activity.organization_id = organization.id
+               JOIN sch_list ON
+               activity.school_id = sch_list.sch_code
+               JOIN support_type ON
+               activity.support_type1 = support_type.id
+                where  school_id ='$sch'
+                 ";
+                 echo $sql;
+             }
+             elseif (!isset($_POST['value'])&& !isset($_POST['school']) && isset($_POST['region'])) {
+
+
+
+               $reg = $_POST['region'];
+               $sql =
+               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+                activity.id as id,  organization.id as Oid
+               FROM activity
+               JOIN organization ON
+               activity.organization_id = organization.id
+               JOIN sch_list ON
+               activity.school_id = sch_list.sch_code
+               JOIN support_type ON
+               activity.support_type1 = support_type.id
+                where  sch_list.region ='$reg'
+                 ";
+                 echo $sql;
+             }
+
+
+
          $result = mysqli_query($conn, $sql);
-	
+
 		while($row=mysqli_fetch_array($result)){
-			
+
 ?>
                       <tr>
                         <td><?php echo $row['organization_name']; ?></td>
-                        <td><?php echo $row['name']; ?></td>
-                        <td><?php echo $row['reg']; ?></td>
-                        <td><?php echo $row['dis']; ?></td>
+                        <td><?php echo $row['sch_name']; ?></td>
+                        <td><?php echo $row['region']; ?></td>
+                        <td><?php echo $row['district']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['quantity'];?></td>
                         <td><?php echo $row['cost']; ?></td>
                         <td><?php echo $row['period_date']; ?></td>
-                       
+
                       </tr>
 
-<?php }?>					  
+<?php }?>
                     </tbody>
                     <tfoot>
-                     
+
                       <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                      </tr> 
+                        <th colspan="8"></th>
+
+                      </tr>
                       <tr>
-                        <th>Prepared by:</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                      </tr> 
- 				  
+                        <th colspan="5">Prepared by:</th>
+                        <th colspan="3"></th>
+
+
+                      </tr>
+
                     </tfoot>
                   </table>
                 </div><!-- /.box-body -->
@@ -235,8 +407,8 @@ include('connection/connection.php');
           </section><!-- /.content -->
         </div><!-- /.container -->
       </div><!-- /.content-wrapper -->
-      
+
     </div><!-- ./wrapper -->
 
 
-<?php include 'footer.php'; ?>          
+<?php include 'footer.php'; ?>
