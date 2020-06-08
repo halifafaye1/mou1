@@ -119,8 +119,6 @@
 
               <form method="post" action="export.php">
                   <input type="submit" name="export" class="btn btn-success" value="EXCEL" />
-                  <input type="submit" name="pdf" class="btn btn-danger" value="PDF" />
-
                </form>
                   <h3 class="box-title"></h3>
                

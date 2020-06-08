@@ -336,12 +336,12 @@ session_start();
 
                      <?php if ( $row['approval']!="Expired" ){
                        echo " <button  href='#renew".$row['org_id']."'
-                         data-toggle='modal'data-rid='".$row['request_id']."' id='btn' class='btn btn-danger' disabled><span class='glyphicon glyphicon-plus' >
+                         data-toggle='modal'data-rid='".$row['request_id']."' id='btn' class='btn btn-success' disabled><span class='glyphicon glyphicon-plus' >
                           </span> Renew</buttom> " ;
                      }
                      else{
                        echo " <button  data-target='#renew'
-                         data-toggle='modal' data-rid='".$row['request_id']."' id='btn' class='btn btn-danger' ><span class='glyphicon glyphicon-plus' >
+                         data-toggle='modal' data-rid='".$row['request_id']."' id='btn' class='btn btn-success' ><span class='glyphicon glyphicon-plus' >
                           </span> Renew</buttom> " ;
                      }
 
@@ -380,7 +380,7 @@ session_start();
                                    </div></center>
                             <div class="modal-footer">
 						                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-						                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Renew</button>
+						                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Renew</button>
 						                </div>
                           </form>
 

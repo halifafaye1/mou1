@@ -53,6 +53,7 @@ if(isset($_POST["export"]))
 	header("Content-Disposition: attachment; filename=\"$fileName\"");
 //   header('Content-Type: application/xls');
 //   header('Content-Disposition: attachment; filename=download.xls');
+
   echo $output;
  }
 }elseif (isset($_POST["excel"])) 
@@ -160,6 +161,7 @@ if(isset($_POST["export"]))
    echo $output;
   
 }
+
 elseif (isset($_POST["excel2"]))
 {
   $query = "SELECT * FROM organization ORDER BY id";
@@ -200,5 +202,7 @@ elseif (isset($_POST["excel2"]))
    echo $output;
   
 }
+
+}
+}
 ?>
-<?php }?>
