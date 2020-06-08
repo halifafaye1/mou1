@@ -126,7 +126,7 @@
                         <th>Last Name</th>
                         <th>DOB</th>
                         <th>Address</th>
-                        <th>Action</th>
+                        <th>ID Number</th>
                       </tr>
                     </thead>
 					<?php
@@ -148,12 +148,12 @@
                         <td><?php echo $row['address']; ?></td>
 
                         <div class="btn-group" role="group">
-                        <td>
+                        <td><?php echo $row['id_number']; ?>
 
 
 							<!-- <a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a> ||
-							<a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-							<!-- Delete --> -->
+							<a href="#delete<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a> -->
+							<!-- Delete -->
 						    <div class="modal fade" id="delete<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						        <div class="modal-dialog">
 						            <div class="modal-content">

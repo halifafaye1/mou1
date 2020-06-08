@@ -139,16 +139,15 @@
 						require 'connection/connection.php';
 
 
-						$sql = "SELECT school_id, support_type, quantity, cost, period_date, activity.id as id, organization_id,
-            organization.organization_name, organization.id as Oid, school.name, school.id as Sid
+						$sql = "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+             activity.id as id,  organization.id as Oid
             FROM activity
-
             JOIN organization ON
             activity.organization_id = organization.id
-            JOIN School ON
-            activity.school_id = school.sch_code 
+            JOIN sch_list ON
+            activity.school_id = sch_list.sch_code
             JOIN support_type ON
-            activity.support_type1 = support_type.id 
+            activity.support_type1 = support_type.id
             ";
 						$result = mysqli_query($conn, $sql);
 
@@ -160,7 +159,7 @@
 
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['organization_name']; ?></td>
-                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['sch_name']; ?>, <?php echo $row['sch_type']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['cost']; ?></td>
@@ -264,21 +263,21 @@
 
                          require 'connection/connection.php';
 
-                         $sql2 = "SELECT * FROM school  ORDER BY id";
+                         $sql2 = "SELECT * FROM sch_list  ORDER BY sch_name";
                          $result2 = mysqli_query($conn, $sql2);
 
                        ?>
                       <label for="field1"><span>School Name <span class="required">*</span></span>
-                   
+
                         <select type="text" class="select-field" id="" name="school_id"  required>
                            <option disabled selected value> -- select a school  -- </option>
                           <?php  while ($row = mysqli_fetch_array($result2)) {
-                               echo "<option value='" . $row['sch_code'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
+                               echo "<option value='" . $row['sch_code'] . "'>" . $row['sch_name'].  " --- ". $row['sch_type'].  " --- "  .$row['sch_code']. " --- ". $row['region'].  "</option>";
                            }
                            ?>
                         </select>
                         <input type="hidden" name="hidden_school" id="hidden_school" />
-                         
+
                       </label>
                     </td>
                    </tr>
@@ -380,14 +379,14 @@
 
                        require 'connection/connection.php';
 
-                       $sql2 = "SELECT * FROM school  ORDER BY id";
+                       $sql2 = "SELECT * FROM sch_list  ORDER BY sch_name";
                        $result2 = mysqli_query($conn, $sql2);
 
                      ?>
                     <label for="field1"><span>School Name <span class="required">*</span></span>
                       <select type="text" class="select-field" id="school_id" name="school_id"  required>
                         <?php  while ($row = mysqli_fetch_array($result2)) {
-                             echo "<option value='" . $row['sch_code'] . "'>" . $row['name'].  "-(code)-"  .$row['sch_code'].  "</option>";
+                             echo "<option value='" . $row['sch_code'] . "'>" . $row['sch_name'].  " --- ". $row['sch_type'].  " --- "  .$row['sch_code']. " --- ". $row['region'].  "</option>";
                          }
                          ?>
                       </select>
@@ -405,7 +404,7 @@
                        ?>
                       <label for="field1"><span>Support Type <span class="required">*</span></span>
                         <select type="text" class="select-field" id="" name="support_type"  required>
-      
+
                           <?php  while ($row = mysqli_fetch_array($result3)) {
                                echo "<option value='" . $row['id'] . "'>" . $row['support_type']."</option>";
                            }

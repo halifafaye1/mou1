@@ -15,7 +15,8 @@
 
         $nxtDtate = strtotime($date_time);
 
-        $expire = date('Y-m-d', strtotime('+3 years',$nxtDtate));
+        // $expire = date('Y-m-d', strtotime('+3 years',$nxtDtate));
+
         $approval = $_POST['approval'];
 
 
@@ -23,14 +24,14 @@
         /*mysqli_query($conn,"insert into person (name, surname,dob, address) values ('$name', '$surname','$dob', '$address')");
          header('location:person.php');*/
 
-        $sql = "INSERT INTO request (organization_id,name,person_name,ag_registration_no, address, telephone, email, file_ref_no, date_time,expire, approval)
-         VALUES ('$organization_id','$name','$person_name','$id_number','$address','$telephone','$email','$file_ref_no','$date_time','$expire','$approval')";
+        $sql = "INSERT INTO request (organization_id,name,person_name,ag_registration_no, address, telephone, email, file_ref_no, date_time, approval)
+         VALUES ('$organization_id','$name','$person_name','$id_number','$address','$telephone','$email','$file_ref_no','$date_time','$approval')";
         $result = mysqli_query($conn, $sql);
 
         if ($result)
         {
           echo '<script>alert("Data Saved")</script>';
-          
+
           // $_SESSION['message'] = " ".$name." Has been added Successfully and now visible on the Report_Request page";
           header('Location:request.php?status=success');
         }
