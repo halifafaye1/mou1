@@ -54,13 +54,13 @@
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="treeview">
+            <!-- <li class="treeview">
               <a href="school.php">
                 <i class="fa fa-institution"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
-            </li>
+            </li> -->
             <li class="treeview">
               <a href="activity.php">
                 <i class="fa fa-bar-chart"></i>

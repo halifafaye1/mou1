@@ -3,6 +3,7 @@ session_start();
 ?>
  <!--  Header (Page header) -->
  <?php include'header.php';?>
+ <!--  sidebar (Page sidebar) -->
  <style type="text/css">
       h4,h5{
         text-align:center;
@@ -15,7 +16,7 @@ session_start();
 		  }
       .hideForm{
         display:none !important;
-      }
+      } 
 		  .main-footer	{
 			display:none !important;
 		  }
@@ -25,13 +26,13 @@ session_start();
 
 
       }
+
     </style>
- <!--  sidebar (Page sidebar) -->
   <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
+         
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -45,15 +46,15 @@ session_start();
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-
+              
             </li>
             <li class="treeview">
               <a href="request.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-external-link"></i>
                 <span>Request</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -74,36 +75,36 @@ session_start();
             </li>
             <li class="treeview">
               <a href="organization.php">
-                <i class="fa fa-files-o"></i>
+                <i class="glyphicon glyphicon-home"></i>
                 <span>Organisation</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="treeview">
+            <!-- <li class="treeview">
               <a href="school.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-institution"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
-            </li>
+            </li> -->
             <li class="treeview">
               <a href="activity.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-bar-chart"></i>
                 <span>Activity</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
 
-            <li class="active treeview">
+            <li class="treeview">
               <a href="activity_report.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Activity Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
             <li class="treeview">
               <a href="request_report.php">
-                <i class="fa fa-files-o"></i>
+                <i class="fa fa-folder-open"></i>
                 <span>Request Report</span>
                 <span class="label label-primary pull-right"></span>
               </a>
@@ -149,9 +150,10 @@ include('connection/connection.php');
         $row=mysqli_fetch_array($query);
 
 ?>
+                  <h4><img src="Coat_of_arms_of_The_Gambia.png" alt="" width="15%" height="15%"></h4>
                   <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU ACTIVITY REPORT</b> </h4>
                   <h5><b>Address: WILLY THROPE PLACE BANJUL</b></h5>
-                  <h5><b>Contact #:</b></h5>
+                  <h5><b>Contact #:	(00220) 4228232 - 4228233 - 4228234 - 4228235</b></h5>
 				  <h4><b>ACTIVITY REPORT as of today, <?php echo date("M d, Y h:i a");?></b></h4>
 
 				  <a class = "btn btn-success btn-print" href = "" onclick = "window.print()"><i class ="glyphicon glyphicon-print"></i> Print</a>

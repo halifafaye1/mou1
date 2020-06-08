@@ -13,6 +13,9 @@ session_start();
           .btn-print {
             display:none !important;
 		  }
+      .hideForm{
+        display:none !important;
+      } 
 		  .main-footer	{
 			display:none !important;
 		  }
@@ -22,6 +25,7 @@ session_start();
 
 
       }
+
     </style>
  <!--  sidebar (Page sidebar) -->
   <!-- Left side column. contains the logo and sidebar -->
@@ -76,13 +80,13 @@ session_start();
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="treeview">
+            <!-- <li class="treeview">
               <a href="school.php">
                 <i class="fa fa-institution"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
-            </li>
+            </li> -->
             <li class="treeview">
               <a href="activity.php">
                 <i class="fa fa-bar-chart"></i>
@@ -171,9 +175,10 @@ session_start();
        $row=mysqli_fetch_array($query);
 
 ?>
+                     <h4><img src="Coat_of_arms_of_The_Gambia.png" alt="" width="15%" height="15%"></h4>
                    <h4><b>MINISTRY OF BASIC AND SECONDARY EDUCATION MOU REQUEST REPORT</b> </h4>
                   <h5><b>Address: WILLY THROPE PLACE BANJUL</b></h5>
-                  <h5><b>Contact #:</b></h5>
+                  <h5><b>Contact #:	(00220) 4228232 - 4228233 - 4228234 - 4228235</b></h5>
 				  <h4><b>REQUEST REPORT as of today, <?php echo date("M d, Y h:i a");?></b></h4>
 
 				  <a class = "btn btn-success btn-print" href = "" onclick = "window.print()"><i class ="glyphicon glyphicon-print"></i> Print</a>
@@ -181,7 +186,7 @@ session_start();
                             <br>
                             <br>
 
-                            <form action=""  method='POST' name='form_filter' >
+                            <form  action=""  method='POST' name='form_filter' class="hideForm" >
                                 <select class="form-control" name="value">
                                     <option value="All">All</option>
                                     <option value="Expired">Expired</option>
