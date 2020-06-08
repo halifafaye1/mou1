@@ -109,6 +109,10 @@
           <div class="row">
             <div class="col-xs-12">
             	<div class="box-header">
+              <form method="post" action="export.php">
+                  <input type="submit" name="excel" class="btn btn-success" value="EXCEL" />
+                  <input type="submit" name="pdf" class="btn btn-danger" value="PDF" />
+               </form>
                   <h3 class="box-title"></h3>
                   <div class="pull-right">
                       <button class="btn btn-success" data-toggle="modal"

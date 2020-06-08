@@ -115,10 +115,19 @@
           <div class="row">
             <div class="col-xs-12">
             	<div class="box-header">
+
+
+              <form method="post" action="export.php">
+                  <input type="submit" name="export" class="btn btn-success" value="EXCEL" />
+                  <input type="submit" name="pdf" class="btn btn-danger" value="PDF" />
+
+               </form>
                   <h3 class="box-title"></h3>
+               
                   <div class="pull-right">
                       <button class="btn btn-success" data-toggle="modal"
                        data-target="#add_request">Add New Request</button>
+                       
                   </div>
                 </div><!-- /.box-header -->
               <div class="box">
@@ -920,9 +929,21 @@
 
         });
 
+ 
 
+   
 
     </script>
+    <!-- <script>  
+ $(document).ready(function(){  
+      $('#create_excel').click(function(){  
+           var excel_data = $('#request').html();  
+           var page = "export.php?data=" + excel_data;  
+           window.location = page;  
+      });  
+ });  
+ </script> -->
+
 
    </body>
 </html>
