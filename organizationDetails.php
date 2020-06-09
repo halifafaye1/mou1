@@ -498,8 +498,11 @@
                 $result = mysqli_query($conn, $sql);
 
               ?>
+              <?php while($row=mysqli_fetch_assoc($result)){ ?>
             <table id="example1" class="table table-bordered table-striped">
+
                 <thead>
+                  <caption><h1>Upload below Reports for:        <strong><?php echo $row['name']; ?></strong>  Request</h1></caption>
                   <tr>
 
                     <th>Status</th>
@@ -513,10 +516,10 @@
 
 
                 <tbody>
-                  <?php while($row=mysqli_fetch_assoc($result)){ ?>
+
                     <tr>
-                      <td colspan="4"><h1>Upload here Reports for:        <strong><?php echo $row['name']; ?></strong>  Request</h1></td>
-                      <td>
+
+                      <td colspan="4">
                       <button class="btn btn-success" style="float:right"
                       data-toggle="modal"
                       data-target="#add_report"
@@ -613,7 +616,7 @@
             require 'connection/connection.php';
 
             $id = $_GET['id'];
-            $sql = "SELECT report.*,request.* FROM report
+            $sql = "SELECT report.*,request.*,report.id AS rid FROM report
             JOIN request on request.id = report.request_id
             where report.id NOT
             IN (
@@ -652,7 +655,7 @@
                 <td>Archive</td>
                 <td ><strong>Year 1: </strong></td>
                 <td><?php echo $row['report_1']; ?></td>
-                <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_1" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
+                <td><a  href="viewReport.php?id=<?php echo $row['rid']; ?>&report=report_1" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
 
 
               </tr>
@@ -661,7 +664,7 @@
                 <td>Archive</td>
                 <td ><strong>Year 2: </strong></td>
                 <td><?php echo $row['report_2']; ?></td>
-                <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_2" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
+                <td><a  href="viewReport.php?id=<?php echo $row['rid']; ?>&report=report_2" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
 
 
               </tr>
@@ -670,7 +673,7 @@
                 <td>Archive</td>
                 <td ><strong>Year 3: </strong></td>
                 <td><?php echo $row['report_3']; ?></td>
-                <td><a  href="viewReport.php?id=<?php echo $row['id']; ?>&report=report_3" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
+                <td><a  href="viewReport.php?id=<?php echo $row['rid']; ?>&report=report_3" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> View Report</a>
 
               </tr>
               <tr>
