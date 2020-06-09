@@ -54,13 +54,13 @@
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-            <li class="treeview">
+            <!-- <li class="treeview">
               <a href="school.php">
                 <i class="fa fa-institution"></i>
                 <span>School</span>
                 <span class="label label-primary pull-right"></span>
               </a>
-            </li>
+            </li> -->
             <li class="treeview">
               <a href="activity.php">
                 <i class="fa fa-bar-chart"></i>
@@ -109,6 +109,10 @@
           <div class="row">
             <div class="col-xs-12">
             	<div class="box-header">
+              <form method="post" action="export.php">
+                  <input type="submit" name="excel2" class="btn btn-success" value="EXCEL" />
+                  
+               </form>
                   <h3 class="box-title"></h3>
                   <div class="pull-right">
                       <button class="btn btn-success" data-toggle="modal"
