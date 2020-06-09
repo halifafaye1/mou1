@@ -241,15 +241,116 @@ session_start();
               
             </div><!-- ./col -->
           </div><!-- /.row -->
+          <div class="card">
+              <div class="card-header">
+                <h3 class="card-title"></h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                 <tr>
+                        <th>Organisation Name</th>
+                        <th>Request Name</th>
+                        <th>Address</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Reference #</th>
+                        <th>Status</th>
+                        <th>Expiry Date</th>
+                        <th>Months Left</th>
+                       
+                      </tr>
+                      </thead>
+                   
+                      <?php include('connection/connection.php');
+
+                       $currentDate = date('Y-m-d');
+                      
+                      $sql = "SELECT *
+                      FROM report
+                      JOIN request ON request.id = report.request_id
+                      JOIN organization ON organization.id = report.org_id
+                      WHERE report.id IN (
+                          SELECT MAX(id)
+                          FROM report
+                          GROUP BY request_id
+
+                      )
+                      ORDER BY report.expiry_date 
+                      and report.expiry_date - $currentDate < 6";
+					          	$result = mysqli_query($conn, $sql);
+                     
+                      ?>
+                       <tbody>
+                       <?php while($row=mysqli_fetch_assoc($result)){ ?>
+                    <tr>
+
+                  <td><?php echo $row['organization_name']; ?></td>
+                  <td><?php echo $row['name']; ?></td>
+                  <td><?php echo $row['address']; ?></td>
+                  <td><?php echo $row['telephone']; ?></td>
+                  <td><?php echo $row['email']; ?></td>
+                  <td><?php echo $row['file_ref_no']; ?></td>
+                  <td><?php echo $row['approval'];?></td>
+                  <td><?php echo $row['expiry_date']; ?></td>
+                  <td> <?php
+
+
+                      $date2 = $row['expiry_date'];
+                      $date1 = date('Y-m-d');
+                      
+
+                      $ts1 = strtotime($date1);
+                      $ts2 = strtotime($date2);
+
+                      $year1 = date('Y', $ts1);
+                      $year2 = date('Y', $ts2);
+
+                      $month1 = date('m', $ts1);
+                      $month2 = date('m', $ts2);
+
+                      $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+
+                      if ($diff < 1){
+                        $diff = abs($diff);
+                      echo "Expired " .$diff." Months Ago ";
+                      }
+                      else
+                        echo $diff." Months ";
+
+
+
+
+                        ?>
+                  </td>
+                  <?php }   ?> 
+                    </tbody>
+                  <tfoot> 
+                   <tr>
+                        <th>Organisation Name</th>
+                        <th>Request Name</th>
+                        <th>Address</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Reference #</th>
+                        <th>Status</th>
+                        <th>Expiry Date</th>
+                        <th>Months Left</th>
+                       
+                      </tr>
+                  </tfoot>
+                </table>
+              </div>
+                 
+              <!-- /.card-body -->
           </div><!-- ./col -->
             <!--TABLE-->
-           
+            
           <!-- Main row -->
                       
-        </section><!-- /.content -->
-
-                      
-							
+        </section><!-- /.content -->      
+                
 						    </div>
       </div><!-- /.content-wrapper -->
 <?php include 'footer.php'; ?>          

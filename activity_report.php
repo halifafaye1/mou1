@@ -392,7 +392,7 @@ include('connection/connection.php');
 
                       </tr>
                       <tr>
-                        <th colspan="5">Prepared by:</th>
+                        <th colspan="5">Prepared by: <span>Planning Department</span></th>
                         <th colspan="3"></th>
 
 
