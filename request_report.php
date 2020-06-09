@@ -424,7 +424,7 @@ session_start();
                         <th></th>
                       </tr>
                       <tr>
-                        <th>Prepared by:</th>
+                        <th>Prepared by: <span>Planning Department</span></th>
                         <th></th>
                         <th></th>
                         <th></th>

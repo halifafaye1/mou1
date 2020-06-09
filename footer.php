@@ -1,8 +1,8 @@
  <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.2.0
+          <b></b>
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>MOBSE EMIS &copy; 2020 </strong> 
       </footer>
 
       <!-- Control Sidebar -->
