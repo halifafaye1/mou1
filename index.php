@@ -8,7 +8,7 @@ session_start();
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -26,7 +26,7 @@ session_start();
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -123,8 +123,8 @@ session_start();
               <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3>
-                  	<?php 
-                  	include 'connection/connection.php'; 
+                  	<?php
+                  	include 'connection/connection.php';
 
 
 					$sql="SELECT * FROM organization";
@@ -138,7 +138,7 @@ session_start();
 					  mysqli_free_result($result);
 					  }
                   	?>
-                  		
+
                   	</h3>
                   <p>Organization</p>
                 </div>
@@ -153,8 +153,8 @@ session_start();
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3>
-                  	<?php 
-                  	include 'connection/connection.php'; 
+                  	<?php
+                  	include 'connection/connection.php';
 
 
 					$sql="SELECT * FROM activity";
@@ -168,7 +168,7 @@ session_start();
 					  mysqli_free_result($result);
 					  }
                   	?>
-                  		
+
                   	</h3>
                   <p>Activity</p>
                 </div>
@@ -183,8 +183,8 @@ session_start();
               <div class="small-box bg-yellow">
                 <div class="inner">
                   <h3>
-                  	<?php 
-                  	include 'connection/connection.php'; 
+                  	<?php
+                  	include 'connection/connection.php';
 
 
 					$sql="SELECT * FROM request";
@@ -198,8 +198,8 @@ session_start();
 					  mysqli_free_result($result);
 					  }
                   	?>
-                  		
-                  	</h3>     
+
+                  	</h3>
                   <p>Request</p>
                 </div>
                 <div class="icon">
@@ -213,8 +213,8 @@ session_start();
               <div class="small-box bg-red">
                 <div class="inner">
                   <h3>
-                  <?php 
-                  	include 'connection/connection.php'; 
+                  <?php
+                  	include 'connection/connection.php';
 
 
 					$sql="SELECT * FROM school";
@@ -238,7 +238,7 @@ session_start();
                 </div>
                 <a href="school.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
-              
+
             </div><!-- ./col -->
           </div><!-- /.row -->
           <div class="card">
@@ -259,14 +259,14 @@ session_start();
                         <th>Status</th>
                         <th>Expiry Date</th>
                         <th>Months Left</th>
-                       
+
                       </tr>
                       </thead>
-                   
+
                       <?php include('connection/connection.php');
 
                        $currentDate = date('Y-m-d');
-                      
+
                       $sql = "SELECT *
                       FROM report
                       JOIN request ON request.id = report.request_id
@@ -277,10 +277,11 @@ session_start();
                           GROUP BY request_id
 
                       )
-                      ORDER BY report.expiry_date 
-                      and report.expiry_date - $currentDate < 6";
+                      and report.expiry_date BETWEEN CURDATE() and DATE_ADD(CURDATE(), INTERVAL 6 MONTH)
+                      ORDER BY report.expiry_date ASC
+                      ";
 					          	$result = mysqli_query($conn, $sql);
-                     
+
                       ?>
                        <tbody>
                        <?php while($row=mysqli_fetch_assoc($result)){ ?>
@@ -299,7 +300,7 @@ session_start();
 
                       $date2 = $row['expiry_date'];
                       $date1 = date('Y-m-d');
-                      
+
 
                       $ts1 = strtotime($date1);
                       $ts2 = strtotime($date2);
@@ -317,16 +318,16 @@ session_start();
                       echo "Expired " .$diff." Months Ago ";
                       }
                       else
-                        echo $diff." Months ";
+                        echo "Expires in ".$diff." Months ";
 
 
 
 
                         ?>
                   </td>
-                  <?php }   ?> 
+                  <?php }   ?>
                     </tbody>
-                  <tfoot> 
+                  <tfoot>
                    <tr>
                         <th>Organisation Name</th>
                         <th>Request Name</th>
@@ -337,20 +338,20 @@ session_start();
                         <th>Status</th>
                         <th>Expiry Date</th>
                         <th>Months Left</th>
-                       
+
                       </tr>
                   </tfoot>
                 </table>
               </div>
-                 
+
               <!-- /.card-body -->
           </div><!-- ./col -->
             <!--TABLE-->
-            
+
           <!-- Main row -->
-                      
-        </section><!-- /.content -->      
-                
+
+        </section><!-- /.content -->
+
 						    </div>
       </div><!-- /.content-wrapper -->
-<?php include 'footer.php'; ?>          
+<?php include 'footer.php'; ?>
