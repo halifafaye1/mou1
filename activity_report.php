@@ -16,7 +16,7 @@ session_start();
 		  }
       .hideForm{
         display:none !important;
-      } 
+      }
 		  .main-footer	{
 			display:none !important;
 		  }
@@ -32,7 +32,7 @@ session_start();
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-         
+
           <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -50,7 +50,7 @@ session_start();
               <a href="index.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-              
+
             </li>
             <li class="treeview">
               <a href="request.php">
@@ -163,7 +163,7 @@ include('connection/connection.php');
 
         <form  action=""  method='POST' name='form_filter' class="hideForm" >
         <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                       <?php
 
@@ -174,7 +174,7 @@ include('connection/connection.php');
 
                       ?>
                         <select class="form-control" name="value">
-                          <option disabled selected value> -- select an organization  -- </option>
+                          <option disabled selected value>select organization</option>
                           <?php  while ($row = mysqli_fetch_array($result1)) {
                                echo "<option value='" . $row['id'] . "'>" . $row['organization_name'].  "--"  .$row['office_space_address'] ."---Donates----". $row['previous_activities']. "</option>";
                            }
@@ -182,7 +182,7 @@ include('connection/connection.php');
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="form-group">
                       <?php
 
@@ -204,8 +204,7 @@ include('connection/connection.php');
                 <div class="col-sm-2">
                     <div class="form-group">
                         <select class="form-control" name="region">
-                          <option disabled selected value> -- select a region  -- </option>
-                            <option value="All">All</option>
+                          <option disabled selected value>-- select region --</option>
                             <option value="1">Region 1</option>
                             <option value="2">Region 2</option>
                             <option value="3">Region 3</option>
@@ -217,12 +216,32 @@ include('connection/connection.php');
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                      <input  type="text" class="form-control" placeholder=" From Date" onfocus="(this.type='date')"/>
+                      <?php
+
+                        require 'connection/connection.php';
+
+                        $sql2 = "SELECT * FROM support_type";
+                        $result2 = mysqli_query($conn, $sql2);
+
+                      ?>
+                        <select class="form-control" name="support">
+                          <option disabled selected value>-- select support --</option>
+                          <?php  while ($row = mysqli_fetch_array($result2)) {
+                               echo "<option value='" . $row['id'] . "'>" . $row['support_type']. "</option>";
+                           }
+                           ?>
+
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                      <input  type="text" class="form-control" placeholder=" To Date" onfocus="(this.type='date')"/>
+                      <input  type="text" class="form-control" name="from" placeholder=" From Date" onfocus="(this.type='date')"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                      <input  type="text" class="form-control" name="to" placeholder=" To Date" onfocus="(this.type='date')"/>
                     </div>
                 </div>
             </div>
@@ -251,9 +270,10 @@ include('connection/connection.php');
                     <tbody>
 
 <?php
+         $total = 0;
 
     $sql =
-    "SELECT activity.*,organization.*,sch_list.*,support_type.*,
+    "SELECT (SELECT SUM(quantity) as total FROM activity), activity.*,organization.*,sch_list.*,support_type.*,
      activity.id as id,  organization.id as Oid
     FROM activity
     JOIN organization ON
@@ -261,114 +281,82 @@ include('connection/connection.php');
     JOIN sch_list ON
     activity.school_id = sch_list.sch_code
     JOIN support_type ON
-    activity.support_type1 = support_type.id ";
-
-      if(isset($_POST['value'])&& !isset($_POST['school']) && !isset($_POST['region'])) {
-
-             $org = $_POST['value'];
-
-              //$query = "SELECT * FROM request WHERE approval='Pending'";
-
-              $sql =
-              "SELECT activity.*,organization.*,sch_list.*,support_type.*,
-               activity.id as id,  organization.id as Oid
-              FROM activity
-              JOIN organization ON
-              activity.organization_id = organization.id
-              JOIN sch_list ON
-              activity.school_id = sch_list.sch_code
-              JOIN support_type ON
-              activity.support_type1 = support_type.id
-               where organization_id = '$org' ";
-
-               echo $sql;
-             }
-             elseif (isset($_POST['value'])&& isset($_POST['school']) && !isset($_POST['region'])) {
+    activity.support_type1 = support_type.id
+    WHERE 1 = 1 ";
 
 
-               $org = $_POST['value'];
-               $sch = $_POST['school'];
-               $sql =
-               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
-                activity.id as id,  organization.id as Oid
-               FROM activity
-               JOIN organization ON
-               activity.organization_id = organization.id
-               JOIN sch_list ON
-               activity.school_id = sch_list.sch_code
-               JOIN support_type ON
-               activity.support_type1 = support_type.id
-                where organization_id = '$org' AND
-                school_id ='$sch'
-                 ";
-                 echo $sql;
-             }
-             elseif (isset($_POST['value'])&& isset($_POST['school']) && isset($_POST['region'])) {
+          if (isset($_POST['value']) ) {
 
+            $org = $_POST['value'];
 
-               $org = $_POST['value'];
-               $sch = $_POST['school'];
-               $reg = $_POST['region'];
-               $sql =
-               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
-                activity.id as id,  organization.id as Oid
-               FROM activity
-               JOIN organization ON
-               activity.organization_id = organization.id
-               JOIN sch_list ON
-               activity.school_id = sch_list.sch_code
-               JOIN support_type ON
-               activity.support_type1 = support_type.id
-                where organization_id = '$org' AND
-                school_id ='$sch' AND sch_list.region = '$reg'
-                 ";
-                 echo $sql;
-             }
-             elseif (!isset($_POST['value'])&& isset($_POST['school']) && !isset($_POST['region'])) {
+            $sql .= " AND organization_id = ".$org."";
+            // echo $sql;
 
-
-               $org = $_POST['value'];
-               $sch = $_POST['school'];
-               $reg = $_POST['region'];
-               $sql =
-               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
-                activity.id as id,  organization.id as Oid
-               FROM activity
-               JOIN organization ON
-               activity.organization_id = organization.id
-               JOIN sch_list ON
-               activity.school_id = sch_list.sch_code
-               JOIN support_type ON
-               activity.support_type1 = support_type.id
-                where  school_id ='$sch'
-                 ";
-                 echo $sql;
-             }
-             elseif (!isset($_POST['value'])&& !isset($_POST['school']) && isset($_POST['region'])) {
+          }
 
 
 
-               $reg = $_POST['region'];
-               $sql =
-               "SELECT activity.*,organization.*,sch_list.*,support_type.*,
-                activity.id as id,  organization.id as Oid
-               FROM activity
-               JOIN organization ON
-               activity.organization_id = organization.id
-               JOIN sch_list ON
-               activity.school_id = sch_list.sch_code
-               JOIN support_type ON
-               activity.support_type1 = support_type.id
-                where  sch_list.region ='$reg'
-                 ";
-                 echo $sql;
-             }
+
+            if(isset($_POST['school'])){
+
+              $sch = $_POST['school'];
+
+              $sql .= " AND school_id = ".$sch."";
+              // echo $sql;
+                // and activity.period_date >=". '$from '." ";
+            }
+            // foreach ($_GET['select2'] as $selectedOption)
+            // echo $selectedOption."\n";
+
+            if(isset($_POST['region'])){
+
+              $reg = $_POST['region'];
+
+              $sql .= " AND sch_list.region = ".$reg."";
+              // echo $sql;
+                // and activity.period_date >=". '$from '." ";
+            }
+            if(isset($_POST['support'])){
+
+              $sup = $_POST['support'];
+
+              $sql .= " AND support_type.id = ".$sup."";
+              // echo $sql;
+                // and activity.period_date >=". '$from '." ";
+            }
+
+            if(!empty($_POST['from']) ){
 
 
+              $from =  $_POST['from'];
+              $sql .= " AND activity.period_date >= '$from '
+               ";
+               // echo $sql;
+
+            }
+            if (!empty($_POST['to']) ){
+
+
+              $to =  $_POST['to'];
+              $sql .=
+              " AND activity.period_date <= '$to'
+               ";
+               // echo $sql;
+
+            }
+
+
+
+          echo $sql;
 
          $result = mysqli_query($conn, $sql);
+       //   if (!$result) {
+       // printf("Error: %s\n", mysqli_error($conn));
+       // exit();
+       //   }
 
 		while($row=mysqli_fetch_array($result)){
+
 
 ?>
                       <tr>
@@ -378,18 +366,26 @@ include('connection/connection.php');
                         <td><?php echo $row['district']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
                         <td><?php echo $row['quantity'];?></td>
-                        <td><?php echo $row['cost']; ?></td>
+                        <td><?php
+                         echo $row['cost'];
+
+                        $total += $row['cost'];
+                        ?></td>
                         <td><?php echo $row['period_date']; ?></td>
+
+                      </tr>
+                      <tr>
+
 
                       </tr>
 
 <?php }?>
                     </tbody>
-                    <tfoot>
+
 
                       <tr>
-                        <th colspan="8"></th>
-
+                        <th colspan="6"><h3>Total</h3></th>
+                        <th colspan="6"><h3><?php echo $total ?></h3></th>
                       </tr>
                       <tr>
                         <th colspan="5">Prepared by: <span>Planning Department</span></th>
@@ -398,7 +394,7 @@ include('connection/connection.php');
 
                       </tr>
 
-                    </tfoot>
+
                   </table>
                 </div><!-- /.box-body -->
 

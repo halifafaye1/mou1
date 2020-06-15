@@ -15,7 +15,7 @@ session_start();
 		  }
       .hideForm{
         display:none !important;
-      } 
+      }
 		  .main-footer	{
 			display:none !important;
 		  }
@@ -135,7 +135,7 @@ session_start();
           <!-- Main content -->
           <section class="content">
             <div class="row">
-	    <div class="col-xs-12">
+	    <div class="col-lg-39">
               <div class="box box-primary">
 
 
