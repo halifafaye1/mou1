@@ -13,7 +13,7 @@ if(isset($_POST["export"]))
  if(mysqli_num_rows($result) > 0)
  {
   $output .= '
-  <table  class="table table-bordered table-striped">
+  <table border="1" class="table table-bordered table-striped">
    <tr>
 
 
@@ -72,7 +72,7 @@ if(isset($_POST["export"]))
   if(mysqli_num_rows($result) > 0)
   {
    $output .= '
-   <table  class="table table-bordered table-striped">
+   <table border="1" class="table table-bordered table-striped">
     <tr>
  
  
@@ -124,7 +124,7 @@ if(isset($_POST["export"]))
   if(mysqli_num_rows($result) > 0)
   {
    $output .= '
-   <table  class="table table-bordered table-striped">
+   <table border="1" class="table table-bordered table-striped">
     <tr>
  
  
@@ -169,7 +169,47 @@ elseif (isset($_POST["excel2"]))
   if(mysqli_num_rows($result) > 0)
   {
    $output .= '
-   <table  class="table table-bordered table-striped">
+   <table border="1" class="table table-bordered table-striped">
+    <tr>
+ 
+ 
+    <th>Organization Name</th>
+    <th>AG Registration</th>
+    <th>Office Space Address</th>
+    <th>Previous Activity</th>
+    
+  </tr>
+   ';
+   while($row = mysqli_fetch_array($result))
+   {
+    $output .= '
+     <tr>  
+                          
+                          <td>'.$row["organization_name"].'</td>  
+                          <td>'.$row["ag_registration_no"].'</td>  
+                         <td>'.$row["office_space_address"].'</td>  
+                          <td>'.$row["previous_activities"].'</td>  
+                       
+                     </tr>
+    ';
+   }
+   $output .= '</table>';
+   $fileName = "Organization_".date('Ymd') . ".xls";			
+   header("Content-Type: application/vnd.ms-excel");
+   header("Content-Disposition: attachment; filename=\"$fileName\"");
+ //   header('Content-Type: application/xls');
+ //   header('Content-Disposition: attachment; filename=download.xls');
+   echo $output;
+  
+}
+elseif(isset($_POST["excel2"]))
+{
+  $query = "SELECT * FROM organization ORDER BY id";
+  $result = mysqli_query($connect, $query);
+  if(mysqli_num_rows($result) > 0)
+  {
+   $output .= '
+   <table border="1" class="table table-bordered table-striped">
     <tr>
  
  
@@ -203,6 +243,73 @@ elseif (isset($_POST["excel2"]))
   
 }
 
+elseif(isset($_POST["download"]))
+{
+  $query = "SELECT *
+  FROM report
+  JOIN request ON request.id = report.request_id
+  JOIN organization ON organization.id = report.org_id
+  WHERE report.id IN (
+      SELECT MAX(id)
+      FROM report
+      GROUP BY request_id
+
+  )
+  and report.expiry_date BETWEEN CURDATE() and DATE_ADD(CURDATE(), INTERVAL 6 MONTH)
+  ORDER BY report.expiry_date ASC
+  ";
+  $result = mysqli_query($connect, $query);
+  if(mysqli_num_rows($result) > 0)
+  {
+   $output .= '
+   <table border="1" class="table table-bordered table-striped">
+    <tr>
+ 
+ 
+    <th>Organisation Name</th>
+    <th>Request Name</th>
+    <th>Address</th>
+    <th>Telephone</th>
+    <th>Email</th>
+    <th>Reference #</th>
+    <th>Status</th>
+    <th>Expiry Date</th>
+    
+  </tr>
+   ';
+   while($row = mysqli_fetch_array($result))
+   {
+    $output .= '
+     <tr>  
+                          
+                          <td>'.$row["organization_name"].'</td>  
+                          <td>'.$row["name"].'</td>  
+                         <td>'.$row["address"].'</td>  
+                          <td>'.$row["telephone"].'</td>  
+                          <td>'.$row["email"].'</td>
+                          <td>'.$row["file_ref_no"].'</td>
+                          <td>'.$row["approval"].'</td>
+                          <td>'.$row["expiry_date"].'</td>
+                         
+                       
+                     </tr>
+    ';
+   }
+   $output .= '</table>';
+   $fileName = "Organization_".date('Ymd') . ".xls";			
+   header("Content-Type: application/vnd.ms-excel");
+   header("Content-Disposition: attachment; filename=\"$fileName\"");
+ //   header('Content-Type: application/xls');
+ //   header('Content-Disposition: attachment; filename=download.xls');
+   echo $output;
+  
 }
+
 }
+
+}
+
+}
+
 ?>
+<?php }?>

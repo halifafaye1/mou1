@@ -236,17 +236,24 @@ session_start();
                 <div class="icon">
                   <i class="fa fa-institution"></i>
                 </div>
-                <a href="school.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
 
             </div><!-- ./col -->
           </div><!-- /.row -->
           <div class="card">
               <div class="card-header">
-                <h3 class="card-title"></h3>
+              
+                <h3 class="card-title"><center> MOU to expire in <b>SIX(6)</b>MONTHS</center></h3>
               </div>
+
               <!-- /.card-header -->
               <div class="card-body">
+              <div class="box-header">
+              <form method="post" action="export.php">
+                  <input type="submit" name="download" class="btn btn-success" value="DOWNLOAD EXCEL" />
+               </form>
+               </div>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                  <tr>
