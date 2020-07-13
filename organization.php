@@ -110,7 +110,7 @@
             <div class="col-xs-12">
             	<div class="box-header">
               <form method="post" action="export.php">
-                  <input type="submit" name="excel2" class="btn btn-success" value="EXCEL" />
+                  <input type="submit" name="excel1" class="btn btn-success" value="EXCEL" />
                   
                </form>
                   <h3 class="box-title"></h3>

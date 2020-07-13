@@ -108,61 +108,10 @@ if(isset($_POST["export"]))
  //   header('Content-Disposition: attachment; filename=download.xls');
    echo $output;
 }
-}elseif (isset($_POST["excel1"]))
-{
-  $query = "SELECT school_id, support_type, quantity, cost, period_date, activity.id as id, organization_id,
-  organization.organization_name, organization.id as Oid, school.name, school.id as Sid
-  FROM activity
-
-  JOIN organization ON
-  activity.organization_id = organization.id
-  JOIN School ON
-  activity.school_id = school.sch_code 
-  JOIN support_type ON
-  activity.support_type1 = support_type.id";
-  $result = mysqli_query($connect, $query);
-  if(mysqli_num_rows($result) > 0)
-  {
-   $output .= '
-   <table border="1" class="table table-bordered table-striped">
-    <tr>
- 
- 
-    <th>Organisation Name</th>
-    <th>School Name</th>
-    <th>Support Type</th>
-    <th>Quantity</th>
-    <th>Cost</th>
-    <th>Period</th>
-    
-  </tr>
-   ';
-   while($row = mysqli_fetch_array($result))
-   {
-    $output .= '
-     <tr>  
-                          
-                          <td>'.$row["organization_name"].'</td>  
-                          <td>'.$row["name"].'</td>  
-                         <td>'.$row["support_type"].'</td>  
-                          <td>'.$row["quantity"].'</td>   
-                          <td>'.$row["cost"].'</td>  
-                          <td>'.$row["period_date"].'</td>  
-                       
-                     </tr>
-    ';
-   }
-   $output .= '</table>';
-   $fileName = "Organization_".date('Ymd') . ".xls";			
-   header("Content-Type: application/vnd.ms-excel");
-   header("Content-Disposition: attachment; filename=\"$fileName\"");
- //   header('Content-Type: application/xls');
- //   header('Content-Disposition: attachment; filename=download.xls');
-   echo $output;
   
 }
 
-elseif (isset($_POST["excel2"]))
+elseif (isset($_POST["excel1"]))
 {
   $query = "SELECT * FROM organization ORDER BY id";
   $result = mysqli_query($connect, $query);
@@ -312,4 +261,3 @@ elseif(isset($_POST["download"]))
 }
 
 ?>
-<?php }?>
