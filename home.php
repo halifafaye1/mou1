@@ -207,13 +207,22 @@ and password='$password'";
  }
  }else{
 ?>
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
 <div class="login">
+  <img src="trans.png" alt="" class="center"> <br><br>
 <h1>MOBSE MOU LOG IN</h1>
 <form action="" method="post" name="login">
 <input type="text" name="username" placeholder="Username" required />
 <input type="password" name="password" placeholder="Password" required />
 <p></p>
-<input name="submit" type="submit" value="Login" />
+<input name="submit" type="submit" value="Login" class="center"/>
 </form>
 <p></p>
 </div>
