@@ -116,6 +116,13 @@ session_start();
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="logout.php">
+                <i class="fa fa-users"></i>
+                <span>Log Out</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
 
         </section>
         <!-- /.sidebar -->
