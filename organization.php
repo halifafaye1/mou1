@@ -90,6 +90,13 @@
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
+            <li class="treeview">
+              <a href="logout.php">
+                <i class="fa fa-users"></i>
+                <span>Log Out</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
 
         </section>
         <!-- /.sidebar -->
@@ -141,7 +148,7 @@
             <div class="col-xs-12">
             	<div class="box-header">
               <form method="post" action="export.php">
-                  <input type="submit" name="excel2" class="btn btn-success" value="EXCEL" />
+                  <input type="submit" name="excel1" class="btn btn-success" value="EXCEL" />
                   
                </form>
                   <h3 class="box-title"></h3>

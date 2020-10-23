@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'auth.php';
+//include 'auth.php';
 ?>
  <!--  Header (Page header) -->
  <?php include'header.php';?>
@@ -93,7 +93,13 @@ include 'auth.php';
                 <span class="label label-primary pull-right"></span>
               </a>
             </li>
-
+            <li class="treeview">
+              <a href="logout.php">
+                <i class="fa fa-users"></i>
+                <span>Log Out</span>
+                <span class="label label-primary pull-right"></span>
+              </a>
+            </li>
         </section>
         <!-- /.sidebar -->
       </aside>
