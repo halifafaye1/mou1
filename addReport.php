@@ -19,7 +19,7 @@
 
                       // Verify file extension
                       $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                      if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                      if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid PDF file.");
 
                       // Verify file size - 5MB maximum
                       $maxsize = 5 * 1024 * 10241;
@@ -78,7 +78,7 @@
 
                     // Verify file extension
                     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                    if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                    if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid PDF file .");
 
                     // Verify file size - 5MB maximum
                     $maxsize = 5 * 1024 * 10241;
@@ -137,7 +137,7 @@
 
                      // Verify file extension
                      $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                     if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid file format.");
+                     if(!array_key_exists($ext, $allowed)) die("Error: Please select a valid PDF file.");
 
                      // Verify file size - 5MB maximum
                      $maxsize = 5 * 1024 * 10241;

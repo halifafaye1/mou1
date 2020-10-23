@@ -30,7 +30,7 @@
         {
 
           echo '<script>alert("Data Updated")</script>';
-          header('Location:request.php');
+          header('Location:request.php?update=successfully');
         }
         else
         {

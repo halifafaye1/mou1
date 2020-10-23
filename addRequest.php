@@ -33,7 +33,7 @@
           echo '<script>alert("Data Saved")</script>';
 
           // $_SESSION['message'] = " ".$name." Has been added Successfully and now visible on the Report_Request page";
-          header('Location:request.php?status=success');
+          header('Location:request.php?status=successfully');
         }
         else
         {

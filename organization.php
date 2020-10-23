@@ -102,6 +102,37 @@
             Organization
             <small>Dashboard</small>
           </h1>
+            <?php
+
+            if (isset($_GET['status'])) {
+                $status = $_GET['status'];
+                $result = '<div class="alert alert-success alert-dismissable">
+                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                 Activity has been '.$status.  ' added.
+                               </div>';
+                echo $result;
+            }
+
+            if (isset($_GET['update'])) {
+                $status = $_GET['update'];
+                $result = '<div class="alert alert-success alert-dismissable">
+                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                 Activity has been '.$status.  ' updated.
+                               </div>';
+                echo $result;
+            }
+
+            if (isset($_GET['delete'])) {
+                $status = $_GET['delete'];
+                $result = '<div class="alert alert-danger alert-dismissable">
+                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                 Activity has been '.$status.  ' deleted.
+                               </div>';
+                echo $result;
+            }
+
+
+            ?>
         </section>
 
         <!-- Main content -->

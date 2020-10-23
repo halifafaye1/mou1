@@ -20,7 +20,8 @@
             if ($result)
             {
               echo '<script>alert("Data Saved")</script>';
-              header('Location: '.$_SERVER['HTTP_REFERER']);
+                //header('Location: '.$_SERVER['HTTP_REFERER']);
+                header('Location:activity.php?status=successfully');
             }
             else
             {

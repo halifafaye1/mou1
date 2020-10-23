@@ -84,7 +84,7 @@
           if($result2 || empty($result2)){
 
             echo '<script>alert("Data Saved")</script>';
-            header('Location:organization.php');
+            header('Location:organization.php?status=successfully');
 
           }
           else

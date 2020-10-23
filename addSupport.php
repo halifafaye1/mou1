@@ -15,7 +15,7 @@
         if ($result)
         {
           echo '<script>alert("Data Saved")</script>';
-          header('Location:support_type.php');
+          header('Location:support_type.php?status=successfully');
         }
         else
         {

@@ -5,6 +5,6 @@
 	mysqli_query($conn,"delete from report where org_id='$id'");
 		mysqli_query($conn,"delete from renewal where org_id='$id'");
 	mysqli_query($conn,"delete from person where org_id='$id'");
-	header('location:organization.php');
+	header('location:organization.php?delete=successfully');
 
 ?>

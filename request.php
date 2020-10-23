@@ -103,10 +103,38 @@
             <small>Dashboard</small>
           </h1>
 
-        <!-- <div >
-            <?php $result = '<div class="alert alert-success">Record has been Successfully added.</div>';
-            echo $result; ?>
-        </div> -->
+
+        <?php
+
+                if (isset($_GET['status'])) {
+                    $status = $_GET['status'];
+                    $result = '<div class="alert alert-success alert-dismissable">
+                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                 Request has been '.$status.  ' added.
+                               </div>';
+                    echo $result;
+                }
+
+                if (isset($_GET['update'])) {
+                    $status = $_GET['update'];
+                    $result = '<div class="alert alert-success alert-dismissable">
+                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                         Request has been '.$status.  ' updated.
+                                       </div>';
+                    echo $result;
+                }
+
+                if (isset($_GET['delete'])) {
+                    $status = $_GET['delete'];
+                    $result = '<div class="alert alert-danger alert-dismissable">
+                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                                         Request has been '.$status.  ' deleted.
+                                       </div>';
+                    echo $result;
+                }
+
+        ?>
+
 
         </section>
 
@@ -292,7 +320,7 @@
           											$drow=mysqli_fetch_array($app);
           										?>
           										<div class="container-fluid">
-          											<h5><center>Are you sure you want to Approve this Request for : <strong><?php echo $drow['name']; ?></strong></center></h5>
+          											<h5><center>Are you sure you want to Approve this Request for : </center><?php echo $drow['name']; ?></center><strong></strong></h5>
                                 </div>
 
 
@@ -335,7 +363,7 @@
                            $drow=mysqli_fetch_array($del);
                          ?>
                          <div class="container-fluid">
-                           <h5><center>Are you sure you want to <br>delete</br>  <strong><?php echo $drow['name']; ?> ? ?  </div>
+                             <h5><center>Are you sure you want to <br>delete</br></center>  <center><strong><?php echo $drow['name']; ?>  Request ? ?  </center></div>
                                  <div class="modal-footer">
                                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
                                      <a href="deleteRequest.php?id=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>

@@ -365,9 +365,9 @@ include('connection/connection.php');
                         <td><?php echo $row['region']; ?></td>
                         <td><?php echo $row['district']; ?></td>
                         <td><?php echo $row['support_type']; ?></td>
-                        <td><?php echo $row['quantity'];?></td>
-                        <td><?php
-                         echo $row['cost'];
+                        <td><center><?php echo $row['quantity'];?></center></td>
+                        <td>D <?php
+                         echo number_format($row['cost']);
 
                         $total += $row['cost'];
                         ?></td>
@@ -385,7 +385,7 @@ include('connection/connection.php');
 
                       <tr>
                         <th colspan="6"><h3>Total</h3></th>
-                        <th colspan="6"><h3><?php echo $total ?></h3></th>
+                        <th colspan="6"><h3>D <?php echo number_format($total) ?></h3></th>
                       </tr>
                       <tr>
                         <th colspan="5">Prepared by: <span>Planning Department</span></th>

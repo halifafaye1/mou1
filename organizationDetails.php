@@ -724,7 +724,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title" id="myModalLabel">Upload Reports</h4>
+            <h4 class="modal-title" id="myModalLabel">Upload Report(PDF only)</h4>
           </div>
         <div class="modal-body">
           <div class="form-style-2">
@@ -751,7 +751,7 @@
                  </label>
 
                  <label for="field1"><span>Report</span>
-                  <input type="file" class="input-field" id="report1" name="report_2" value="" required/>
+                  <input type="file" class="input-field" id="report1" name="report_2" value="" accept="application/pdf" required/>
                  </label>
 
          </div>

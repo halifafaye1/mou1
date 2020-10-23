@@ -19,7 +19,7 @@
         if ($result)
         {
           echo '<script>alert("Data Updated")</script>';
-          header('Location:organization.php');
+          header('Location:organization.php?update=successfully');
         }
         else
         {
